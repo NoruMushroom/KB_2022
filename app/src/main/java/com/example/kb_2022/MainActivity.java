@@ -26,10 +26,9 @@ public class MainActivity extends AppCompatActivity {
         Calender = new CalendarFragment();
         Community = new CommunityFragment();
         Option = new OptionFragment();//객체 생성
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Home).commitAllowingStateLoss();
         //bottomNavigationView = findViewById(R.id.navi);
-        BottomNavigationView bottomNavigationView;
-        bottomNavigationView = findViewById(R.id.navi);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -50,7 +49,5 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
-
 }
