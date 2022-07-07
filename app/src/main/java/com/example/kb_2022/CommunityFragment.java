@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,9 +58,7 @@ public class CommunityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View Community = inflater.inflate(R.layout.fragment_community, container, false);
-        TextView text = Community.findViewById(R.id.Community_text);
-        text.setText("여기는 커뮤니티 화면 입니다.");
-        return Community;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_community, container, false);
     }
 }
