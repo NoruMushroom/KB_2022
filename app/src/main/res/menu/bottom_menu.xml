@@ -8,21 +8,21 @@
         />
 
     <item
-        android:id="@+id/star"
+        android:id="@+id/calendar"
         android:icon="@drawable/ic_calendar"
-        android:title="즐겨찾기"
+        android:title="캘린더"
         android:enabled="true"
         />
     <item
-        android:id="@+id/group"
+        android:id="@+id/community"
         android:icon="@drawable/ic_community"
-        android:title="친구"
+        android:title="커뮤니티"
         android:enabled="true"
         />
     <item
-        android:id="@+id/hotel"
+        android:id="@+id/option"
         android:icon="@drawable/ic_option"
-        android:title="호텔"
+        android:title="환경설정"
         android:enabled="true"
         />
 
