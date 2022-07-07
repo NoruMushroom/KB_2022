@@ -7,11 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ListView;
 
 public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private ListView Trash_List;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -53,9 +54,17 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
-        TextView text = Home_View.findViewById(R.id.Home_text);
-        text.setText("여기는 홈 화면 입니다.");
-        // Inflate the layout for this fragment
+        Trash_List = Home_View.findViewById(R.id.Main_ListView);
+        dataSetting();
         return Home_View;
+    }
+    private void dataSetting(){
+        List_Adapter List_item = new List_Adapter();
+        String[] array = new String[]{"일간", "주간","월간"};
+        for (int i=0; i<3; i++) {
+            List_item.addItem(array[i]);
+        }
+        /* 리스트뷰에 어댑터 등록 */
+        Trash_List.setAdapter(List_item);
     }
 }
