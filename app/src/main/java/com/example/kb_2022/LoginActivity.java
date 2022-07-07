@@ -27,8 +27,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // EditText에 현재 입력되어있는 값을 get(가져온다)해온다.
                 String userID = ID.getText().toString();
-                String userPass = PW.getText().toString();
-
+                String userPW = PW.getText().toString();
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -42,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                 Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("userID", userID);
-                                intent.putExtra("userPass", userPass);
+                                //intent.putExtra("userID", userID);
+                                //intent.putExtra("userPass", userPass);
                                 startActivity(intent);
                             } else { // 로그인에 실패한 경우
                                 Toast.makeText(getApplicationContext(),"로그인에 실패하였습니다.",Toast.LENGTH_SHORT).show();
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 };
-                LoginRequest loginRequest = new LoginRequest(userID, userPass, responseListener);
+                LoginRequest loginRequest = new LoginRequest(userID, userPW, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
             }
