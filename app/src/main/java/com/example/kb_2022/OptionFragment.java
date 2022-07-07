@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +59,9 @@ public class OptionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_option, container, false);
+        View Option_View = inflater.inflate(R.layout.fragment_option, container, false);
+        TextView text = Option_View.findViewById(R.id.Option_text);
+        text.setText("여기는 환경설정 화면 입니다.");
+        return Option_View;
     }
 }
