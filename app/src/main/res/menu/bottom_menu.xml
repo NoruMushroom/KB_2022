@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_baseline_restore_from_trash_24"
+        android:title="홈"
+        android:enabled="true"
+        />
+
+    <item
+        android:id="@+id/star"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="즐겨찾기"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/group"
+        android:icon="@drawable/ic_baseline_mode_comment_24"
+        android:title="친구"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/hotel"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="호텔"
+        android:enabled="true"
+        />
+
+</menu>
