@@ -1,33 +1,19 @@
 package com.example.kb_2022;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
-import androidx.loader.content.AsyncTaskLoader;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,15 +21,9 @@ import java.nio.charset.StandardCharsets;
  * create an instance of this fragment.
  */
 public class CommunityFragment extends Fragment {
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private ListView Community_List;
-
-    // Json 변수
-    private String mJsonString;
-
-
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -95,10 +75,6 @@ public class CommunityFragment extends Fragment {
             }
         });
         dataSetting();
-
-        GetData task = new GetData();
-        task.execute("http://123.215.162.92/KBServer/readboard.php", "");
-
         return Community_View;
     }
     private void dataSetting(){
@@ -107,110 +83,5 @@ public class CommunityFragment extends Fragment {
             List_item.addItem("작성자","홍길동",3,1);
         }//여기서 DB접근
         Community_List.setAdapter(List_item);
-    }
-
-    private class GetData extends AsyncTask<String, Void, String> {
-
-        //ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-
-        String errorString = null;
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-
-            //progressDialog = ProgressDialog.show();
-        }
-
-        @Override
-        protected void onPostExecute(String result){
-            super.onPostExecute(result);
-
-            //progressDialog.dismiss();
-
-            if(result != null){
-                mJsonString = result;
-                showResult();
-            }
-        }
-        @Override
-        protected String doInBackground(String... params) {
-            String serverURL = params[0];
-            String postParameters = params[1];
-
-            try{
-                URL url = new URL(serverURL);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoInput(true);
-                httpURLConnection.connect();
-
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
-                outputStream.flush();
-                outputStream.close();
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "응답코드 = " + responseStatusCode);
-                InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK){
-                    inputStream = httpURLConnection.getInputStream();
-                }
-                else {
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                StringBuilder sb = new StringBuilder();
-                String line;
-
-                while((line = bufferedReader.readLine()) != null){
-                    sb.append(line);
-                }
-
-                bufferedReader.close();
-
-                return  sb.toString().trim();
-            } catch (Exception e){
-                Log.d(TAG, "얻은 데이터 : 에러", e);
-                errorString = e.toString();
-
-                return null;
-            }
-
-        }
-    }
-
-    private void showResult(){
-        String TAG_JSON = "board_list";
-        String TAG_BNO = "bno";
-        String TAG_TITLE = "title";
-        String TAG_UNAME = "name";
-        String TAG_CONTENT = "content";
-        String TAG_LIKE = "islike";
-
-        try{
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-
-            for(int i = 0;i<jsonArray.length();i++){
-                JSONObject item = jsonArray.getJSONObject(i);
-                Integer bno = item.getInt(TAG_BNO);
-                String title = item.getString(TAG_TITLE);
-                String uname = item.getString(TAG_UNAME);
-                String content = item.getString(TAG_CONTENT);
-                Integer like = item.getInt(TAG_LIKE);
-
-                System.out.println(bno + title + uname + content + like);
-            }
-        } catch(JSONException e){
-            Log.d(TAG, "showResult : ", e);
-        }
     }
 }
