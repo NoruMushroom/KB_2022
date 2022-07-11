@@ -196,6 +196,6 @@ public class CommunityFragment extends Fragment {
             Community_List.setAdapter(List_item);
         } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
-        }
+        }///
     }
 }
