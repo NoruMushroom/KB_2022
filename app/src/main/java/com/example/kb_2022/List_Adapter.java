@@ -33,7 +33,7 @@ public class List_Adapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Context context = parent.getContext();
+        Context context = parent.getContext();//
 
         /* 'listview_custom' Layout을 inflate하여 convertView 참조 획득 */
         if (convertView == null) {
