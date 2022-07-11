@@ -82,6 +82,6 @@ public class CommunityFragment extends Fragment {
         for (int i=0; i<3; i++) {
             List_item.addItem("작성자","홍길동",3,1);
         }//여기서 DB접근
-        Community_List.setAdapter(List_item);//
+        Community_List.setAdapter(List_item);
     }
 }
