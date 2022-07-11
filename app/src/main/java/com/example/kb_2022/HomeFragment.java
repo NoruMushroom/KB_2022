@@ -9,10 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+
+import java.util.ArrayList;
+
 public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private ListView Trash_List;
+    private ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
+    private ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
+    private ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
+    private ArrayList[] Chart_List = {Daily_chart,Weekly_chart,Monthly_chart};
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -55,15 +66,23 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
         Trash_List = Home_View.findViewById(R.id.Main_ListView);
+        Trash_List.setVerticalScrollBarEnabled(false);
+        Daily_chart.add(new BarEntry(1,1));
+        Daily_chart.add(new BarEntry(2, 2));
+        Weekly_chart.add(new BarEntry(3, 3));
+        Weekly_chart.add(new BarEntry(4, 4));
+        Monthly_chart.add(new BarEntry(5, 2));
+        Monthly_chart.add(new BarEntry(6, 8));
         dataSetting();
         return Home_View;
     }
+
     private void dataSetting(){
         List_Adapter List_item = new List_Adapter();
-        String[] array = new String[]{"일간", "주간","월간"};
+        String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {
-            List_item.addItem(array[i]);
-        }
+            List_item.addItem(array[i],Chart_List[i]);//수치랑 이름 같이 넘겨주기
+        }//일간 주간 월간 리스트뷰 아이템 생성
         /* 리스트뷰에 어댑터 등록 */
         Trash_List.setAdapter(List_item);
     }
