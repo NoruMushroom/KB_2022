@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
@@ -69,16 +66,19 @@ public class HomeFragment extends Fragment {
         Trash_List.setVerticalScrollBarEnabled(false);
         Daily_chart.add(new BarEntry(1,1));
         Daily_chart.add(new BarEntry(2, 2));
-        Weekly_chart.add(new BarEntry(3, 3));
-        Weekly_chart.add(new BarEntry(4, 4));
-        Monthly_chart.add(new BarEntry(5, 2));
-        Monthly_chart.add(new BarEntry(6, 8));
+        Daily_chart.add(new BarEntry(3, 7));
+        Weekly_chart.add(new BarEntry(1, 3));
+        Weekly_chart.add(new BarEntry(2, 4));
+        Weekly_chart.add(new BarEntry(3, 1));
+        Monthly_chart.add(new BarEntry(1, 2));
+        Monthly_chart.add(new BarEntry(2, 8));
+        Monthly_chart.add(new BarEntry(3, 4));
         dataSetting();
         return Home_View;
     }
 
     private void dataSetting(){
-        List_Adapter List_item = new List_Adapter();
+        HomeList_Adapter List_item = new HomeList_Adapter();
         String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {
             List_item.addItem(array[i],Chart_List[i]);//수치랑 이름 같이 넘겨주기

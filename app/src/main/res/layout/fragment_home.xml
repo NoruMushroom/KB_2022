@@ -18,21 +18,19 @@
 
     <ListView
         android:id="@+id/Main_ListView"
-        android:scrollbars="none"
-        android:layout_marginTop="180dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="180dp"
         android:layout_marginRight="10dp"
-        >
-    </ListView>
+        android:layout_marginBottom="10dp"
+        android:scrollbars="none"></ListView>
 
     <ImageView
         android:id="@+id/Tree_Picture"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="25dp"/>
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp" />
 
 </FrameLayout>

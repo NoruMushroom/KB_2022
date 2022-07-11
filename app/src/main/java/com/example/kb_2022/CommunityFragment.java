@@ -2,12 +2,18 @@ package com.example.kb_2022;
 
 import android.os.Bundle;
 
+import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,9 +21,9 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class CommunityFragment extends Fragment {
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private ListView Community_List;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -60,8 +66,22 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Community_View = inflater.inflate(R.layout.fragment_community, container, false);
-        TextView text = Community_View.findViewById(R.id.Community_text);
-        text.setText("여기는 커뮤니티 화면 입니다.");
+        Community_List = Community_View.findViewById(R.id.Community_ListView);
+        ImageButton Write_icon = Community_View.findViewById(R.id.Write);
+        Write_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("STATE", "LOG in SERVER");
+            }
+        });
+        dataSetting();
         return Community_View;
+    }
+    private void dataSetting(){
+        CommunityList_Adapter List_item = new CommunityList_Adapter();
+        for (int i=0; i<3; i++) {
+            List_item.addItem("작성자","홍길동",3,1);
+        }//여기서 DB접근
+        Community_List.setAdapter(List_item);
     }
 }

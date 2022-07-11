@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.297" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.1495" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.2295" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_mode_comment_24.xml" value="0.296" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_restore_from_trash_24.xml" value="0.297" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1495" />
@@ -14,11 +15,13 @@
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/activity_login.xml" value="0.1875" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/bar_chart.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/community_listview_item.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_calendar.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_community.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_option.xml" value="0.1875" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/home_item.xml" value="0.2817028985507246" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/home_listview_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/listview_item.xml" value="0.25" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/listview_ltem.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/menu/bottom_menu.xml" value="0.2921875" />
