@@ -22,5 +22,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="45dp"
         android:layout_marginRight="10dp"
-        android:scrollbars="none"></ListView>
+        android:scrollbars="none">
+
+    </ListView>
 </FrameLayout>
