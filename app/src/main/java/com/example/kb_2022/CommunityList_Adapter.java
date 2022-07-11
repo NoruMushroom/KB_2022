@@ -58,6 +58,6 @@ public class CommunityList_Adapter extends BaseAdapter {
         mItem.setNumber(Number);
         //mItem.setContents(contents);
         /* mItems에 MyItem을 추가한다. */
-        mItems.add(mItem);
+        mItems.add(mItem);//
     }
 }
