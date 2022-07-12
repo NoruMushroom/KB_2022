@@ -35,7 +35,7 @@ public class Community_Read extends AppCompatActivity {
         Title.setText(intent.getStringExtra("제목"));
         Content.setText(intent.getStringExtra("내용"));
         Like.setText("좋아요 "+like);
-        Writer.setText("글쓴이:" + writer);
+        Writer.setText("글쓴이 : " + writer);
         Like_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
