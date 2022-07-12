@@ -18,6 +18,8 @@ public class CommunityList_Adapter extends BaseAdapter {
     public CommunityList_Adapter(){
 
     }
+
+
     @Override
     public int getCount() {
         return mItems.size();

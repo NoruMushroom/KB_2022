@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -48,6 +49,7 @@ public class CommunityFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mJsonString;
     private CommunityList_Adapter List_item;
+    private ArrayAdapter adapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -82,14 +84,20 @@ public class CommunityFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    @Override
+    public void onResume(){
+        super.onResume();
+        dataSetting();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         This_Activity = container.getContext();
         View Community_View = inflater.inflate(R.layout.fragment_community, container, false);
+        System.out.println("아이디" + This_Activity);
         Community_List = Community_View.findViewById(R.id.Community_ListView);//리스트뷰
         ImageButton Write_icon = Community_View.findViewById(R.id.Write);
+        출처: https://eskeptor.tistory.com/60 [Hello World:티스토리]
         Write_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

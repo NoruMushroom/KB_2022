@@ -12,9 +12,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,22 +76,22 @@ public class Community_Read extends AppCompatActivity {
     }
     private class GetData extends AsyncTask<String, Void, String> {
 
-        //ProgressDialog progressDialog;
+        ProgressDialog progressDialog;
         String errorString = null;
 
-        /*@Override
+        @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(This_Activity,
+            progressDialog = ProgressDialog.show(Community_Read.this,
                     "Please Wait", null, true, true);
-        }*/
+        }
 
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //progressDialog.dismiss();
+            progressDialog.dismiss();
             if (result == null){
                 Log.d(TAG, "response - " + result);
 
@@ -97,8 +101,6 @@ public class Community_Read extends AppCompatActivity {
                 showResult();
             }
         }
-
-
         @Override
         protected String doInBackground(String... params) {
             String serverURL = params[0];
@@ -154,6 +156,4 @@ public class Community_Read extends AppCompatActivity {
             Log.d(TAG, "showResult : ", e);
         }
     }
-
-
 }
