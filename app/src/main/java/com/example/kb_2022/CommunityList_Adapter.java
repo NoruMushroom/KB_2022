@@ -4,12 +4,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class CommunityList_Adapter extends BaseAdapter {
     private ArrayList<Community_Type> mItems = new ArrayList<>();
+    public CommunityList_Adapter(){
+
+    }
     @Override
     public int getCount() {
         return mItems.size();
@@ -25,7 +33,7 @@ public class CommunityList_Adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        final int pos = position;
         Context context = parent.getContext();//
 
         /* 'listview_custom' Layout을 inflate하여 convertView 참조 획득 */
@@ -45,12 +53,13 @@ public class CommunityList_Adapter extends BaseAdapter {
         return convertView;
     }
 
-    public void addItem(String Title, String Writer, int Like, int Number) {//매개변수 바꿔야됨
+    public void addItem(String Title, String Writer, String Content, int Like, int Number) {//매개변수 바꿔야됨
         //Drawable img, String name, String contents
         /* MyItem에 아이템을 setting한다. */
         //mItem.setIcon(img);
         Community_Type mItem = new Community_Type();
         mItem.setTitle(Title);
+        mItem.setContent(Content);
         mItem.setWriter(Writer);
         mItem.setLike(Like);
         mItem.setNumber(Number);
