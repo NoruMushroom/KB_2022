@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id = "@+id/Fragment_Community"
     tools:context=".CommunityFragment">
 
     <ImageButton
@@ -12,6 +11,7 @@
         android:layout_height="45dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="right"
+        android:background="@color/white"
         android:src="@drawable/ic_baseline_create_24" />
 
     <ListView

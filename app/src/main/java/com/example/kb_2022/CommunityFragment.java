@@ -94,7 +94,7 @@ public class CommunityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Community_Read.class);
-                startActivity(intent);
+                //startActivity(intent);
             }//글쓰기 서버 업로드
         });
         dataSetting();
@@ -102,7 +102,18 @@ public class CommunityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> a_parent, View a_view, int a_position, long a_id) {
                 final Community_Type item = (Community_Type) List_item.getItem(a_position);
-                Toast.makeText(This_Activity,  item.getTitle(), Toast.LENGTH_SHORT).show();
+                String Title = item.getTitle();
+                String Writer = item.getWriter();
+                String Content = item.getContent();
+                String Like = item.getLike();
+                String Number = item.getNumber();
+                Intent intent = new Intent(getActivity(), Community_Read.class);
+                intent.putExtra("제목", Title);
+                intent.putExtra("글쓴이", Writer);
+                intent.putExtra("내용",Content);
+                intent.putExtra("좋아요",Like);
+                intent.putExtra("글 번호",Number);//값 전달해주기
+                startActivity(intent);
             }
         });
         return Community_View;
