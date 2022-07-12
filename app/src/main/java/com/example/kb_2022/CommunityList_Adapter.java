@@ -21,9 +21,7 @@ public class CommunityList_Adapter extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+    public long getItemId(int position) {return 0;}
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
