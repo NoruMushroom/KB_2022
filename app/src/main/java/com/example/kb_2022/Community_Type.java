@@ -6,6 +6,7 @@ public class Community_Type {
     private String Title;
     private String Like;
     private String Number;
+    private String Content;
 
     public String getWriter() {
         return Writer;
@@ -19,6 +20,10 @@ public class Community_Type {
     public String getNumber(){
         return Number;
     }
+    public String getContent(){
+        return Content;
+    }
+    public void setContent(String content ) { this.Content = content; }
     public void setWriter(String writer) {
         this.Writer = writer;
     }

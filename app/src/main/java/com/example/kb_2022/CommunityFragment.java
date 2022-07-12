@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -46,7 +47,7 @@ public class CommunityFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mJsonString;
-    private ArrayList<Community_Type> mArrayList;
+    private CommunityList_Adapter List_item;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -97,6 +98,13 @@ public class CommunityFragment extends Fragment {
             }//글쓰기 서버 업로드
         });
         dataSetting();
+        Community_List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a_parent, View a_view, int a_position, long a_id) {
+                final Community_Type item = (Community_Type) List_item.getItem(a_position);
+                Toast.makeText(This_Activity,  item.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
         return Community_View;
     }
     private void dataSetting(){
@@ -180,7 +188,7 @@ public class CommunityFragment extends Fragment {
         String TAG_UNAME = "name";
         String TAG_CONTENT = "content";
         String TAG_LIKE = "islike";
-        CommunityList_Adapter List_item = new CommunityList_Adapter();
+        List_item = new CommunityList_Adapter();
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
@@ -192,7 +200,7 @@ public class CommunityFragment extends Fragment {
                 String uname = item.getString(TAG_UNAME);
                 String content = item.getString(TAG_CONTENT);
                 Integer like = item.getInt(TAG_LIKE);
-                List_item.addItem(title,uname,like,bno);
+                List_item.addItem(title,uname,content,like,bno);
                 System.out.println(bno + title + uname + content + like);
             }
             Community_List.setAdapter(List_item);
