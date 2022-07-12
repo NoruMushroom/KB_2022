@@ -2,6 +2,7 @@ package com.example.kb_2022;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -86,12 +87,13 @@ public class CommunityFragment extends Fragment {
                              Bundle savedInstanceState) {
         This_Activity = container.getContext();
         View Community_View = inflater.inflate(R.layout.fragment_community, container, false);
-        Community_List = Community_View.findViewById(R.id.Community_ListView);
+        Community_List = Community_View.findViewById(R.id.Community_ListView);//리스트뷰
         ImageButton Write_icon = Community_View.findViewById(R.id.Write);
         Write_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("STATE", "LOG in SERVER");
+                Intent intent = new Intent(getActivity(), Community_Read.class);
+                startActivity(intent);
             }//글쓰기 서버 업로드
         });
         dataSetting();
