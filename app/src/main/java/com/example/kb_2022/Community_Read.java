@@ -126,7 +126,7 @@ public class Community_Read extends AppCompatActivity {
             String postParameters;
             String Bno;
             String isLike;
-            String upw;
+            String bpw;
             switch (params[0]){
                 case "readtext":
                     Bno = params[1];
@@ -141,8 +141,8 @@ public class Community_Read extends AppCompatActivity {
                     break;
                 case "deletetext":
                     Bno = params[1];
-                    upw = params[2];
-                    postParameters = "bno=" + Bno + "&upw=" + upw;
+                    bpw = params[2];
+                    postParameters = "bno=" + Bno + "&bpw=" + bpw;
                     postValue = 2;
                     break;
                 default:
