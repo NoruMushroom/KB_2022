@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class Community_Read extends AppCompatActivity {
     private TextView Like;
     private ImageButton Like_Btn;
     private ImageButton Bad_Btn;
-    private Context This_Activity;
+    private ImageButton Delete_Btn;
     private String mJsonString;
     private Integer postValue;
     @Override
@@ -54,6 +55,7 @@ public class Community_Read extends AppCompatActivity {
         Writer = findViewById(R.id.R_writer);
         Content = findViewById(R.id.R_content);
         Like = findViewById(R.id.R_like);
+        Delete_Btn = findViewById(R.id.R_delete);
         String number = intent.getStringExtra("글 번호");//string형 글번호 변수
 
         //글 내용 가져오기
@@ -64,10 +66,13 @@ public class Community_Read extends AppCompatActivity {
             public void onClick(View v) {
                 GetData task = new GetData();
                 task.execute("likeupdown", number , "true");
-
+                Intent intent = getIntent();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
-
         Bad_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +83,11 @@ public class Community_Read extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+            }
+        });
+        Delete_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
     }
