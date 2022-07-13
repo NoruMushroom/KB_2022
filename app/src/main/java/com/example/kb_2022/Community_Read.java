@@ -49,6 +49,7 @@ public class Community_Read extends AppCompatActivity {
     private String mJsonString;
     private Integer postValue;
     private GetData D_task;
+    private boolean D_result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +114,14 @@ public class Community_Read extends AppCompatActivity {
                         PW_content = PW.getText().toString();
                         D_task = new GetData();
                         D_task.execute("deletetext", number, PW_content);
-                        Toast.makeText(getApplicationContext(),postValue.toString(),Toast.LENGTH_SHORT).show();
+                        String vvv;
+                        if(D_result){
+                            vvv = "true";
+                        }
+                        else{
+                            vvv = "false";
+                        }
+                        Toast.makeText(getApplicationContext(),vvv,Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.show();
@@ -145,9 +153,16 @@ public class Community_Read extends AppCompatActivity {
             }
             else {
                 mJsonString = result;
-                showContent();
+                if(postValue == 1){
+                    showContent();
+                }
+                else if(postValue == 2){
+                    showLike();
+                }
+                else{
+                    showDelete();
+                }
             }
-
         }
         @Override
         protected String doInBackground(String... params) {
@@ -172,7 +187,7 @@ public class Community_Read extends AppCompatActivity {
                     Bno = params[1];
                     bpw = params[2];
                     postParameters = "bno=" + Bno + "&bpw=" + bpw;
-                    postValue = 2;
+                    postValue = 3;
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + params[0]);
@@ -215,13 +230,31 @@ public class Community_Read extends AppCompatActivity {
             }
         }
     }
-    private void showResult() {
+    private void showLike() {
         String TAG_SUCCESS = "success";
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
 
             String success = jsonObject.getString(TAG_SUCCESS);
             System.out.println(success);
+
+        } catch (JSONException e) {
+            Log.d(TAG, "showResult : ", e);
+        }
+    }
+    private void showDelete() {
+        String TAG_SUCCESS = "success";
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+
+            String success = jsonObject.getString(TAG_SUCCESS);
+            System.out.println(success);
+            if(success.equals("true")){
+                D_result = false;
+            }
+            else{
+                D_result = true;
+            }
 
         } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
@@ -234,27 +267,24 @@ public class Community_Read extends AppCompatActivity {
         String TAG_CONTENT = "content";
         String TAG_ISLIKE = "islike";
 
-        if(postValue == 1){
-            try {
-                JSONObject jsonObject = new JSONObject(mJsonString);
-                JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject item = jsonArray.getJSONObject(i);
-                    String title = item.getString(TAG_TITLE);
-                    String name = item.getString(TAG_NAME);
-                    String content = item.getString(TAG_CONTENT);
-                    String like = item.getString(TAG_ISLIKE);
-                    Title.setText(title);
-                    Writer.setText(name);
-                    Content.setText(content);
-                    Like.setText("좋아요 : "+ like);
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject item = jsonArray.getJSONObject(i);
+                String title = item.getString(TAG_TITLE);
+                String name = item.getString(TAG_NAME);
+                String content = item.getString(TAG_CONTENT);
+                String like = item.getString(TAG_ISLIKE);
+                Title.setText(title);
+                Writer.setText(name);
+                Content.setText(content);
+                Like.setText("좋아요 : "+ like);
                 }
-            } catch (JSONException e) {
-                Log.d(TAG, "showResult : ", e);
+
             }
-        }
-        else{
-            showResult();
+        catch (JSONException e) {
+            Log.d(TAG, "showResult : ", e);
         }
     }
 }
