@@ -61,7 +61,6 @@ public class Community_Write extends AppCompatActivity {
             public void onClick(View view) {
                 GetData task = new GetData();
                 task.execute("writeboard", Title.getText().toString(), userName, PW.getText().toString(), Content.getText().toString());
-                writeAlertDialog(success);
             }
         });
     }
@@ -147,6 +146,7 @@ public class Community_Write extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(mJsonString);
 
             success = jsonObject.getString(TAG_SUCCESS);
+            writeAlertDialog(success);
             System.out.println(success);
 
         } catch (JSONException e) {
