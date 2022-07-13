@@ -95,12 +95,13 @@ public class Community_Read extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Community_Read.this);
                 builder.setTitle("글 삭제");
-                builder.setMessage("작성하실때 입력한 비밀번호를 입력해주세요.");
+                builder.setMessage("비밀번호를 입력해주세요.");
                 final EditText PW = new EditText(Community_Read.this);
                 final ConstraintLayout container = new ConstraintLayout(Community_Read.this);
                 final ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 params.leftMargin = getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
                 params.rightMargin =getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
+                PW.setLayoutParams(params);
                 container.addView(PW);
                 builder.setView(container);
                 builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
