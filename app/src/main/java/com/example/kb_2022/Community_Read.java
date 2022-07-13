@@ -45,6 +45,7 @@ public class Community_Read extends AppCompatActivity {
     private ImageButton Like_Btn;
     private ImageButton Bad_Btn;
     private ImageButton Delete_Btn;
+    private String PW_content;
     private String mJsonString;
     private Integer postValue;
     @Override
@@ -95,19 +96,21 @@ public class Community_Read extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Community_Read.this);
                 builder.setTitle("글 삭제");
-                builder.setMessage("비밀번호를 입력해주세요.");
+                builder.setMessage("\n비밀번호를 입력해주세요.\n");
                 final EditText PW = new EditText(Community_Read.this);
                 final ConstraintLayout container = new ConstraintLayout(Community_Read.this);
                 final ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 params.leftMargin = getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
                 params.rightMargin =getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
                 PW.setLayoutParams(params);
+                PW.setBackgroundResource(R.drawable.round_wiget);
                 container.addView(PW);
                 builder.setView(container);
                 builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        PW_content = PW.getText().toString();
+                        Toast.makeText(getApplicationContext(),PW_content,Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.show();
