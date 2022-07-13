@@ -27,6 +27,7 @@ public class Community_Write extends AppCompatActivity {
     private EditText Content;
     private EditText PW;
     private Button Save;
+    private String userName;
     private Context This_Activity;
     private String mJsonString;
 
@@ -36,6 +37,8 @@ public class Community_Write extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.community_write);
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("이름");
         Title = findViewById(R.id.W_title);
         Title.setSelection(0);
         Content = findViewById(R.id.W_content);

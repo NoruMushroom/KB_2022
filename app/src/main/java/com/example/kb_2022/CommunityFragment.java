@@ -110,6 +110,7 @@ public class CommunityFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(),"이름 : " + userName + " 성별 : " + userGender, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), Community_Write.class);
+                intent.putExtra("이름", userName);
                 startActivity(intent);
             }//글쓰기화면 이동
         });

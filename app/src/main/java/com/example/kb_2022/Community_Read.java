@@ -44,7 +44,6 @@ public class Community_Read extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        This_Activity = getApplicationContext();
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.community_read);
@@ -57,23 +56,15 @@ public class Community_Read extends AppCompatActivity {
         Like = findViewById(R.id.R_like);
         String number = intent.getStringExtra("글 번호");//string형 글번호 변수
 
-
-
         //글 내용 가져오기
         GetData task = new GetData();
         task.execute("readtext", number);
-
-
         Like_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GetData task = new GetData();
                 task.execute("likeupdown", number , "true");
-                Intent intent = getIntent();
-                finish();
-                overridePendingTransition(0, 0);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
+
             }
         });
 
