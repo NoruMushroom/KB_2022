@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".Community_Read"/>
+        <activity android:name=".Community_Write"/>
     </application>
 
 </manifest>

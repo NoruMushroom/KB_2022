@@ -97,13 +97,12 @@ public class CommunityFragment extends Fragment {
         System.out.println("아이디" + This_Activity);
         Community_List = Community_View.findViewById(R.id.Community_ListView);//리스트뷰
         ImageButton Write_icon = Community_View.findViewById(R.id.Write);
-        출처: https://eskeptor.tistory.com/60 [Hello World:티스토리]
         Write_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Community_Read.class);
-                //startActivity(intent);
-            }//글쓰기 서버 업로드
+                Intent intent = new Intent(getActivity(), Community_Write.class);
+                startActivity(intent);
+            }//글쓰기화면 이동
         });
         dataSetting();
         Community_List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
