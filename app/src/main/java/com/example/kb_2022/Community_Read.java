@@ -36,6 +36,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 public class Community_Read extends AppCompatActivity {
     private TextView Title;
@@ -113,15 +114,17 @@ public class Community_Read extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         PW_content = PW.getText().toString();
                         D_task = new GetData();
-                        D_task.execute("deletetext", number, PW_content);
-                        String vvv;
-                        if(D_result){
-                            vvv = "true";
+                        try {
+                           String reesult = D_task.execute("deletetext", number, PW_content).get();
+                           JSONObject j_reesult = new JSONObject(reesult);
+                           reesult = j_reesult.getString("success");
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        else{
-                            vvv = "false";
-                        }
-                        Toast.makeText(getApplicationContext(),vvv,Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.show();
@@ -133,6 +136,7 @@ public class Community_Read extends AppCompatActivity {
 
         ProgressDialog progressDialog;
         String errorString = null;
+
 
         @Override
         protected void onPreExecute() {
@@ -246,7 +250,6 @@ public class Community_Read extends AppCompatActivity {
         String TAG_SUCCESS = "success";
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
-
             String success = jsonObject.getString(TAG_SUCCESS);
             System.out.println(success);
             if(success.equals("true")){
