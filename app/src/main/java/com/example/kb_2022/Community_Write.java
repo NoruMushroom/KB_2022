@@ -2,8 +2,10 @@ package com.example.kb_2022;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,7 +39,7 @@ public class Community_Write extends AppCompatActivity {
     private String userName;
     private Context This_Activity;
     private String mJsonString;
-
+    private String success;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,7 @@ public class Community_Write extends AppCompatActivity {
             public void onClick(View view) {
                 GetData task = new GetData();
                 task.execute("writeboard", Title.getText().toString(), userName, PW.getText().toString(), Content.getText().toString());
+                writeAlertDialog(success);
             }
         });
     }
@@ -141,11 +146,37 @@ public class Community_Write extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
 
-            String success = jsonObject.getString(TAG_SUCCESS);
+            success = jsonObject.getString(TAG_SUCCESS);
             System.out.println(success);
 
         } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
         }
     }
+
+    private void writeAlertDialog(String string){
+        AlertDialog.Builder bulider = new AlertDialog.Builder(this);
+        if(string == "true") {
+            bulider.setTitle("글 작성 성공");
+            bulider.setMessage("글을 작성하였습니다.");
+            bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(getApplicationContext(), "선택하였습니다.", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else{
+            bulider.setTitle("글 작성 실패");
+            bulider.setMessage("글 작성에 실패하였습니다.");
+            bulider.setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(getApplicationContext(), "선택하였습니다.", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        bulider.show();
+    }
+
 }
