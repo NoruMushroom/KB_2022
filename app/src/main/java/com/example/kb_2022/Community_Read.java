@@ -48,6 +48,7 @@ public class Community_Read extends AppCompatActivity {
     private String PW_content;
     private String mJsonString;
     private Integer postValue;
+    private GetData D_task;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +111,9 @@ public class Community_Read extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         PW_content = PW.getText().toString();
-                        Toast.makeText(getApplicationContext(),PW_content,Toast.LENGTH_SHORT).show();
+                        D_task = new GetData();
+                        D_task.execute("deletetext", number, PW_content);
+                        Toast.makeText(getApplicationContext(),postValue.toString(),Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.show();
