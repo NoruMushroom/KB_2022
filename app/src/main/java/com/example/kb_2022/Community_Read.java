@@ -69,6 +69,11 @@ public class Community_Read extends AppCompatActivity {
             public void onClick(View v) {
                 GetData task = new GetData();
                 task.execute("likeupdown", number , "true");
+                Intent intent = getIntent();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -77,6 +82,11 @@ public class Community_Read extends AppCompatActivity {
             public void onClick(View v) {
                 GetData task = new GetData();
                 task.execute("likeupdown", number , "false");
+                Intent intent = getIntent();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }
@@ -207,7 +217,7 @@ public class Community_Read extends AppCompatActivity {
                     Title.setText(title);
                     Writer.setText(name);
                     Content.setText(content);
-                    Like.setText(like);
+                    Like.setText("좋아요 : "+ like);
                 }
             } catch (JSONException e) {
                 Log.d(TAG, "showResult : ", e);
