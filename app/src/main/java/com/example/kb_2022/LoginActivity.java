@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("이름", userName);
                                 intent.putExtra("성별", userGender);
+                                finish();
                                 startActivity(intent);//메인에게 이름 넘겨주기
                             } else { // 로그인에 실패한 경우
                                 Toast.makeText(getApplicationContext(),"로그인에 실패하였습니다.",Toast.LENGTH_SHORT).show();
