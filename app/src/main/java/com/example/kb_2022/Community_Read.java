@@ -50,7 +50,7 @@ public class Community_Read extends AppCompatActivity {
     private String mJsonString;
     private Integer postValue;
     private GetData D_task;
-    private boolean D_result;
+    private Intent Main_intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +58,7 @@ public class Community_Read extends AppCompatActivity {
         actionBar.hide();
         setContentView(R.layout.community_read);
         Intent intent = getIntent();
+        Main_intent = getIntent();
         Like_Btn = findViewById(R.id.image_like);
         Bad_Btn = findViewById(R.id.image_unlike);
         Title = findViewById(R.id.R_title);
@@ -66,7 +67,6 @@ public class Community_Read extends AppCompatActivity {
         Like = findViewById(R.id.R_like);
         Delete_Btn = findViewById(R.id.R_delete);
         String number = intent.getStringExtra("글 번호");//string형 글번호 변수
-
         //글 내용 가져오기
         GetData task = new GetData();
         task.execute("readtext", number);
@@ -115,9 +115,11 @@ public class Community_Read extends AppCompatActivity {
                         PW_content = PW.getText().toString();
                         D_task = new GetData();
                         try {
-                           String reesult = D_task.execute("deletetext", number, PW_content).get();
-                           JSONObject j_reesult = new JSONObject(reesult);
-                           reesult = j_reesult.getString("success");
+                            String result = D_task.execute("deletetext", number, PW_content).get();
+                            JSONObject j_result = new JSONObject(result);
+                            result = j_result.getString("success");//성공 여부
+                            if(result.equals(true)){
+                            }
                         } catch (ExecutionException e) {
                             e.printStackTrace();
                         } catch (InterruptedException e) {
@@ -252,12 +254,6 @@ public class Community_Read extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(mJsonString);
             String success = jsonObject.getString(TAG_SUCCESS);
             System.out.println(success);
-            if(success.equals("true")){
-                D_result = false;
-            }
-            else{
-                D_result = true;
-            }
 
         } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
