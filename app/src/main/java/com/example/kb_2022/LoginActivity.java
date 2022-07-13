@@ -42,10 +42,12 @@ public class LoginActivity extends AppCompatActivity {
                             if (success) { // 로그인에 성공한 경우
                                 String userID = jsonObject.getString("userID");
                                 String userPass = jsonObject.getString("userPassword");
+                                String userName = jsonObject.getString("userName");
+                                String userGender = jsonObject.getString("userGender");
                                 Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                //intent.putExtra("userID", userID);
-                                //intent.putExtra("userPass", userPass);
+                                intent.putExtra("이름", userName);
+                                intent.putExtra("성별", userGender);
                                 startActivity(intent);//메인에게 이름 넘겨주기
                             } else { // 로그인에 실패한 경우
                                 Toast.makeText(getApplicationContext(),"로그인에 실패하였습니다.",Toast.LENGTH_SHORT).show();

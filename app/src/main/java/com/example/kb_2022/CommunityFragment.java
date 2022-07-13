@@ -50,6 +50,8 @@ public class CommunityFragment extends Fragment {
     private String mJsonString;
     private CommunityList_Adapter List_item;
     private ArrayAdapter adapter;
+    private String userName;
+    private String userGender;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -93,6 +95,12 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         This_Activity = container.getContext();
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            bundle = getArguments();
+            userName = bundle.getString("이름");
+            userGender = bundle.getString("성별");
+        }
         View Community_View = inflater.inflate(R.layout.fragment_community, container, false);
         System.out.println("아이디" + This_Activity);
         Community_List = Community_View.findViewById(R.id.Community_ListView);//리스트뷰
@@ -100,6 +108,7 @@ public class CommunityFragment extends Fragment {
         Write_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getActivity(),"이름 : " + userName + " 성별 : " + userGender, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), Community_Write.class);
                 startActivity(intent);
             }//글쓰기화면 이동
