@@ -40,6 +40,7 @@ public class Community_Read extends AppCompatActivity {
     private ImageButton Bad_Btn;
     private Context This_Activity;
     private String mJsonString;
+    private Integer postValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,19 +56,31 @@ public class Community_Read extends AppCompatActivity {
         Content = findViewById(R.id.R_content);
         Like = findViewById(R.id.R_like);
         String number = intent.getStringExtra("글 번호");//string형 글번호 변수
+
+
+
+        //글 내용 가져오기
+        GetData task = new GetData();
+        task.execute("readtext", number);
+
+
         Like_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GetData task = new GetData();
-                task.execute("http://123.215.162.92/KBServer/likeupdown.php", number , "true");
+                task.execute("likeupdown", number , "true");
             }
         });
+
         Bad_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GetData task = new GetData();
+                task.execute("likeupdown", number , "false");
             }
         });
     }
+
     private class GetData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
@@ -81,26 +94,50 @@ public class Community_Read extends AppCompatActivity {
                     "Please Wait", null, true, true);
         }
 
-
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
+
+
             if (result == null){
                 Log.d(TAG, "response - " + result);
-
             }
             else {
                 mJsonString = result;
-                showResult();
+                showContent();
             }
+
         }
         @Override
         protected String doInBackground(String... params) {
-            String serverURL = params[0];
-            String Bno = params[1];
-            String isLike = params[2];
-            String postParameters = "bno=" + Bno + "&islike=" + isLike;
+            String serverURL = "http://123.215.162.92/KBServer/" + params[0] + ".php";
+            String postParameters;
+            String Bno;
+            String isLike;
+            String upw;
+            switch (params[0]){
+                case "readtext":
+                    Bno = params[1];
+                    postParameters = "bno=" + Bno;
+                    postValue = 1;
+                    break;
+                case "likeupdown":
+                    Bno = params[1];
+                    isLike = params[2];
+                    postParameters = "bno=" + Bno + "&islike=" + isLike;
+                    postValue = 2;
+                    break;
+                case "deletetext":
+                    Bno = params[1];
+                    upw = params[2];
+                    postParameters = "bno=" + Bno + "&upw=" + upw;
+                    postValue = 2;
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + params[0]);
+            }
+
             try {
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -148,6 +185,36 @@ public class Community_Read extends AppCompatActivity {
 
         } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
+        }
+    }
+    private void showContent(){
+        String TAG_JSON = "select_content";
+        String TAG_TITLE = "title";
+        String TAG_NAME = "name";
+        String TAG_CONTENT = "content";
+        String TAG_ISLIKE = "islike";
+
+        if(postValue == 1){
+            try {
+                JSONObject jsonObject = new JSONObject(mJsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject item = jsonArray.getJSONObject(i);
+                    String title = item.getString(TAG_TITLE);
+                    String name = item.getString(TAG_NAME);
+                    String content = item.getString(TAG_CONTENT);
+                    String like = item.getString(TAG_ISLIKE);
+                    Title.setText(title);
+                    Writer.setText(name);
+                    Content.setText(content);
+                    Like.setText(like);
+                }
+            } catch (JSONException e) {
+                Log.d(TAG, "showResult : ", e);
+            }
+        }
+        else{
+            showResult();
         }
     }
 }

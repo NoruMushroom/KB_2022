@@ -220,7 +220,6 @@ public class CommunityFragment extends Fragment {
                 String content = item.getString(TAG_CONTENT);
                 Integer like = item.getInt(TAG_LIKE);
                 List_item.addItem(title,uname,content,like,bno);
-                System.out.println(bno + title + uname + content + like);
             }
             Community_List.setAdapter(List_item);
         } catch (JSONException e) {
