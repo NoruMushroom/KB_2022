@@ -50,7 +50,6 @@ public class Community_Read extends AppCompatActivity {
     private String mJsonString;
     private Integer postValue;
     private GetData D_task;
-    private Intent Main_intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +57,6 @@ public class Community_Read extends AppCompatActivity {
         actionBar.hide();
         setContentView(R.layout.community_read);
         Intent intent = getIntent();
-        Main_intent = getIntent();
         Like_Btn = findViewById(R.id.image_like);
         Bad_Btn = findViewById(R.id.image_unlike);
         Title = findViewById(R.id.R_title);
@@ -118,7 +116,9 @@ public class Community_Read extends AppCompatActivity {
                             String result = D_task.execute("deletetext", number, PW_content).get();
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
-                            if(result.equals(true)){
+                            if(result.equals("true")){
+                                finish();
+                                overridePendingTransition(0, 0);
                             }
                         } catch (ExecutionException e) {
                             e.printStackTrace();
