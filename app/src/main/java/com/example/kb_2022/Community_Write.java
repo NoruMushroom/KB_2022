@@ -74,7 +74,7 @@ public class Community_Write extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(Community_Write.this,
-                    "Please Wait", null, true, true);
+                    "잠시만 기다려주세요", null, true, true);
         }
 
         @Override
@@ -162,7 +162,8 @@ public class Community_Write extends AppCompatActivity {
             bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Toast.makeText(getApplicationContext(), "선택하였습니다.", Toast.LENGTH_LONG).show();
+                    finish();
+                    overridePendingTransition(0, 0);
                 }
             });
         }
@@ -172,7 +173,8 @@ public class Community_Write extends AppCompatActivity {
             bulider.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Toast.makeText(getApplicationContext(), "선택하였습니다.", Toast.LENGTH_LONG).show();
+                    finish();
+                    overridePendingTransition(0, 0);
                 }
             });
         }

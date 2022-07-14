@@ -145,7 +145,7 @@ public class Community_Read extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(Community_Read.this,
-                    "Please Wait", null, true, true);
+                    "잠시만 기다려주세요", null, true, true);
         }
 
         @Override
