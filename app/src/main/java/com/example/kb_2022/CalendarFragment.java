@@ -96,7 +96,6 @@ public class CalendarFragment extends Fragment {
             }
         });
         calendarView.addDecorators(new DayDecorator(container.getContext()));
-
         // 좌우 화살표 가운데의 연/월이 보이는 방식 커스텀
         calendarView.setTitleFormatter(new TitleFormatter() {
             @Override
