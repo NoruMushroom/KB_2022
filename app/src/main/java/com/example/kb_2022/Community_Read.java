@@ -116,10 +116,29 @@ public class Community_Read extends AppCompatActivity {
                             String result = D_task.execute("deletetext", number, PW_content).get();
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
+                            System.out.println(result);
+                            AlertDialog.Builder del_bulider = new AlertDialog.Builder(Community_Read.this);
                             if(result.equals("true")){
-                                finish();
-                                overridePendingTransition(0, 0);
+                                del_bulider.setTitle("글 삭제 성공");
+                                del_bulider.setMessage("글 삭제를 성공하였습니다.");
+                                del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                        overridePendingTransition(0, 0);
+                                    }
+                                });
                             }
+                            else{
+                                del_bulider.setTitle("글 삭제 실패");
+                                del_bulider.setMessage("비밀번호가 맞지 않습니다.");
+                                del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+                            }
+                            del_bulider.show();
                         } catch (ExecutionException e) {
                             e.printStackTrace();
                         } catch (InterruptedException e) {
