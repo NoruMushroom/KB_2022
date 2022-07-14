@@ -131,7 +131,7 @@ public class Community_Read extends AppCompatActivity {
                             }
                             else{
                                 del_bulider.setTitle("글 삭제 실패");
-                                del_bulider.setMessage("비밀번호가 맞지 않습니다.");
+                                del_bulider.setMessage("\n비밀번호가 맞지 않습니다.\n");
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {

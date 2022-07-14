@@ -1,13 +1,18 @@
 package com.example.kb_2022;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.data.BarEntry;
 
@@ -17,6 +22,7 @@ public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private ListView Trash_List;
+    private ImageButton Refresh;
     private ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
     private ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
     private ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
@@ -63,6 +69,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
         Trash_List = Home_View.findViewById(R.id.Main_ListView);
+        Refresh = Home_View.findViewById(R.id.Refresh);
         Trash_List.setVerticalScrollBarEnabled(false);
         Daily_chart.add(new BarEntry(1,1));
         Daily_chart.add(new BarEntry(2, 2));
@@ -73,10 +80,20 @@ public class HomeFragment extends Fragment {
         Monthly_chart.add(new BarEntry(1, 2));
         Monthly_chart.add(new BarEntry(2, 8));
         Monthly_chart.add(new BarEntry(3, 4));
+        Refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh();
+                Toast.makeText(container.getContext(),"갱신",Toast.LENGTH_SHORT).show();
+            }
+        });
         dataSetting();
         return Home_View;
     }
-
+    private void refresh(){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
+    }
     private void dataSetting(){
         HomeList_Adapter List_item = new HomeList_Adapter();
         String[] array = new String[]{"일간", "주간", "월간"};

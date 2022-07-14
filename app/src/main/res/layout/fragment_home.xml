@@ -13,8 +13,7 @@
         android:background="@drawable/round_item"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:text="." />
+        android:layout_marginTop="10dp" />
 
     <ListView
         android:id="@+id/Main_ListView"
@@ -33,6 +32,16 @@
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginLeft="25dp"
+        android:src="@drawable/chu"
         android:layout_marginTop="25dp" />
+
+    <ImageButton
+        android:id="@+id/Refresh"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="25dp"
+        android:background="#B4F0B4"
+        android:src="@drawable/ic_baseline_refresh_24" />
 
 </FrameLayout>
