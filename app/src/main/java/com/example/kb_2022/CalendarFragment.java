@@ -15,11 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.OnRangeSelectedListener;
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
@@ -27,6 +29,7 @@ import com.prolificinteractive.materialcalendarview.format.TitleFormatter;
 
 import org.threeten.bp.LocalDate;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -38,6 +41,8 @@ public class CalendarFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private TextView Select_Day;
+    private String[] Day;
     private MaterialCalendarView calendarView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -82,17 +87,16 @@ public class CalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         View Calender_View = inflater.inflate(R.layout.fragment_calendar, container, false);
         calendarView = Calender_View.findViewById(R.id.Calendar);
+        Select_Day = Calender_View.findViewById(R.id.Day);
         calendarView.setTitleFormatter(new MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)));
         calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)));
         calendarView.setHeaderTextAppearance(R.style.CalendarWidgetHeader);
-        calendarView.setOnRangeSelectedListener(new OnRangeSelectedListener() {
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
-            public void onRangeSelected(@NonNull MaterialCalendarView widget, @NonNull List<CalendarDay> dates) {
-                // 아래 로그를 통해 시작일, 종료일이 어떻게 찍히는지 확인하고 본인이 필요한 방식에 따라 바꿔 사용한다
-                // UTC 시간을 구하려는 경우 이 라이브러리에서 제공하지 않으니 별도의 로직을 짜서 만들어내 써야 한다
-                String startDay = dates.get(0).getDate().toString();
-                String endDay = dates.get(dates.size() - 1).getDate().toString();
-                Log.e(TAG, "시작일 : " + startDay + ", 종료일 : " + endDay);
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                String Present = date.getDate().toString();//yyyy-mm-dd 형식
+                Day = Present.split("-");
+                Select_Day.setText(Day[0] +"년 " + Day[1] + "월 " + Day[2] + "일 입니다.");
             }
         });
         calendarView.addDecorators(new DayDecorator(container.getContext()));
