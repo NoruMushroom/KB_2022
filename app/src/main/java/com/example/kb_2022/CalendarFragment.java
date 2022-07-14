@@ -42,6 +42,7 @@ public class CalendarFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private TextView Select_Day;
+    private TextView Show_Gram;
     private String[] Day;
     private MaterialCalendarView calendarView;
     private static final String ARG_PARAM1 = "param1";
@@ -88,15 +89,18 @@ public class CalendarFragment extends Fragment {
         View Calender_View = inflater.inflate(R.layout.fragment_calendar, container, false);
         calendarView = Calender_View.findViewById(R.id.Calendar);
         Select_Day = Calender_View.findViewById(R.id.Day);
+        Show_Gram = Calender_View.findViewById(R.id.Gram);
         calendarView.setTitleFormatter(new MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)));
         calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)));
         calendarView.setHeaderTextAppearance(R.style.CalendarWidgetHeader);
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                int gram = 30;
                 String Present = date.getDate().toString();//yyyy-mm-dd 형식
                 Day = Present.split("-");
-                Select_Day.setText(Day[0] +"년 " + Day[1] + "월 " + Day[2] + "일 입니다.");
+                Select_Day.setText(Day[0] +"년 " + Day[1] + "월 " + Day[2] + "일");
+                Show_Gram.setText("선택하신 날짜에 버린 쓰레기의 총합은 "+ Integer.toString(gram) +"g 입니다.");
             }
         });
         calendarView.addDecorators(new DayDecorator(container.getContext()));
