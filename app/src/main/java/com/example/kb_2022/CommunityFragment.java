@@ -206,7 +206,6 @@ public class CommunityFragment extends Fragment {
         String TAG_BNO = "bno";
         String TAG_TITLE = "title";
         String TAG_UNAME = "name";
-        String TAG_CONTENT = "content";
         String TAG_LIKE = "islike";
         List_item = new CommunityList_Adapter();
         try {
@@ -218,9 +217,8 @@ public class CommunityFragment extends Fragment {
                 Integer bno = item.getInt(TAG_BNO);
                 String title = item.getString(TAG_TITLE);
                 String uname = item.getString(TAG_UNAME);
-                String content = item.getString(TAG_CONTENT);
                 Integer like = item.getInt(TAG_LIKE);
-                List_item.addItem(title,uname,content,like,bno);
+                List_item.addItem(title,uname,like,bno);
             }
             Community_List.setAdapter(List_item);
         } catch (JSONException e) {

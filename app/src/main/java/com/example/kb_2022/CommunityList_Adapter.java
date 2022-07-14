@@ -55,13 +55,13 @@ public class CommunityList_Adapter extends BaseAdapter {
         return convertView;
     }
 
-    public void addItem(String Title, String Writer, String Content, int Like, int Number) {//매개변수 바꿔야됨
+    public void addItem(String Title, String Writer, int Like, int Number) {//매개변수 바꿔야됨
         //Drawable img, String name, String contents
         /* MyItem에 아이템을 setting한다. */
         //mItem.setIcon(img);
         Community_Type mItem = new Community_Type();
         mItem.setTitle(Title);
-        mItem.setContent(Content);
+
         mItem.setWriter(Writer);
         mItem.setLike(Like);
         mItem.setNumber(Number);
