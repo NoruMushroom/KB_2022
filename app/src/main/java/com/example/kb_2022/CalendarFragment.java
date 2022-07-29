@@ -41,6 +41,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,6 +60,7 @@ public class CalendarFragment extends Fragment {
     private String userName;
     private String mJsonString;
     private Context This_Activity;
+    private ArrayList<String> Data;
     private MaterialCalendarView calendarView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -142,6 +144,7 @@ public class CalendarFragment extends Fragment {
                         .append("월");
                 Month = calendarHeaderElements[1].replaceAll("^0+","");
                 Toast.makeText(container.getContext(),Month,Toast.LENGTH_SHORT).show();
+                dataSetting();
                 return calendarHeaderBuilder.toString();
             }
         });
@@ -172,7 +175,7 @@ public class CalendarFragment extends Fragment {
         }
 
     private void dataSetting(){
-        CalendarFragment.GetData task = new CommunityFragment.GetData();
+        CalendarFragment.GetData task = new CalendarFragment.GetData();
         task.execute(IP_ADDRESS, "");
     }
 
@@ -252,7 +255,7 @@ public class CalendarFragment extends Fragment {
         String TAG_TITLE = "title";
         String TAG_UNAME = "name";
         String TAG_LIKE = "islike";
-        List_item = new CommunityList_Adapter();
+        Data = new ArrayList<>();
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
