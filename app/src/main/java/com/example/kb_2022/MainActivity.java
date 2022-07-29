@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment Option;//페이지 변수 선언
     String userName;
     String userGender;
+    String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userName = intent.getStringExtra("이름");
         userGender = intent.getStringExtra("성별");
+        userID = intent.getStringExtra("아이디");
         Home = new HomeFragment();
         Calender = new CalendarFragment();
         Community = new CommunityFragment();
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.calendar:
                         Bundle Cal_bundle = new Bundle();
-                        Cal_bundle.putString("이름",userName);
+                        Cal_bundle.putString("아이디",userID);
                         Calender.setArguments(Cal_bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Calender).commitAllowingStateLoss();
                         return true;

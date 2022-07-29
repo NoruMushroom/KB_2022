@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String userGender = jsonObject.getString("userGender");
                                 Toast.makeText(getApplicationContext(),"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("아이디", userID);
                                 intent.putExtra("이름", userName);
                                 intent.putExtra("성별", userGender);
                                 finish();
