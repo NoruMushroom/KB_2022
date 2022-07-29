@@ -43,13 +43,16 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Home).commitAllowingStateLoss();
                         return true;
                     case R.id.calendar:
+                        Bundle Cal_bundle = new Bundle();
+                        Cal_bundle.putString("이름",userName);
+                        Calender.setArguments(Cal_bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Calender).commitAllowingStateLoss();
                         return true;
                     case R.id.community:
-                        Bundle bundle = new Bundle();
-                        bundle.putString("이름",userName);
-                        bundle.putString("성별",userGender);
-                        Community.setArguments(bundle);
+                        Bundle Com_bundle = new Bundle();
+                        Com_bundle.putString("이름",userName);
+                        Com_bundle.putString("성별",userGender);
+                        Community.setArguments(Com_bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Community).commitAllowingStateLoss();
                         return true;
                     case R.id.option:

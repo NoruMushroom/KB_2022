@@ -2,8 +2,10 @@ package com.example.kb_2022;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,8 +29,17 @@ import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
 import com.prolificinteractive.materialcalendarview.format.TitleFormatter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.threeten.bp.LocalDate;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -44,6 +55,10 @@ public class CalendarFragment extends Fragment {
     private TextView Select_Day;
     private TextView Show_Gram;
     private String[] Day;
+    private String Month;
+    private String userName;
+    private String mJsonString;
+    private Context This_Activity;
     private MaterialCalendarView calendarView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -87,6 +102,12 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Calender_View = inflater.inflate(R.layout.fragment_calendar, container, false);
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            bundle = getArguments();
+            userName = bundle.getString("이름");
+        }
+        This_Activity = container.getContext();
         calendarView = Calender_View.findViewById(R.id.Calendar);
         Select_Day = Calender_View.findViewById(R.id.Day);
         Show_Gram = Calender_View.findViewById(R.id.Gram);
@@ -115,8 +136,12 @@ public class CalendarFragment extends Fragment {
                 String[] calendarHeaderElements = inputText.toString().split("-");
                 StringBuilder calendarHeaderBuilder = new StringBuilder();
                 calendarHeaderBuilder.append(calendarHeaderElements[0])
+                        .append("년")
                         .append(" ")
-                        .append(calendarHeaderElements[1]);
+                        .append(calendarHeaderElements[1].replaceAll("^0+",""))//달
+                        .append("월");
+                Month = calendarHeaderElements[1].replaceAll("^0+","");
+                Toast.makeText(container.getContext(),Month,Toast.LENGTH_SHORT).show();
                 return calendarHeaderBuilder.toString();
             }
         });
@@ -144,4 +169,98 @@ public class CalendarFragment extends Fragment {
     //            view.addSpan(new StyleSpan(Typeface.BOLD));   // 달력 안의 모든 숫자들이 볼드 처리됨
             }
         }
+    private class GetData extends AsyncTask<String, Void, String> {
+
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(This_Activity,
+                    "잠시만 기다려주세요", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressDialog.dismiss();
+            if (result == null){
+                Log.d(TAG, "response - " + result);
+                //실패시
+            }
+            else {
+                mJsonString = result;
+                showResult();
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            String serverURL = params[0];
+            String postParameters = params[1];
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+                bufferedReader.close();
+                return sb.toString().trim();
+            } catch (Exception e) {
+                errorString = e.toString();
+                return null;
+            }
+        }
+    }
+    private void showResult() {
+        String TAG_JSON = "board_list";
+        String TAG_BNO = "bno";
+        String TAG_TITLE = "title";
+        String TAG_UNAME = "name";
+        String TAG_LIKE = "islike";
+        List_item = new CommunityList_Adapter();
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject item = jsonArray.getJSONObject(i);
+                Integer bno = item.getInt(TAG_BNO);
+                String title = item.getString(TAG_TITLE);
+                String uname = item.getString(TAG_UNAME);
+                Integer like = item.getInt(TAG_LIKE);
+                List_item.addItem(title,uname,like,bno);
+            }
+            Community_List.setAdapter(List_item);
+        } catch (JSONException e) {
+            Log.d(TAG, "showResult : ", e);
+        }
+    }
 }
