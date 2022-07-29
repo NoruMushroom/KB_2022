@@ -128,7 +128,7 @@ public class CalendarFragment extends Fragment {
         // 좌우 화살표 가운데의 연/월이 보이는 방식 커스텀
         calendarView.setTitleFormatter(new TitleFormatter() {
             @Override
-            public CharSequence format(CalendarDay day) {
+             public CharSequence format(CalendarDay day){
                 // CalendarDay라는 클래스는 LocalDate 클래스를 기반으로 만들어진 클래스다
                 // 때문에 MaterialCalendarView에서 연/월 보여주기를 커스텀하려면 CalendarDay 객체의 getDate()로 연/월을 구한 다음 LocalDate 객체에 넣어서
                 // LocalDate로 변환하는 처리가 필요하다
@@ -147,6 +147,7 @@ public class CalendarFragment extends Fragment {
         });
         return Calender_View;
     }
+
     /* 선택된 요일의 background를 설정하는 Decorator 클래스 */
         private static class DayDecorator implements DayViewDecorator {
 
@@ -169,6 +170,12 @@ public class CalendarFragment extends Fragment {
     //            view.addSpan(new StyleSpan(Typeface.BOLD));   // 달력 안의 모든 숫자들이 볼드 처리됨
             }
         }
+
+    private void dataSetting(){
+        CalendarFragment.GetData task = new CommunityFragment.GetData();
+        task.execute(IP_ADDRESS, "");
+    }
+
     private class GetData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;

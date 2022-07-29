@@ -207,6 +207,7 @@ public class CommunityFragment extends Fragment {
         String TAG_TITLE = "title";
         String TAG_UNAME = "name";
         String TAG_LIKE = "islike";
+
         List_item = new CommunityList_Adapter();
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
