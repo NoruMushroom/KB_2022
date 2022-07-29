@@ -119,11 +119,19 @@ public class CalendarFragment extends Fragment {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                int gram = 30;
                 String Present = date.getDate().toString();//yyyy-mm-dd 형식
                 Day = Present.split("-");
+                String Data = null;
+                try {
+                    Data = item.getString("g"+Day[1]+Day[2]);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Select_Day.setText(Day[0] +"년 " + Day[1] + "월 " + Day[2] + "일");
-                Show_Gram.setText("선택하신 날짜에 버린 쓰레기의 총합은 "+ Integer.toString(gram) +"g 입니다.");
+                if(Data == null){
+                    Data = "0";
+                }
+                Show_Gram.setText("선택하신 날짜에 버린 쓰레기의 총합은 "+ Data +"g 입니다.");
             }
         });
         calendarView.addDecorators(new DayDecorator(container.getContext()));
@@ -144,7 +152,6 @@ public class CalendarFragment extends Fragment {
                         .append("월");
                 Month = calendarHeaderElements[1].replaceAll("^0+","");
                 Toast.makeText(container.getContext(),Month,Toast.LENGTH_SHORT).show();
-
                 GetData task = new GetData();
                 task.execute(userName, Month);
 
