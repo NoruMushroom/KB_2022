@@ -220,7 +220,7 @@ public class CalendarFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             String serverURL = "http://123.215.162.92/KBServer/readgarbage.php";
-            String postParameters = "userid=" + params[0] + "&mon=" + params[1];
+            String postParameters = "userID=" + params[0] + "&mon=" + params[1];
             try {
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
