@@ -60,7 +60,6 @@ public class CalendarFragment extends Fragment {
     private String userID;
     private String mJsonString;
     private Context This_Activity;
-    private String Data;
     private JSONObject item;
     private MaterialCalendarView calendarView;
     private static final String ARG_PARAM1 = "param1";
@@ -122,13 +121,14 @@ public class CalendarFragment extends Fragment {
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 String Present = date.getDate().toString();//yyyy-mm-dd 형식
                 Day = Present.split("-");
+                String Data = null;
                 try {
                     Data = item.getString("g"+Day[1]+Day[2]);
+                    if(Data == "null"){
+                        Data = "0";
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
-                if(Data == null) {
-                    Data = "0";
                 }
                 Select_Day.setText(Day[0] +"년 " + Day[1] + "월 " + Day[2] + "일");
                 Show_Gram.setText("선택하신 날짜에 버린 쓰레기의 총합은 "+ Data +"g 입니다.");
