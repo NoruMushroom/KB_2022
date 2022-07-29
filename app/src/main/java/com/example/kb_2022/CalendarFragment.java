@@ -60,7 +60,7 @@ public class CalendarFragment extends Fragment {
     private String userName;
     private String mJsonString;
     private Context This_Activity;
-    private ArrayList<String> Data;
+    private JSONObject item;
     private MaterialCalendarView calendarView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -144,7 +144,10 @@ public class CalendarFragment extends Fragment {
                         .append("월");
                 Month = calendarHeaderElements[1].replaceAll("^0+","");
                 Toast.makeText(container.getContext(),Month,Toast.LENGTH_SHORT).show();
-                dataSetting();
+
+                GetData task = new GetData();
+                task.execute(userName, Month);
+
                 return calendarHeaderBuilder.toString();
             }
         });
@@ -174,10 +177,7 @@ public class CalendarFragment extends Fragment {
             }
         }
 
-    private void dataSetting(){
-        CalendarFragment.GetData task = new CalendarFragment.GetData();
-        task.execute(IP_ADDRESS, "");
-    }
+
 
     private class GetData extends AsyncTask<String, Void, String> {
 
@@ -202,16 +202,19 @@ public class CalendarFragment extends Fragment {
                 //실패시
             }
             else {
-                mJsonString = result;
-                showResult();
+                try {
+                    item = new JSONObject(result);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
 
         @Override
         protected String doInBackground(String... params) {
-            String serverURL = params[0];
-            String postParameters = params[1];
+            String serverURL = "http://123.215.162.92/KBServer/readgarbage.php";
+            String postParameters = "userid=" + params[0] + "&mon=" + params[1];
             try {
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -249,28 +252,5 @@ public class CalendarFragment extends Fragment {
             }
         }
     }
-    private void showResult() {
-        String TAG_JSON = "board_list";
-        String TAG_BNO = "bno";
-        String TAG_TITLE = "title";
-        String TAG_UNAME = "name";
-        String TAG_LIKE = "islike";
-        Data = new ArrayList<>();
-        try {
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject item = jsonArray.getJSONObject(i);
-                Integer bno = item.getInt(TAG_BNO);
-                String title = item.getString(TAG_TITLE);
-                String uname = item.getString(TAG_UNAME);
-                Integer like = item.getInt(TAG_LIKE);
-                List_item.addItem(title,uname,like,bno);
-            }
-            Community_List.setAdapter(List_item);
-        } catch (JSONException e) {
-            Log.d(TAG, "showResult : ", e);
-        }
-    }
 }
