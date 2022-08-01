@@ -36,8 +36,8 @@ public class HomeList_Type {
         public BarData getBar_Data(){
             BarData barData = new BarData();
             BarDataSet barDataSet = new BarDataSet(Chart_List, "bardataset");
-            barDataSet.setColor(Color.RED);
-            barData.setBarWidth(0.5f);
+            barDataSet.setColor(Color.WHITE);
+            barData.setBarWidth(0.3f);
             barData.addDataSet(barDataSet);
             return barData;
         }

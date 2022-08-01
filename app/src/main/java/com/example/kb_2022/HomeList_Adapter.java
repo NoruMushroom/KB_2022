@@ -13,11 +13,13 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
 
 public class HomeList_Adapter extends BaseAdapter {
     private ArrayList<HomeList_Type> mItems = new ArrayList<>();
+    private int option = 0;
     @Override
     public int getCount() {
         return mItems.size();
@@ -48,43 +50,54 @@ public class HomeList_Adapter extends BaseAdapter {
         HomeList_Type myItem = getItem(position);
         Text.setText(myItem.getName());
         Trash_Bar.setData(myItem.getBar_Data());
-        configureChartAppearance(Trash_Bar);
-        Trash_Bar.invalidate(); // 차트 업데이트
+        if(myItem.getName().equals("일간")){
+            option = 7                                 ;
+            configureChartAppearance(Trash_Bar,option);
+        }
+        if(myItem.getName().equals("주간")){
+            option = 4;
+            configureChartAppearance(Trash_Bar,option);
+        }
+        if(myItem.getName().equals("월간")){
+            option = 3;
+            configureChartAppearance(Trash_Bar,option);
+        }
         Trash_Bar.setTouchEnabled(false);
+        RoundedBarChart barChartRender = new RoundedBarChart(Trash_Bar,Trash_Bar.getAnimator(), Trash_Bar.getViewPortHandler());
+        Trash_Bar.setRenderer(barChartRender);
+        Trash_Bar.invalidate();// 차트 업데이트
         return convertView;
     }
-    private void configureChartAppearance(BarChart Trash_Bar) {
+    private void configureChartAppearance(BarChart Trash_Bar, int option) {
         Trash_Bar.setDrawBarShadow(false);//그림자 효과
         Trash_Bar.getDescription().setEnabled(false); // chart 밑에 description 표시 유무
-        Trash_Bar.setMaxVisibleValueCount(3);
+        Trash_Bar.setMaxVisibleValueCount(option);
         Trash_Bar.setTouchEnabled(false); // 터치 유무
+        Trash_Bar.setDrawGridBackground(false);//격자 출력 유무
         Trash_Bar.getLegend().setEnabled(false); // Legend는 차트의 범례
 
         // XAxis (수평 막대 기준 왼쪽) - 선 유무, 사이즈, 색상, 축 위치 설정
         XAxis xAxis = Trash_Bar.getXAxis();
-        xAxis.setDrawAxisLine(true);
-        xAxis.setGranularity(1f);
-        xAxis.setTextSize(13f);
-        xAxis.setGridLineWidth(25f);
-        xAxis.setGridColor(Color.parseColor("#80E5E5E5"));
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // X 축 데이터 표시 위치
+        xAxis.setTextSize(10);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setDrawGridLines(false);//선출력
+        xAxis.setGranularity(1f);
+        xAxis.setGridLineWidth(25f);
+        final String[] weekdays = {" ","월", "화", "수", "목", "금", "토", "일"};
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(weekdays));
 
-        // YAxis(Left) (수평 막대 기준 아래쪽) - 선 유무, 데이터 최솟값/최댓값, label 유무
-        YAxis axisLeft = Trash_Bar.getAxisLeft();
-        axisLeft.setDrawGridLines(true);
-        axisLeft.setDrawAxisLine(true);
-        axisLeft.setAxisMinimum(0f); // 최솟값
-        axisLeft.setAxisMaximum(10f); // 최댓값
-        axisLeft.setGranularity(2f); // 값만큼 라인선 설정
-        axisLeft.setDrawLabels(true); // label 삭제
+        YAxis yAxis = Trash_Bar.getAxisLeft();
+        Trash_Bar.getAxisRight().setEnabled(false);
+        xAxis.setTextSize(10);
+        yAxis.setTextColor(Color.BLACK);
+        yAxis.setAxisLineColor(Color.BLACK);
+        yAxis.setDrawAxisLine(true);
+        yAxis.setDrawGridLines(true);//선출력
+        yAxis.setAxisMaximum(1000);
 
 
-        // YAxis(Right) (수평 막대 기준 위쪽) - 사이즈, 선 유무
-        YAxis axisRight = Trash_Bar.getAxisRight();
-        axisRight.setTextSize(15f);
-        axisRight.setDrawLabels(false); // label 삭제
-        axisRight.setDrawGridLines(false);
-        axisRight.setDrawAxisLine(false);
     }
 
     public void addItem(String name, ArrayList<BarEntry> Chart_List) {//Bar = 차트 위젯, chart = 차트 데이터

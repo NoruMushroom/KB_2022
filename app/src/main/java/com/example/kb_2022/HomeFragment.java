@@ -16,7 +16,11 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.data.BarEntry;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -68,18 +72,28 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+        String month = monthFormat.format(currentTime);//현재 달
         Trash_List = Home_View.findViewById(R.id.Main_ListView);
         Refresh = Home_View.findViewById(R.id.Refresh);
         Trash_List.setVerticalScrollBarEnabled(false);
-        Daily_chart.add(new BarEntry(1,1));
-        Daily_chart.add(new BarEntry(2, 2));
-        Daily_chart.add(new BarEntry(3, 7));
-        Weekly_chart.add(new BarEntry(1, 3));
-        Weekly_chart.add(new BarEntry(2, 4));
-        Weekly_chart.add(new BarEntry(3, 1));
-        Monthly_chart.add(new BarEntry(1, 2));
-        Monthly_chart.add(new BarEntry(2, 8));
-        Monthly_chart.add(new BarEntry(3, 4));
+        month = month.replaceAll("^0+","");
+        Toast.makeText(container.getContext(), month,Toast.LENGTH_SHORT).show();
+        Daily_chart.add(new BarEntry(1,100));
+        Daily_chart.add(new BarEntry(2, 200));
+        Daily_chart.add(new BarEntry(3, 300));
+        Daily_chart.add(new BarEntry(4,400));
+        Daily_chart.add(new BarEntry(5, 500));
+        Daily_chart.add(new BarEntry(6, 600));
+        Daily_chart.add(new BarEntry(7, 700));
+        Weekly_chart.add(new BarEntry(1, 500));
+        Weekly_chart.add(new BarEntry(2, 600));
+        Weekly_chart.add(new BarEntry(3, 700));
+        Weekly_chart.add(new BarEntry(4, 800));
+        Monthly_chart.add(new BarEntry(1, 700));
+        Monthly_chart.add(new BarEntry(2, 600));
+        Monthly_chart.add(new BarEntry(3, 500));
         Refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +113,7 @@ public class HomeFragment extends Fragment {
         String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {
             List_item.addItem(array[i],Chart_List[i]);//수치랑 이름 같이 넘겨주기
+            //chart_List에 값을 바꾸면 실시간
         }//일간 주간 월간 리스트뷰 아이템 생성
         /* 리스트뷰에 어댑터 등록 */
         Trash_List.setAdapter(List_item);
