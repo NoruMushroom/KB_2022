@@ -45,6 +45,7 @@ public class HomeFragment extends Fragment {
     private Context This_Activity;
     private String userID;
     private String month;
+    private ArrayList<Integer> chart_Data = new ArrayList<>();
     private ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
     private ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
     private ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
@@ -140,12 +141,16 @@ public class HomeFragment extends Fragment {
         ft.detach(this).attach(this).commit();
     }
     private void dataSetting() throws JSONException {
-
+//g0801이런식으로
         int n_month = Integer.parseInt(month);
-        JSONObject jsonmonth1 = item.getJSONObject(month);
-        JSONObject jsonmonth2 = item.getJSONObject(Integer.toString(n_month - 1));
-        JSONObject jsonmonth3 = item.getJSONObject(Integer.toString(n_month - 2));
+        JSONObject jsonmonth1 = item.getJSONObject(month);//이번달
+        JSONObject jsonmonth2 = item.getJSONObject(Integer.toString(n_month - 1));//저번달
+        JSONObject jsonmonth3 = item.getJSONObject(Integer.toString(n_month - 2));//저저번달
+        Toast.makeText(This_Activity, jsonmonth1.length(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(This_Activity, jsonmonth2.length(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(This_Activity, jsonmonth3.length(),Toast.LENGTH_SHORT).show();
 
+        ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
         HomeList_Adapter List_item = new HomeList_Adapter();
         String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {
