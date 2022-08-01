@@ -91,13 +91,12 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
         Bundle bundle = this.getArguments();
         if(bundle != null){
             bundle = getArguments();
             userID = bundle.getString("아이디");
         }
-        Toast.makeText(container.getContext(), userID,Toast.LENGTH_SHORT).show();
+        View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
         month = monthFormat.format(currentTime);//현재 달
@@ -107,6 +106,7 @@ public class HomeFragment extends Fragment {
         Trash_List.setVerticalScrollBarEnabled(false);
         month = month.replaceAll("^0+","");
         Toast.makeText(container.getContext(), month,Toast.LENGTH_SHORT).show();
+        Toast.makeText(container.getContext(), userID,Toast.LENGTH_SHORT).show();
         Daily_chart.add(new BarEntry(1,100));
         Daily_chart.add(new BarEntry(2, 200));
         Daily_chart.add(new BarEntry(3, 300));

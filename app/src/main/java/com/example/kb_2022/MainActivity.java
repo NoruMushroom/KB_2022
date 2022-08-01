@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
     Fragment Calender;
     Fragment Community;
     Fragment Option;//페이지 변수 선언
-    String userName;
-    String userGender;
-    String userID;
+    private String userName;
+    private String userGender;
+    private String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         Calender = new CalendarFragment();
         Community = new CommunityFragment();
         Option = new OptionFragment();//객체 생성
+        Bundle home_bundle = new Bundle();
+        home_bundle.putString("아이디",userID);
+        Home.setArguments(home_bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Home).commitAllowingStateLoss();
         BottomNavigationView bottomNavigationView = findViewById(R.id.navi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
