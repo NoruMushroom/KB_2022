@@ -128,14 +128,24 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(container.getContext(),"갱신",Toast.LENGTH_SHORT).show();
             }
         });
-        dataSetting();
+        try {
+            dataSetting();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return Home_View;
     }
     private void refresh(){
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
     }
-    private void dataSetting(){
+    private void dataSetting() throws JSONException {
+
+        int n_month = Integer.parseInt(month);
+        JSONObject jsonmonth1 = item.getJSONObject(month);
+        JSONObject jsonmonth2 = item.getJSONObject(Integer.toString(n_month - 1));
+        JSONObject jsonmonth3 = item.getJSONObject(Integer.toString(n_month - 2));
+
         HomeList_Adapter List_item = new HomeList_Adapter();
         String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {
