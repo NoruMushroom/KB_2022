@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.home:
+                        Bundle home_bundle = new Bundle();
+                        home_bundle.putString("아이디",userID);
+                        Calender.setArguments(home_bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Home).commitAllowingStateLoss();
                         return true;
                     case R.id.calendar:

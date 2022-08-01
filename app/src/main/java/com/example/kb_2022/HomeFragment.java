@@ -3,6 +3,7 @@ package com.example.kb_2022;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private ListView Trash_List;
     private ImageButton Refresh;
+    private Context This_Activity;
+    private String userID;
     private ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
     private ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
     private ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
@@ -86,10 +89,16 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            bundle = getArguments();
+            userID = bundle.getString("아이디");
+        }
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
         String month = monthFormat.format(currentTime);//현재 달
         Trash_List = Home_View.findViewById(R.id.Main_ListView);
+        This_Activity = container.getContext();
         Refresh = Home_View.findViewById(R.id.Refresh);
         Trash_List.setVerticalScrollBarEnabled(false);
         month = month.replaceAll("^0+","");
