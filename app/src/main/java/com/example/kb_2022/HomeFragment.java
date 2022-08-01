@@ -96,6 +96,7 @@ public class HomeFragment extends Fragment {
             bundle = getArguments();
             userID = bundle.getString("아이디");
         }
+
         View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
@@ -105,8 +106,6 @@ public class HomeFragment extends Fragment {
         Refresh = Home_View.findViewById(R.id.Refresh);
         Trash_List.setVerticalScrollBarEnabled(false);
         month = month.replaceAll("^0+","");
-        Toast.makeText(container.getContext(), month,Toast.LENGTH_SHORT).show();
-        Toast.makeText(container.getContext(), userID,Toast.LENGTH_SHORT).show();
         Daily_chart.add(new BarEntry(1,100));
         Daily_chart.add(new BarEntry(2, 200));
         Daily_chart.add(new BarEntry(3, 300));
@@ -121,8 +120,10 @@ public class HomeFragment extends Fragment {
         Monthly_chart.add(new BarEntry(1, 700));
         Monthly_chart.add(new BarEntry(2, 600));
         Monthly_chart.add(new BarEntry(3, 500));
+
         GetData task = new GetData();
         task.execute(userID, month);
+
         Refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,26 +131,24 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(container.getContext(),"갱신",Toast.LENGTH_SHORT).show();
             }
         });
-        try {
-            dataSetting();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
         return Home_View;
     }
     private void refresh(){
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
     }
-    private void dataSetting() throws JSONException {
-//g0801이런식으로
+
+
+    private void dataSetting(String result) throws JSONException {
+
+        item = new JSONObject(result);
+
         int n_month = Integer.parseInt(month);
         JSONObject jsonmonth1 = item.getJSONObject(month);//이번달
         JSONObject jsonmonth2 = item.getJSONObject(Integer.toString(n_month - 1));//저번달
         JSONObject jsonmonth3 = item.getJSONObject(Integer.toString(n_month - 2));//저저번달
-        Toast.makeText(This_Activity, jsonmonth1.length(),Toast.LENGTH_SHORT).show();
-        Toast.makeText(This_Activity, jsonmonth2.length(),Toast.LENGTH_SHORT).show();
-        Toast.makeText(This_Activity, jsonmonth3.length(),Toast.LENGTH_SHORT).show();
+        System.out.println("이번달 : "+jsonmonth1.length()+"저번달 : "+jsonmonth2.length()+"저저번달 : "+jsonmonth3.length());
 
         ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
         HomeList_Adapter List_item = new HomeList_Adapter();
@@ -184,14 +183,14 @@ public class HomeFragment extends Fragment {
                 //실패시
             }
             else {
+                //item = new JSONObject(result);
                 try {
-                    item = new JSONObject(result);
+                    dataSetting(result);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }
-
 
         @Override
         protected String doInBackground(String... params) {
@@ -233,7 +232,6 @@ public class HomeFragment extends Fragment {
                 return null;
             }
         }
-
-
     }
+
 }
