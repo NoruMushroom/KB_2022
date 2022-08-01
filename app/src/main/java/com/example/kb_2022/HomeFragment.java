@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
     private ImageButton Refresh;
     private Context This_Activity;
     private String userID;
+    private String month;
     private ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
     private ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
     private ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
@@ -97,7 +98,7 @@ public class HomeFragment extends Fragment {
         }
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
-        String month = monthFormat.format(currentTime);//현재 달
+        month = monthFormat.format(currentTime);//현재 달
         Trash_List = Home_View.findViewById(R.id.Main_ListView);
         This_Activity = container.getContext();
         Refresh = Home_View.findViewById(R.id.Refresh);
