@@ -97,6 +97,7 @@ public class HomeFragment extends Fragment {
             bundle = getArguments();
             userID = bundle.getString("아이디");
         }
+        Toast.makeText(container.getContext(), userID,Toast.LENGTH_SHORT).show();
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
         month = monthFormat.format(currentTime);//현재 달
