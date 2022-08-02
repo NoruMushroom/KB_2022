@@ -33,6 +33,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,8 +48,7 @@ public class HomeFragment extends Fragment {
     private Context This_Activity;
     private String userID;
     private String month;
-    private String Zero_month;
-    private String Zero_day;
+    private String day;
     private ArrayList<Integer> chart_Data = new ArrayList<>();
     private ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
     private ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
@@ -106,8 +106,7 @@ public class HomeFragment extends Fragment {
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
         SimpleDateFormat dayFormat = new SimpleDateFormat("MM", Locale.getDefault());
         month = monthFormat.format(currentTime);//현재 달
-        Zero_month = monthFormat.format(currentTime);//현재 달
-        Zero_day = dayFormat.format(currentTime);//현재 달
+        day = dayFormat.format(currentTime);//현재 달
         Trash_List = Home_View.findViewById(R.id.Main_ListView);
         This_Activity = container.getContext();
         Refresh = Home_View.findViewById(R.id.Refresh);
@@ -124,9 +123,6 @@ public class HomeFragment extends Fragment {
         Weekly_chart.add(new BarEntry(2, 600));
         Weekly_chart.add(new BarEntry(3, 700));
         Weekly_chart.add(new BarEntry(4, 800));
-        Monthly_chart.add(new BarEntry(1, 700));
-        Monthly_chart.add(new BarEntry(2, 600));
-        Monthly_chart.add(new BarEntry(3, 500));
 
         GetData task = new GetData();
         task.execute(userID, month);
@@ -149,24 +145,54 @@ public class HomeFragment extends Fragment {
     private void dataSetting(String result) throws JSONException {
 
         item = new JSONObject(result);
-
+        int month1 = 0,month2 = 0,month3 = 0;
         int n_month = Integer.parseInt(month);
         JSONObject jsonmonth1 = item.getJSONObject(month);//이번달
         JSONObject jsonmonth2 = item.getJSONObject(Integer.toString(n_month - 1));//저번달
         JSONObject jsonmonth3 = item.getJSONObject(Integer.toString(n_month - 2));//저저번달
         for(int i = 0; i < jsonmonth1.length() - 1; i++){
-            String TAG = "g"+ "0" + month;
-            if(i + 1 < 10){
+            String TAG = "g" + "0" + month;
+            if(i + 1< 10){
                 TAG = TAG + "0" + Integer.toString(i+1);
             }
             else{
-                TAG = TAG + Integer.toString(i);
+                TAG = TAG + Integer.toString(i + 1);
             }
-            chart_Data.add(item.getInt(TAG));
+            System.out.println(TAG);
+            month1 += jsonmonth1.getInt(TAG);
+            chart_Data.add(jsonmonth1.getInt(TAG));
         }//이번달
-        System.out.println("dkdkddlld"+chart_Data);
+        for(int i = 0; i < jsonmonth2.length() - 1; i++){
+            String TAG = "g" + "0" +  Integer.toString(n_month - 1);
+            if(i + 1< 10){
+                TAG = TAG + "0" + Integer.toString(i+1);
+            }
+            else{
+                TAG = TAG + Integer.toString(i + 1);
+            }
+            System.out.println(TAG);
+            month2 += jsonmonth2.getInt(TAG);
+            chart_Data.add(jsonmonth2.getInt(TAG));
+        }//저번달
+        for(int i = 0; i < jsonmonth3.length() - 1; i++){
+            String TAG = "g" + "0" +  Integer.toString(n_month - 2);
+            if(i + 1< 10){
+                TAG = TAG + "0" + Integer.toString(i+1);
+            }
+            else{
+                TAG = TAG + Integer.toString(i + 1);
+            }
+            System.out.println(TAG);
+            month3 += jsonmonth3.getInt(TAG);
+            chart_Data.add(jsonmonth3.getInt(TAG));
+        }//저저번달
+        Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month1 * 10/(jsonmonth1.length()-1)));
+        Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month2 * 20/(jsonmonth2.length()-1)));
+        Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month3 * 30/(jsonmonth3.length()-1)));
         System.out.println("이번달 : "+jsonmonth1.length()+"저번달 : "+jsonmonth2.length()+"저저번달 : "+jsonmonth3.length());
-        ArrayList<BarEntry> Monthly_avg = new ArrayList<>();//월간데이터를 담는
+        System.out.println(month1);
+        System.out.println(month2);
+        System.out.println(month3);
         HomeList_Adapter List_item = new HomeList_Adapter();
         String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {
