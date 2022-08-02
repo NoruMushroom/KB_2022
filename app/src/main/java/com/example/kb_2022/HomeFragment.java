@@ -112,6 +112,7 @@ public class HomeFragment extends Fragment {
         Refresh = Home_View.findViewById(R.id.Refresh);
         Trash_List.setVerticalScrollBarEnabled(false);
         month = month.replaceAll("^0+","");
+        day = month.replaceAll("^0+","");
         Daily_chart.add(new BarEntry(1,100));
         Daily_chart.add(new BarEntry(2, 200));
         Daily_chart.add(new BarEntry(3, 300));
@@ -186,6 +187,18 @@ public class HomeFragment extends Fragment {
             month3 += jsonmonth3.getInt(TAG);
             chart_Data.add(jsonmonth3.getInt(TAG));
         }//저저번달
+        int present_day = jsonmonth2.length() - 1 + jsonmonth3.length() - 1 +Integer.parseInt(day);//현재일 구함
+        int weekly = 1;
+        int total = 0;
+        for(int i = 1; i < 29; i++){
+            if(i % 7 == 0){
+                Weekly_chart.add(new BarEntry(weekly, total / 7));
+                System.out.print("평균"+total / 7);
+                weekly++;
+                total = 0;
+            }
+            total += chart_Data.get(present_day - (i-1));//현재일로 부터 뒤로
+        }
         Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month1 * 10/(jsonmonth1.length()-1)));
         Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month2 * 20/(jsonmonth2.length()-1)));
         Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month3 * 30/(jsonmonth3.length()-1)));
