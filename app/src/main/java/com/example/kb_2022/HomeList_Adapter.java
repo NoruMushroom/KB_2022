@@ -63,8 +63,6 @@ public class HomeList_Adapter extends BaseAdapter {
             configureChartAppearance(Trash_Bar,option);
         }
         Trash_Bar.setTouchEnabled(false);
-        RoundedBarChart barChartRender = new RoundedBarChart(Trash_Bar,Trash_Bar.getAnimator(), Trash_Bar.getViewPortHandler());
-        Trash_Bar.setRenderer(barChartRender);
         Trash_Bar.invalidate();// 차트 업데이트
         return convertView;
     }
@@ -87,7 +85,6 @@ public class HomeList_Adapter extends BaseAdapter {
         xAxis.setGridLineWidth(25f);
         final String[] weekdays = {" ","월", "화", "수", "목", "금", "토", "일"};
         xAxis.setValueFormatter(new IndexAxisValueFormatter(weekdays));
-
         YAxis yAxis = Trash_Bar.getAxisLeft();
         Trash_Bar.getAxisRight().setEnabled(false);
         xAxis.setTextSize(10);
@@ -95,11 +92,8 @@ public class HomeList_Adapter extends BaseAdapter {
         yAxis.setAxisLineColor(Color.BLACK);
         yAxis.setDrawAxisLine(true);
         yAxis.setDrawGridLines(true);//선출력
-        yAxis.setAxisMaximum(1000);
-
-
+        yAxis.setAxisMaximum(500);
     }
-
     public void addItem(String name, ArrayList<BarEntry> Chart_List) {//Bar = 차트 위젯, chart = 차트 데이터
         //Drawable img, String name, String contents
         /* MyItem에 아이템을 setting한다. */
