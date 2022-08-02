@@ -92,7 +92,7 @@ public class HomeList_Adapter extends BaseAdapter {
         yAxis.setAxisLineColor(Color.BLACK);
         yAxis.setDrawAxisLine(true);
         yAxis.setDrawGridLines(true);//선출력
-        yAxis.setAxisMaximum(500);
+        yAxis.setAxisMaximum(100);
     }
     public void addItem(String name, ArrayList<BarEntry> Chart_List) {//Bar = 차트 위젯, chart = 차트 데이터
         //Drawable img, String name, String contents
