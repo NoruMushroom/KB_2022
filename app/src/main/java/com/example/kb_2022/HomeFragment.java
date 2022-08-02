@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.data.BarEntry;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class HomeFragment extends Fragment {
@@ -45,6 +47,8 @@ public class HomeFragment extends Fragment {
     private Context This_Activity;
     private String userID;
     private String month;
+    private String Zero_month;
+    private String Zero_day;
     private ArrayList<Integer> chart_Data = new ArrayList<>();
     private ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
     private ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
@@ -100,7 +104,10 @@ public class HomeFragment extends Fragment {
         View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+        SimpleDateFormat dayFormat = new SimpleDateFormat("MM", Locale.getDefault());
         month = monthFormat.format(currentTime);//현재 달
+        Zero_month = monthFormat.format(currentTime);//현재 달
+        Zero_day = dayFormat.format(currentTime);//현재 달
         Trash_List = Home_View.findViewById(R.id.Main_ListView);
         This_Activity = container.getContext();
         Refresh = Home_View.findViewById(R.id.Refresh);
@@ -123,7 +130,6 @@ public class HomeFragment extends Fragment {
 
         GetData task = new GetData();
         task.execute(userID, month);
-
         Refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,9 +154,19 @@ public class HomeFragment extends Fragment {
         JSONObject jsonmonth1 = item.getJSONObject(month);//이번달
         JSONObject jsonmonth2 = item.getJSONObject(Integer.toString(n_month - 1));//저번달
         JSONObject jsonmonth3 = item.getJSONObject(Integer.toString(n_month - 2));//저저번달
+        for(int i = 0; i < jsonmonth1.length() - 1; i++){
+            String TAG = "g"+ "0" + month;
+            if(i + 1 < 10){
+                TAG = TAG + "0" + Integer.toString(i+1);
+            }
+            else{
+                TAG = TAG + Integer.toString(i);
+            }
+            chart_Data.add(item.getInt(TAG));
+        }//이번달
+        System.out.println("dkdkddlld"+chart_Data);
         System.out.println("이번달 : "+jsonmonth1.length()+"저번달 : "+jsonmonth2.length()+"저저번달 : "+jsonmonth3.length());
-
-        ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
+        ArrayList<BarEntry> Monthly_avg = new ArrayList<>();//월간데이터를 담는
         HomeList_Adapter List_item = new HomeList_Adapter();
         String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {
