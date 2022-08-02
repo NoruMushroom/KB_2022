@@ -49,11 +49,6 @@ public class HomeFragment extends Fragment {
     private String userID;
     private String month;
     private String day;
-    private ArrayList<Integer> chart_Data = new ArrayList<>();
-    private ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
-    private ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
-    private ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
-    private ArrayList[] Chart_List = {Daily_chart,Weekly_chart,Monthly_chart};
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private  JSONObject item;
@@ -113,17 +108,6 @@ public class HomeFragment extends Fragment {
         Trash_List.setVerticalScrollBarEnabled(false);
         month = month.replaceAll("^0+","");
         day = month.replaceAll("^0+","");
-        Daily_chart.add(new BarEntry(1,100));
-        Daily_chart.add(new BarEntry(2, 200));
-        Daily_chart.add(new BarEntry(3, 300));
-        Daily_chart.add(new BarEntry(4,400));
-        Daily_chart.add(new BarEntry(5, 500));
-        Daily_chart.add(new BarEntry(6, 600));
-        Daily_chart.add(new BarEntry(7, 700));
-        Weekly_chart.add(new BarEntry(1, 500));
-        Weekly_chart.add(new BarEntry(2, 600));
-        Weekly_chart.add(new BarEntry(3, 700));
-        Weekly_chart.add(new BarEntry(4, 800));
 
         GetData task = new GetData();
         task.execute(userID, month);
@@ -144,7 +128,18 @@ public class HomeFragment extends Fragment {
 
 
     private void dataSetting(String result) throws JSONException {
-
+        ArrayList<Integer> chart_Data = new ArrayList<>();
+        ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
+        ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
+        ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
+        ArrayList[] Chart_List = {Daily_chart,Weekly_chart,Monthly_chart};
+        Daily_chart.add(new BarEntry(1,100));
+        Daily_chart.add(new BarEntry(2, 200));
+        Daily_chart.add(new BarEntry(3, 300));
+        Daily_chart.add(new BarEntry(4,400));
+        Daily_chart.add(new BarEntry(5, 500));
+        Daily_chart.add(new BarEntry(6, 600));
+        Daily_chart.add(new BarEntry(7, 700));
         item = new JSONObject(result);
         int month1 = 0,month2 = 0,month3 = 0;
         int n_month = Integer.parseInt(month);
@@ -192,8 +187,8 @@ public class HomeFragment extends Fragment {
         int total = 0;
         for(int i = 1; i < 29; i++){
             if(i % 7 == 0){
-                Weekly_chart.add(new BarEntry(weekly, total / 7));
-                System.out.print("평균"+total / 7);
+                Weekly_chart.add(new BarEntry(weekly, 399+total / 7));
+                System.out.print("평균:\n"+ total / 7);
                 weekly++;
                 total = 0;
             }
@@ -202,10 +197,8 @@ public class HomeFragment extends Fragment {
         Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month1 * 10/(jsonmonth1.length()-1)));
         Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month2 * 20/(jsonmonth2.length()-1)));
         Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month3 * 30/(jsonmonth3.length()-1)));
-        System.out.println("이번달 : "+jsonmonth1.length()+"저번달 : "+jsonmonth2.length()+"저저번달 : "+jsonmonth3.length());
-        System.out.println(month1);
-        System.out.println(month2);
-        System.out.println(month3);
+
+        System.out.println("월간:" + Monthly_chart.size() + "주간 : " + Weekly_chart.size());
         HomeList_Adapter List_item = new HomeList_Adapter();
         String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {

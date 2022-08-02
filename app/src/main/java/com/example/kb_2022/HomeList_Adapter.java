@@ -51,7 +51,7 @@ public class HomeList_Adapter extends BaseAdapter {
         Text.setText(myItem.getName());
         Trash_Bar.setData(myItem.getBar_Data());
         if(myItem.getName().equals("일간")){
-            option = 7                                 ;
+            option = 7;
             configureChartAppearance(Trash_Bar,option);
         }
         if(myItem.getName().equals("주간")){
