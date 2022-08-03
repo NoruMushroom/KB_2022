@@ -133,59 +133,15 @@ public class HomeFragment extends Fragment {
         ArrayList<BarEntry> Daily_chart = new ArrayList<>(); //일간데이터를 담는곳
         ArrayList<BarEntry> Weekly_chart = new ArrayList<>();//주간데이터를 담는곳
         ArrayList<BarEntry> Monthly_chart = new ArrayList<>();//월간데이터를 담는곳
+        ArrayList<Integer> W_Data = new ArrayList<>();
         ArrayList[] Chart_List = {Daily_chart,Weekly_chart,Monthly_chart};
         String Month_Str;
-        Daily_chart.add(new BarEntry(1,100));
-        Daily_chart.add(new BarEntry(2, 200));
-        Daily_chart.add(new BarEntry(3, 300));
-        Daily_chart.add(new BarEntry(4,400));
-        Daily_chart.add(new BarEntry(5, 500));
-        Daily_chart.add(new BarEntry(6, 600));
-        Daily_chart.add(new BarEntry(7, 700));
         item = new JSONObject(result);
         int month1 = 0,month2 = 0,month3 = 0, month1_len = 0, month2_len = 0, month3_len = 0;
         int n_month = Integer.parseInt(month);
         JSONObject jsonmonth1 = item.getJSONObject(month);//이번달
         JSONObject jsonmonth2 = item.getJSONObject(Integer.toString(n_month - 1));//저번달
         JSONObject jsonmonth3 = item.getJSONObject(Integer.toString(n_month - 2));//저저번달
-        for(int i = 0; i < jsonmonth1.length() - 1; i++){
-            String TAG = "g" + "0" + month;
-            if(i + 1 < 10){
-                TAG = TAG + "0" + Integer.toString(i+1);
-            }
-            else{
-                TAG = TAG + Integer.toString(i + 1);
-            }
-            Month_Str = jsonmonth1.getString(TAG);
-            System.out.println(TAG);
-            if(Month_Str == "null") {
-                System.out.println(Month_Str);
-                chart_Data.add("x");
-            }
-            else {
-                month1 += Integer.parseInt(Month_Str);
-                chart_Data.add(Month_Str);
-                month1_len++; //달평균을 위해
-            }
-        }//이번달
-        for(int i = 0; i < jsonmonth2.length() - 1; i++){
-            String TAG = "g" + "0" +  Integer.toString(n_month - 1);
-            if(i + 1< 10){
-                TAG = TAG + "0" + Integer.toString(i+1);
-            }
-            else{
-                TAG = TAG + Integer.toString(i + 1);
-            }
-            Month_Str = jsonmonth2.getString(TAG);
-            if(Month_Str == "null") {
-                chart_Data.add("x");
-            }
-            else {
-                month2 += Integer.parseInt(Month_Str);
-                chart_Data.add(Month_Str);
-                month2_len++; //달평균을 위해
-            }
-        }//저번달
         for(int i = 0; i < jsonmonth3.length() - 1; i++){
             String TAG = "g" + "0" +  Integer.toString(n_month - 2);
             if(i + 1< 10){
@@ -204,16 +160,58 @@ public class HomeFragment extends Fragment {
                 month3_len++; //달평균을 위해
             }
         }//저저번달
+        for(int i = 0; i < jsonmonth2.length() - 1; i++){
+            String TAG = "g" + "0" +  Integer.toString(n_month - 1);
+            if(i + 1< 10){
+                TAG = TAG + "0" + Integer.toString(i+1);
+            }
+            else{
+                TAG = TAG + Integer.toString(i + 1);
+            }
+            Month_Str = jsonmonth2.getString(TAG);
+            if(Month_Str == "null") {
+                chart_Data.add("x");
+            }
+            else {
+                month2 += Integer.parseInt(Month_Str);
+                chart_Data.add(Month_Str);
+                month2_len++; //달평균을 위해
+            }
+        }//저번달
+        for(int i = 0; i < jsonmonth1.length() - 1; i++){
+            String TAG = "g" + "0" + month;
+            if(i + 1 < 10){
+                TAG = TAG + "0" + Integer.toString(i+1);
+            }
+            else{
+                TAG = TAG + Integer.toString(i + 1);
+            }
+            Month_Str = jsonmonth1.getString(TAG);
+            if(Month_Str == "null") {
+                chart_Data.add("x");
+            }
+            else {
+                month1 += Integer.parseInt(Month_Str);
+                chart_Data.add(Month_Str);
+                month1_len++; //달평균을 위해
+            }
+        }//이번달
         int present_day = jsonmonth2.length() - 1 + jsonmonth3.length() - 1 +Integer.parseInt(day);//현재일 구함
-        int weekly = 1;
-        int total = 0;
+        int Start_point = present_day - 28;
         int count = 0;
         int value = 0;
-        System.out.println("값: " + present_day);
         for(int i = 1; i < 29; i++){
-            Week_Data.add(chart_Data.get(present_day));
-            present_day--;
-            if(i % 7 == 0){
+            if(i > 20){
+                System.out.println("Daily 값: " + chart_Data.get(i + Start_point));
+                if(chart_Data.get(i + Start_point) == "x"){
+                    Daily_chart.add(new BarEntry(Daily_chart.size() + 1, 0));
+                }
+                else {
+                    Daily_chart.add(new BarEntry(Daily_chart.size() + 1, Integer.parseInt(chart_Data.get(i + Start_point))));
+                }
+            }
+            Week_Data.add(chart_Data.get(i + Start_point));
+            if(Week_Data.size() % 7 == 0){
                 System.out.println("값: " +Week_Data);
                 for(int j = 0; j < 7; j++){
                     if(Week_Data.get(j) != "x") {
@@ -222,13 +220,16 @@ public class HomeFragment extends Fragment {
                         count++;
                     }
                 }
-                System.out.println("평균: "+ (month1 / count) + "갯수: " + count);
-                Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month1 / count));
+                System.out.println("평균: "+ (value / count) + "갯수: " + count);
+                Weekly_chart.add(new BarEntry(Weekly_chart.size()+1,value / count));
                 Week_Data.clear();
                 count = 0;
                 value = 0;
             }
-        }
+        }//주간데이터(1주차 ~ 4주차)
+        Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month3/month3_len ));//저저번달
+        Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month2/month2_len ));//저번달
+        Monthly_chart.add(new BarEntry(Monthly_chart.size() + 1,month1/month1_len ));//이번달
         HomeList_Adapter List_item = new HomeList_Adapter();
         String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {

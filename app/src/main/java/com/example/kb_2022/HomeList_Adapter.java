@@ -15,7 +15,11 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class HomeList_Adapter extends BaseAdapter {
     private ArrayList<HomeList_Type> mItems = new ArrayList<>();
@@ -52,21 +56,32 @@ public class HomeList_Adapter extends BaseAdapter {
         Trash_Bar.setData(myItem.getBar_Data());
         if(myItem.getName().equals("일간")){
             option = 7;
-            configureChartAppearance(Trash_Bar,option);
+            String[] days = {" ","월", "화", "수", "목", "금", "토", "일"};
+            configureChartAppearance(Trash_Bar,option,days);
         }
         if(myItem.getName().equals("주간")){
             option = 4;
-            configureChartAppearance(Trash_Bar,option);
+            String[] week = {" ","1주차", "2주차", "3주차", "4주차"};
+            configureChartAppearance(Trash_Bar,option,week);
         }
         if(myItem.getName().equals("월간")){
+            String[] Month = {" "," "," "," "};
+            Date currentTime = Calendar.getInstance().getTime();
+            SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+            String month = monthFormat.format(currentTime);//현재 달
+            month = month.replaceAll("^0+","");
+            int I_Month = Integer.parseInt(month);
+            for(int i = 0; i < 3; i++){
+                Month[3 - i] = Integer.toString(I_Month - i) + "월";
+            }
             option = 3;
-            configureChartAppearance(Trash_Bar,option);
+            configureChartAppearance(Trash_Bar,option,Month);
         }
         Trash_Bar.setTouchEnabled(false);
         Trash_Bar.invalidate();// 차트 업데이트
         return convertView;
     }
-    private void configureChartAppearance(BarChart Trash_Bar, int option) {
+    private void configureChartAppearance(BarChart Trash_Bar, int option, String[] option_array) {
         Trash_Bar.setDrawBarShadow(false);//그림자 효과
         Trash_Bar.getDescription().setEnabled(false); // chart 밑에 description 표시 유무
         Trash_Bar.setMaxVisibleValueCount(option);
@@ -82,9 +97,8 @@ public class HomeList_Adapter extends BaseAdapter {
         xAxis.setDrawAxisLine(true);
         xAxis.setDrawGridLines(false);//선출력
         xAxis.setGranularity(1f);
-        xAxis.setGridLineWidth(25f);
-        final String[] weekdays = {" ","월", "화", "수", "목", "금", "토", "일"};
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(weekdays));
+        xAxis.setGridLineWidth(20f);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(option_array));
         YAxis yAxis = Trash_Bar.getAxisLeft();
         Trash_Bar.getAxisRight().setEnabled(false);
         xAxis.setTextSize(10);
