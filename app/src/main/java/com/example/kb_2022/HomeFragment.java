@@ -209,7 +209,7 @@ public class HomeFragment extends Fragment {
                 else {
                     Daily_chart.add(new BarEntry(Daily_chart.size() + 1, Integer.parseInt(chart_Data.get(i + Start_point))));
                 }
-            }
+            }//일간데이터 삽입
             Week_Data.add(chart_Data.get(i + Start_point));
             if(Week_Data.size() % 7 == 0){
                 System.out.println("값: " +Week_Data);
