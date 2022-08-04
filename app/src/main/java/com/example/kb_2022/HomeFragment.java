@@ -207,11 +207,11 @@ public class HomeFragment extends Fragment {
         int count = 0;
         int value = 0;
         int current_weight = 0;//오늘 무게
-        if(chart_Data.get(present_day) == "x"){ //현재의 무게 구하기
+        if(chart_Data.get(present_day-1) == "x"){ //현재의 무게 구하기
             current_weight = 0;
         }
         else{
-            current_weight = Integer.parseInt(chart_Data.get(present_day));
+            current_weight = Integer.parseInt(chart_Data.get(present_day-1));
         }
         Current_Result.setText(current_weight+"g");
         for(int i = 0; i < 28; i++){
