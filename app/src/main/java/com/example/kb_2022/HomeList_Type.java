@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +39,12 @@ public class HomeList_Type {
             BarDataSet barDataSet = new BarDataSet(Chart_List, "bardataset");
             barDataSet.setColor(Color.WHITE);
             barData.setBarWidth(0.3f);
+            barDataSet.setValueFormatter(new ValueFormatter() {
+                @Override
+                public String getFormattedValue(float value) {
+                    return (String.valueOf((int) value)) + "g";
+                }
+            });
             barData.addDataSet(barDataSet);
             return barData;
         }

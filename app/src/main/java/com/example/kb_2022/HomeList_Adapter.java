@@ -67,12 +67,12 @@ public class HomeList_Adapter extends BaseAdapter {
                 days[6 - i] = format.format(calendar.getTime());
             }
             System.out.println(days);
-            configureChartAppearance(Trash_Bar,option,days);
+            configureChartAppearance(Trash_Bar,days);
         }
         if(myItem.getName().equals("주간")){
             option = 4;
             String[] week = {" ","1주차", "2주차", "3주차", "4주차"};
-            configureChartAppearance(Trash_Bar,option,week);
+            configureChartAppearance(Trash_Bar,week);
         }
         if(myItem.getName().equals("월간")){
             String[] Month = {" "," "," "," "};
@@ -85,20 +85,18 @@ public class HomeList_Adapter extends BaseAdapter {
                 Month[3 - i] = Integer.toString(I_Month - i) + "월";
             }
             option = 3;
-            configureChartAppearance(Trash_Bar,option,Month);
+            configureChartAppearance(Trash_Bar,Month);
         }
         Trash_Bar.setTouchEnabled(false);
         Trash_Bar.animateXY(1000, 1000);
         Trash_Bar.invalidate();// 차트 업데이트
         return convertView;
     }
-    private void configureChartAppearance(BarChart Trash_Bar, int option, String[] option_array) {
-        Trash_Bar.setDrawBarShadow(false);//그림자 효과
-        Trash_Bar.getDescription().setEnabled(false); // chart 밑에 description 표시 유무
-        Trash_Bar.setMaxVisibleValueCount(option);
-        Trash_Bar.setTouchEnabled(false); // 터치 유무
-        Trash_Bar.setDrawGridBackground(false);//격자 출력 유무
+    private void configureChartAppearance(BarChart Trash_Bar, String[] option_array) {
         Trash_Bar.getLegend().setEnabled(false); // Legend는 차트의 범례
+        Trash_Bar.setDrawGridBackground(false);//격자 출력 유무
+        Trash_Bar.setDrawBarShadow(false);//그림자 효과
+        Trash_Bar.getDescription().setEnabled(false);
 
 
         // XAxis (수평 막대 기준 왼쪽) - 선 유무, 사이즈, 색상, 축 위치 설정
