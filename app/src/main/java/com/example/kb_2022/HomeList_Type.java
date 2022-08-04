@@ -38,13 +38,14 @@ public class HomeList_Type {
             BarData barData = new BarData();
             BarDataSet barDataSet = new BarDataSet(Chart_List, "bardataset");
             barDataSet.setColor(Color.WHITE);
-            barData.setBarWidth(0.3f);
             barDataSet.setValueFormatter(new ValueFormatter() {
                 @Override
                 public String getFormattedValue(float value) {
                     return (String.valueOf((int) value)) + "g";
                 }
             });
+            barDataSet.setValueTextSize(10f);
+            barData.setBarWidth(0.3f);
             barData.addDataSet(barDataSet);
             return barData;
         }
