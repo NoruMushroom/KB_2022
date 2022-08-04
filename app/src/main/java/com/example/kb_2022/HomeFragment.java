@@ -120,6 +120,8 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 refresh();
                 Toast.makeText(container.getContext(),"갱신",Toast.LENGTH_SHORT).show();
+                GetData taskR = new GetData();
+                taskR.execute(userID, month);
             }
         });
 
