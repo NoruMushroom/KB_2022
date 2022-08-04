@@ -13,8 +13,20 @@
         android:background="@drawable/round_item"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" />
-
+        android:layout_marginTop="10dp"
+        android:text="오늘 버린 총 양은"
+        android:textSize="20dp"
+        android:paddingLeft="165dp"
+        android:paddingTop="50dp"/>
+    <TextView
+        android:id="@+id/Currentweight"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="82dp"
+        android:text="asd"
+        android:textSize="23dp"/>
     <ListView
         android:id="@+id/Main_ListView"
         android:dividerHeight="0px"
@@ -39,9 +51,10 @@
         android:id="@+id/Refresh"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="350dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginLeft="305dp"
+        android:layout_marginTop="15dp"
         android:background="#B4F0B4"
-        android:src="@drawable/ic_baseline_refresh_24" />
+        android:src="@drawable/ic_baseline_refresh_24"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </FrameLayout>

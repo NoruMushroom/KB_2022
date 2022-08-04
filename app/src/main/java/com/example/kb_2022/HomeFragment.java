@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.data.BarEntry;
@@ -32,6 +33,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Ref;
 import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private ListView Trash_List;
+    private TextView Current_Result;
     private ImageButton Refresh;
     private Context This_Activity;
     private String userID;
@@ -106,6 +109,7 @@ public class HomeFragment extends Fragment {
         This_Activity = container.getContext();
         Refresh = Home_View.findViewById(R.id.Refresh);
         Trash_List.setVerticalScrollBarEnabled(false);
+        Current_Result = Home_View.findViewById(R.id.Currentweight); // 맨위 현재 무게
         month = month.replaceAll("^0+","");
         day = day.replaceAll("^0+","");
         System.out.println("섹스: " + day);
@@ -200,6 +204,14 @@ public class HomeFragment extends Fragment {
         int Start_point = present_day - 28;
         int count = 0;
         int value = 0;
+        int current_weight = 0;//오늘 무게
+        if(chart_Data.get(present_day) == "x"){ //현재의 무게 구하기
+            current_weight = 0;
+        }
+        else{
+            current_weight = Integer.parseInt(chart_Data.get(present_day));
+        }
+        Current_Result.setText(current_weight+"g");
         for(int i = 0; i < 28; i++){
             if(i > 20){
                 System.out.println("Daily 값: " + chart_Data.get(i + Start_point));
