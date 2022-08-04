@@ -56,7 +56,15 @@ public class HomeList_Adapter extends BaseAdapter {
         Trash_Bar.setData(myItem.getBar_Data());
         if(myItem.getName().equals("일간")){
             option = 7;
-            String[] days = {" ","월", "화", "수", "목", "금", "토", "일"};
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd");
+            String[] days = {" "," "," "," "," "," "," "," "};
+            Calendar calendar = Calendar.getInstance();
+            for(int i = 0; i <7; i++){
+                calendar.add(Calendar.DAY_OF_MONTH, -1);
+                //Date date = calendar.getTime();
+                days[7 - i] = format.format(calendar.getTime());
+            }
+            System.out.println(days);
             configureChartAppearance(Trash_Bar,option,days);
         }
         if(myItem.getName().equals("주간")){
