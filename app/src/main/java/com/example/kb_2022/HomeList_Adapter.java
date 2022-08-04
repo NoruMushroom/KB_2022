@@ -88,6 +88,7 @@ public class HomeList_Adapter extends BaseAdapter {
             configureChartAppearance(Trash_Bar,option,Month);
         }
         Trash_Bar.setTouchEnabled(false);
+        Trash_Bar.animateXY(1000, 1000);
         Trash_Bar.invalidate();// 차트 업데이트
         return convertView;
     }
@@ -99,10 +100,11 @@ public class HomeList_Adapter extends BaseAdapter {
         Trash_Bar.setDrawGridBackground(false);//격자 출력 유무
         Trash_Bar.getLegend().setEnabled(false); // Legend는 차트의 범례
 
+
         // XAxis (수평 막대 기준 왼쪽) - 선 유무, 사이즈, 색상, 축 위치 설정
         XAxis xAxis = Trash_Bar.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // X 축 데이터 표시 위치
-        xAxis.setTextSize(10);
+        xAxis.setTextSize(10f);
         xAxis.setTextColor(Color.BLACK);
         xAxis.setDrawAxisLine(true);
         xAxis.setDrawGridLines(false);//선출력
@@ -111,7 +113,7 @@ public class HomeList_Adapter extends BaseAdapter {
         xAxis.setValueFormatter(new IndexAxisValueFormatter(option_array));
         YAxis yAxis = Trash_Bar.getAxisLeft();
         Trash_Bar.getAxisRight().setEnabled(false);
-        xAxis.setTextSize(10);
+        xAxis.setTextSize(10f);
         yAxis.setTextColor(Color.BLACK);
         yAxis.setAxisLineColor(Color.BLACK);
         yAxis.setDrawAxisLine(true);
