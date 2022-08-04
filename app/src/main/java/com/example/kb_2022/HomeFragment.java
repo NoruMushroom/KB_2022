@@ -200,7 +200,7 @@ public class HomeFragment extends Fragment {
         int Start_point = present_day - 28;
         int count = 0;
         int value = 0;
-        for(int i = 1; i < 29; i++){
+        for(int i = 0; i < 28; i++){
             if(i > 20){
                 System.out.println("Daily 값: " + chart_Data.get(i + Start_point));
                 if(chart_Data.get(i + Start_point) == "x"){
@@ -234,9 +234,7 @@ public class HomeFragment extends Fragment {
         String[] array = new String[]{"일간", "주간", "월간"};
         for (int i=0; i<3; i++) {
             List_item.addItem(array[i],Chart_List[i]);//수치랑 이름 같이 넘겨주기
-            //chart_List에 값을 바꾸면 실시간
         }//일간 주간 월간 리스트뷰 아이템 생성
-        /* 리스트뷰에 어댑터 등록 */
         Trash_List.setAdapter(List_item);
     }
     private class GetData extends AsyncTask<String, Void, String> {
