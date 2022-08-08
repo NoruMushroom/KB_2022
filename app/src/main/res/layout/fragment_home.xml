@@ -19,20 +19,31 @@
         android:textSize="17dp" />
     <TextView
         android:id="@+id/Welcome_Text"
-        android:layout_width="175dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginLeft="15dp"
+        android:maxLines="1"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="30dp"
-        android:gravity="center"
+        android:gravity="left"
         android:textSize="17dp" />
 
     <TextView
         android:id="@+id/Currentweight"
-        android:layout_width="270dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginLeft="15dp"
+        android:maxLines="1"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="60dp"
-        android:gravity="center"
+        android:gravity="left"
+        android:textSize="17dp" />
+    <TextView
+        android:id="@+id/Changeweight"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:maxLines="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="90dp"
+        android:gravity="left"
         android:textSize="17dp" />
 
     <ListView

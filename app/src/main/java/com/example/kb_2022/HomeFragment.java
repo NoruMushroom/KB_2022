@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private ListView Trash_List;
     private TextView Current_Result;
+    private TextView Change_Weight;
     private TextView User_Info;
     private TextView Trash_context;
     private ImageButton Refresh;
@@ -113,6 +114,7 @@ public class HomeFragment extends Fragment {
         Refresh = Home_View.findViewById(R.id.Refresh);
         Trash_List.setVerticalScrollBarEnabled(false);
         Current_Result = Home_View.findViewById(R.id.Currentweight); // 맨위 현재 무게
+        Change_Weight = Home_View.findViewById(R.id.Changeweight);
         month = month.replaceAll("^0+","");
         day = day.replaceAll("^0+","");
         User_Info = Home_View.findViewById(R.id.Welcome_Text);
@@ -211,13 +213,32 @@ public class HomeFragment extends Fragment {
         int count = 0;
         int value = 0;
         int current_weight = 0;//오늘 무게
+        int yester_weight = 0;//어제 무게
         if(chart_Data.get(present_day-1) == "x"){ //현재의 무게 구하기
             current_weight = 0;
         }
         else{
             current_weight = Integer.parseInt(chart_Data.get(present_day-1));
         }
-        Current_Result.setText("오늘 버린 쓰레기의 양은 "+current_weight+"g 입니다!");
+        Current_Result.setText("오늘 배출량은 "+current_weight+"g 입니다!");
+        if(chart_Data.get(present_day-2) == "x"){
+            yester_weight = 0;
+        }
+        else{
+            yester_weight = Integer.parseInt(chart_Data.get(present_day-2));
+
+        }
+        //배출량 변화
+        if(yester_weight - current_weight > 0){
+            Change_Weight.setText("어제보다 "+(yester_weight - current_weight) + "g 덜 배출했습니다.");
+        }
+        else if(yester_weight == current_weight){
+            Change_Weight.setText("어제와 동일하게 " +current_weight+"g 배출했습니다.");
+        }
+        else{
+            Change_Weight.setText("어제보다 " + Math.abs(yester_weight - current_weight) + "g 더 배출했습니다.");
+        }
+
         for(int i = 0; i < 28; i++){
             if(i > 20){
                 System.out.println("Daily 값: " + chart_Data.get(i + Start_point));
