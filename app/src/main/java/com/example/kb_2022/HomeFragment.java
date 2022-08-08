@@ -32,6 +32,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Ref;
@@ -49,6 +50,7 @@ public class HomeFragment extends Fragment {
     private ListView Trash_List;
     private TextView Current_Result;
     private TextView Change_Weight;
+    private TextView Tree_Result;
     private TextView User_Info;
     private TextView Trash_context;
     private ImageButton Refresh;
@@ -115,7 +117,8 @@ public class HomeFragment extends Fragment {
         Refresh = Home_View.findViewById(R.id.Refresh);
         Trash_List.setVerticalScrollBarEnabled(false);
         Current_Result = Home_View.findViewById(R.id.Currentweight); // 맨위 현재 무게
-        Change_Weight = Home_View.findViewById(R.id.Changeweight);
+        Change_Weight = Home_View.findViewById(R.id.Changeweight); // 배출 변화량
+        Tree_Result = Home_View.findViewById(R.id.TreeResult); //나무 결과
         month = month.replaceAll("^0+","");
         day = day.replaceAll("^0+","");
         User_Info = Home_View.findViewById(R.id.Welcome_Text);
@@ -233,17 +236,22 @@ public class HomeFragment extends Fragment {
 
         }
         //배출량 변화
-        if(yester_weight - current_weight > 0){
+        int change_result = yester_weight - current_weight;
+        double tree_change = change_result * 0.000008;
+        BigDecimal bd = new BigDecimal(Math.abs(tree_change));
+        if(change_result > 0){
             int unicode = 0x1F5603;
-            Change_Weight.setText("어제보다 "+(yester_weight - current_weight) + "g 덜 배출했습니다."+getEmojiByUnicode(unicode));
+            Change_Weight.setText("어제보다 "+change_result + "g 덜 배출했습니다."+getEmojiByUnicode(unicode));
+            Tree_Result.setText(bd.toString()+"그루");
         }
-        else if(yester_weight == current_weight){
+        else if(change_result == 0){
             int unicode = 0x1F5603;
             Change_Weight.setText("어제와 동일하게 " +current_weight+"g 배출했습니다." + getEmojiByUnicode(unicode));
         }
         else{
             int unicode = 0x1F61F;
-            Change_Weight.setText("어제보다 " + Math.abs(yester_weight - current_weight) + "g 더 배출했습니다." + getEmojiByUnicode(unicode));
+            Change_Weight.setText("어제보다 " + Math.abs(change_result) + "g 더 배출했습니다." + getEmojiByUnicode(unicode));
+            Tree_Result.setText(bd+"그루");
         }
 
         for(int i = 0; i < 28; i++){

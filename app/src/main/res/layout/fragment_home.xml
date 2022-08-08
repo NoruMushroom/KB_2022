@@ -48,6 +48,17 @@
         android:textColor = "#FF000000"
         android:textSize="17dp" />
 
+    <TextView
+        android:id="@+id/TreeResult"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:maxLines="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="120dp"
+        android:gravity="left"
+        android:textColor = "#FF000000"
+        android:textSize="17dp" />
+
     <ListView
         android:id="@+id/Main_ListView"
         android:dividerHeight="0px"
