@@ -240,7 +240,7 @@ public class HomeFragment extends Fragment {
         int change_result = yester_weight - current_weight;
         double tree_change = change_result * 0.000008;
         BigDecimal bd = new BigDecimal(Math.abs(tree_change));
-        DecimalFormat df = new DecimalFormat("#.#######");
+        DecimalFormat df = new DecimalFormat("#.######");
         if(change_result > 0){
             int unicode = 0x1F5603;
             Change_Weight.setText("어제보다 "+change_result + "g 덜 배출했습니다."+getEmojiByUnicode(unicode));
