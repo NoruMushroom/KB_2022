@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Option = new OptionFragment();//객체 생성
         Bundle home_bundle = new Bundle();
         home_bundle.putString("아이디",userID);
+        home_bundle.putString("이름",userName);
         Home.setArguments(home_bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Home).commitAllowingStateLoss();
         BottomNavigationView bottomNavigationView = findViewById(R.id.navi);
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.home:
                         Bundle home_bundle = new Bundle();
                         home_bundle.putString("아이디",userID);
+                        home_bundle.putString("이름",userName);
                         Home.setArguments(home_bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Home).commitAllowingStateLoss();
                         return true;

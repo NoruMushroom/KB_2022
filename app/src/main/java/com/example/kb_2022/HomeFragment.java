@@ -47,9 +47,12 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private ListView Trash_List;
     private TextView Current_Result;
+    private TextView User_Info;
+    private TextView Trash_context;
     private ImageButton Refresh;
     private Context This_Activity;
     private String userID;
+    private String userName;
     private String month;
     private String day;
     private static final String ARG_PARAM1 = "param1";
@@ -97,8 +100,8 @@ public class HomeFragment extends Fragment {
         if(bundle != null){
             bundle = getArguments();
             userID = bundle.getString("아이디");
+            userName = bundle.getString("이름");
         }
-
         View Home_View = inflater.inflate(R.layout.fragment_home, container, false);
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
@@ -110,9 +113,12 @@ public class HomeFragment extends Fragment {
         Refresh = Home_View.findViewById(R.id.Refresh);
         Trash_List.setVerticalScrollBarEnabled(false);
         Current_Result = Home_View.findViewById(R.id.Currentweight); // 맨위 현재 무게
+        Trash_context = Home_View.findViewById(R.id.Trash_Text);
         month = month.replaceAll("^0+","");
         day = day.replaceAll("^0+","");
-        System.out.println("섹스: " + day);
+        User_Info = Home_View.findViewById(R.id.Welcome_Text);
+        User_Info.setText(userName +"님 안녕하세요!");
+        Trash_context.setText("오늘 버린 쓰레기 양은");
         GetData task = new GetData();
         task.execute(userID, month);
         Refresh.setOnClickListener(new View.OnClickListener() {
@@ -213,7 +219,7 @@ public class HomeFragment extends Fragment {
         else{
             current_weight = Integer.parseInt(chart_Data.get(present_day-1));
         }
-        Current_Result.setText(current_weight+"g");
+        Current_Result.setText(current_weight+"g 입니다!");
         for(int i = 0; i < 28; i++){
             if(i > 20){
                 System.out.println("Daily 값: " + chart_Data.get(i + Start_point));

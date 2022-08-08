@@ -7,26 +7,41 @@
     tools:context=".HomeFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/User_info"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="@drawable/round_item"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:text="오늘 버린 총 양은"
-        android:textSize="20dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/round_item"
         android:paddingLeft="165dp"
-        android:paddingTop="50dp"/>
+        android:paddingTop="50dp"
+        android:textSize="17dp" />
+    <TextView
+        android:id="@+id/Welcome_Text"
+        android:layout_width="175dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textSize="17dp" />
+    <TextView
+        android:id="@+id/Trash_Text"
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:textSize="17dp" />
     <TextView
         android:id="@+id/Currentweight"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="110dp"
         android:gravity="center"
-        android:layout_marginLeft="210dp"
-        android:layout_marginTop="82dp"
-        android:text="asd"
-        android:textSize="23dp"/>
+        android:textSize="17dp" />
+
     <ListView
         android:id="@+id/Main_ListView"
         android:dividerHeight="0px"
@@ -34,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="260dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:scrollbars="none"></ListView>
@@ -51,10 +66,36 @@
         android:id="@+id/Refresh"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="305sp"
+        android:layout_marginLeft="295dp"
         android:layout_marginTop="15dp"
         android:background="#B4F0B4"
         android:src="@drawable/ic_baseline_refresh_24"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/Daily_Percent"
+        android:layout_width="102dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/round_item"
+        android:text=" 일간변화량" />
+
+    <TextView
+        android:id="@+id/Weekly_Percent"
+        android:layout_width="102dp"
+        android:layout_height="80dp"
+        android:background="@drawable/round_item"
+        android:layout_marginLeft="126dp"
+        android:layout_marginTop="180dp"
+        android:text=" 주간 변화량" />
+    <TextView
+        android:id="@+id/Month_Percent"
+        android:layout_width="102dp"
+        android:layout_height="80dp"
+        android:background="@drawable/round_item"
+        android:layout_marginLeft="242dp"
+        android:layout_marginTop="180dp"
+        android:text=" 월간 변화량" />
 
 </FrameLayout>
