@@ -36,6 +36,7 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Ref;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.ArrayList;
@@ -239,19 +240,21 @@ public class HomeFragment extends Fragment {
         int change_result = yester_weight - current_weight;
         double tree_change = change_result * 0.000008;
         BigDecimal bd = new BigDecimal(Math.abs(tree_change));
+        DecimalFormat df = new DecimalFormat("#.#######");
         if(change_result > 0){
             int unicode = 0x1F5603;
             Change_Weight.setText("어제보다 "+change_result + "g 덜 배출했습니다."+getEmojiByUnicode(unicode));
-            Tree_Result.setText(bd.toString()+"그루");
+            Tree_Result.setText(df.format(bd).toString()+"그루");
         }
         else if(change_result == 0){
             int unicode = 0x1F5603;
             Change_Weight.setText("어제와 동일하게 " +current_weight+"g 배출했습니다." + getEmojiByUnicode(unicode));
+            Tree_Result.setText(df.format(bd).toString()+"그루");
         }
         else{
             int unicode = 0x1F61F;
             Change_Weight.setText("어제보다 " + Math.abs(change_result) + "g 더 배출했습니다." + getEmojiByUnicode(unicode));
-            Tree_Result.setText(bd+"그루");
+            Tree_Result.setText(df.format(bd).toString()+"그루");
         }
 
         for(int i = 0; i < 28; i++){
