@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -137,6 +138,9 @@ public class HomeFragment extends Fragment {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
     }
+    public String getEmojiByUnicode(int unicode){
+        return new String(Character.toChars(unicode));
+    }
 
 
     private void dataSetting(String result) throws JSONException {
@@ -230,13 +234,16 @@ public class HomeFragment extends Fragment {
         }
         //배출량 변화
         if(yester_weight - current_weight > 0){
-            Change_Weight.setText("어제보다 "+(yester_weight - current_weight) + "g 덜 배출했습니다.");
+            int unicode = 0x1F5603;
+            Change_Weight.setText("어제보다 "+(yester_weight - current_weight) + "g 덜 배출했습니다."+getEmojiByUnicode(unicode));
         }
         else if(yester_weight == current_weight){
-            Change_Weight.setText("어제와 동일하게 " +current_weight+"g 배출했습니다.");
+            int unicode = 0x1F5603;
+            Change_Weight.setText("어제와 동일하게 " +current_weight+"g 배출했습니다." + getEmojiByUnicode(unicode));
         }
         else{
-            Change_Weight.setText("어제보다 " + Math.abs(yester_weight - current_weight) + "g 더 배출했습니다.");
+            int unicode = 0x1F61F;
+            Change_Weight.setText("어제보다 " + Math.abs(yester_weight - current_weight) + "g 더 배출했습니다." + getEmojiByUnicode(unicode));
         }
 
         for(int i = 0; i < 28; i++){
