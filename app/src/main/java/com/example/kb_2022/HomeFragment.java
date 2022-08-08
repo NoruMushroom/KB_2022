@@ -244,17 +244,16 @@ public class HomeFragment extends Fragment {
         if(change_result > 0){
             int unicode = 0x1F5603;
             Change_Weight.setText("어제보다 "+change_result + "g 덜 배출했습니다."+getEmojiByUnicode(unicode));
-            Tree_Result.setText(df.format(bd).toString()+"그루");
+            Tree_Result.setText(df.format(bd).toString()+"그루를 심었습니다!");
         }
         else if(change_result == 0){
             int unicode = 0x1F5603;
             Change_Weight.setText("어제와 동일하게 " +current_weight+"g 배출했습니다." + getEmojiByUnicode(unicode));
-            Tree_Result.setText(df.format(bd).toString()+"그루");
         }
         else{
             int unicode = 0x1F61F;
             Change_Weight.setText("어제보다 " + Math.abs(change_result) + "g 더 배출했습니다." + getEmojiByUnicode(unicode));
-            Tree_Result.setText(df.format(bd).toString()+"그루");
+            Tree_Result.setText(df.format(bd).toString()+"그루가 없어졌습니다!");
         }
 
         for(int i = 0; i < 28; i++){
