@@ -294,7 +294,6 @@ public class Community_Read extends AppCompatActivity {
         String TAG_CNO = "cno";
         String TAG_COM = "comment";
         List_item = new CommentList_Adapter();
-
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JCON);
@@ -318,6 +317,7 @@ public class Community_Read extends AppCompatActivity {
                 System.out.println("댓번호 : "+cno+" 작성자 : " + name+" 내용 : "+comment);
                 List_item.addItem(comment,name,cno);
                 }
+            Comment_List.setAdapter(List_item);
             }
         catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
