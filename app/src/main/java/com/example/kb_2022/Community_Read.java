@@ -50,12 +50,14 @@ public class Community_Read extends AppCompatActivity {
     private String mJsonString;
     private Integer postValue;
     private GetData D_task;
+    private TextView comment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.community_read);
+        comment = findViewById(R.id.comment);
         Intent intent = getIntent();
         Like_Btn = findViewById(R.id.image_like);
         Bad_Btn = findViewById(R.id.image_unlike);
@@ -66,6 +68,10 @@ public class Community_Read extends AppCompatActivity {
         Delete_Btn = findViewById(R.id.R_delete);
         String number = intent.getStringExtra("글 번호");//string형 글번호 변수
         //글 내용 가져오기
+        String text = "";
+        for(int i=0; i<100; i++)
+            text += i + "\n";
+        comment.setText(text);
         GetData task = new GetData();
         task.execute("readtext", number);
         Like_Btn.setOnClickListener(new View.OnClickListener() {
