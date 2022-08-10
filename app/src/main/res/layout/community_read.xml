@@ -39,8 +39,9 @@
                 android:id="@+id/R_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/R_delete"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="0dp"
                 android:background="@drawable/round_wiget"
                 android:textColor="#FF333333"
                 android:textSize="30sp" />
