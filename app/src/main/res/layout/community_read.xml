@@ -12,6 +12,7 @@
         android:layout_marginTop="20dp"
         android:textColor = "#FF333333"
         android:textSize="30sp"
+        android:background="@drawable/round_wiget"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,13 +20,15 @@
 
     <TextView
         android:id="@+id/R_content"
-        android:textColor = "#FF333333"
         android:layout_width="330dp"
-        android:layout_height="350dp"
+        android:layout_height="150dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="10dp"
+        android:background="@drawable/round_wiget"
+        android:textColor="#FF333333"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,6 +44,7 @@
         app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/round_wiget"
         app:layout_constraintVertical_bias="0.73" />
 
     <TextView
@@ -89,4 +93,5 @@
         android:background="@drawable/ic_baseline_delete_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
