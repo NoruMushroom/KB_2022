@@ -295,7 +295,7 @@ public class Community_Read extends AppCompatActivity {
                 String content = item.getString(TAG_CONTENT);
                 String like = item.getString(TAG_ISLIKE);
                 Title.setText(title);
-                Writer.setText(name);
+                Writer.setText("작성자 : "+name);
                 Content.setText(content);
                 Like.setText("좋아요 : "+ like);
                 }

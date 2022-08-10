@@ -49,7 +49,6 @@ public class CommunityFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mJsonString;
     private CommunityList_Adapter List_item;
-    private ArrayAdapter adapter;
     private String userName;
     private String userGender;
     // TODO: Rename and change types of parameters
