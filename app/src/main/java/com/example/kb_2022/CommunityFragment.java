@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -14,11 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -31,7 +27,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -102,7 +97,7 @@ public class CommunityFragment extends Fragment {
         }
         View Community_View = inflater.inflate(R.layout.fragment_community, container, false);
         System.out.println("아이디" + This_Activity);
-        Community_List = Community_View.findViewById(R.id.Community_ListView);//리스트뷰
+        Community_List = Community_View.findViewById(R.id.Community_Comment);//리스트뷰
         ImageButton Write_icon = Community_View.findViewById(R.id.Write);
         Write_icon.setOnClickListener(new View.OnClickListener() {
             @Override

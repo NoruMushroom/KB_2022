@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,8 @@ public class Community_Read extends AppCompatActivity {
     private String mJsonString;
     private Integer postValue;
     private GetData D_task;
+    private CommentList_Adapter List_item;
+    private ListView Comment_List;
     private TextView comment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +61,8 @@ public class Community_Read extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.community_read);
-        comment = findViewById(R.id.comment);
         Intent intent = getIntent();
+        Comment_List = findViewById(R.id.Community_Comment);
         Like_Btn = findViewById(R.id.image_like);
         Bad_Btn = findViewById(R.id.image_unlike);
         Title = findViewById(R.id.R_title);
@@ -68,10 +72,6 @@ public class Community_Read extends AppCompatActivity {
         Delete_Btn = findViewById(R.id.R_delete);
         String number = intent.getStringExtra("글 번호");//string형 글번호 변수
         //글 내용 가져오기
-        String text = "";
-        for(int i=0; i<100; i++)
-            text += i + "\n";
-        comment.setText(text);
         GetData task = new GetData();
         task.execute("readtext", number);
         Like_Btn.setOnClickListener(new View.OnClickListener() {
@@ -323,7 +323,7 @@ public class Community_Read extends AppCompatActivity {
         String TAG_CNO = "cno";
         String TAG_NAME = "name";
         String TAG_COM = "comment";
-
+        List_item = new CommentList_Adapter();
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
@@ -332,6 +332,7 @@ public class Community_Read extends AppCompatActivity {
             String title = item.getString(TAG_CNO);
             String name = item.getString(TAG_NAME);
             String content = item.getString(TAG_COM);
+            List_item.addItem(content,name,title);
             }
         } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);

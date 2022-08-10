@@ -8,18 +8,20 @@
     android:orientation="vertical">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity ="center"
         android:fillViewport="true"
-        android:layout_marginTop="0dp"
-        android:id="@+id/scrollView">
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="357dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:orientation="vertical"
             android:id="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/R_title"
@@ -58,6 +60,7 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/R_delete" />
+
             <TextView
                 android:id="@+id/R_like"
                 android:layout_width="wrap_content"
@@ -107,18 +110,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/comment"
+            <ListView
+                android:id="@+id/Community_Comment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_wiget"
-                android:textSize="20sp"
+                android:layout_height="350dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:divider="#FFFFFF"
+                android:dividerHeight="0px"
+                android:scrollbars="none"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/R_like" />
+                app:layout_constraintStart_toStartOf="parent">
+
+            </ListView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
