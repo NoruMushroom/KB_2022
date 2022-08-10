@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,69 +17,85 @@
         android:paddingLeft="165dp"
         android:paddingTop="50dp"
         android:textSize="17dp" />
+
     <TextView
         android:id="@+id/Welcome_Text"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:maxLines="1"
+        android:layout_alignStart="@+id/User_info"
+        android:layout_marginStart="15dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="30dp"
         android:gravity="left"
-        android:textColor = "#FF333333"
+        android:maxLines="1"
+        android:textColor="#FF333333"
         android:textSize="17dp" />
 
     <TextView
         android:id="@+id/Currentweight"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:maxLines="1"
+        android:layout_alignStart="@+id/User_info"
+        android:layout_marginStart="15dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="60dp"
         android:gravity="left"
-        android:textColor = "#FF333333"
+        android:maxLines="1"
+        android:textColor="#FF333333"
         android:textSize="17dp" />
+
     <TextView
         android:id="@+id/Changeweight"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:maxLines="1"
+        android:layout_alignStart="@+id/User_info"
+        android:layout_marginStart="15dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="90dp"
         android:gravity="left"
-        android:textColor = "#FF333333"
+        android:maxLines="1"
+        android:textColor="#FF333333"
         android:textSize="17dp" />
 
     <TextView
         android:id="@+id/TreeResult"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:maxLines="1"
+        android:layout_alignStart="@+id/User_info"
+        android:layout_marginStart="15dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="120dp"
         android:gravity="left"
-        android:textColor = "#FF333333"
+        android:maxLines="1"
+        android:textColor="#FF333333"
         android:textSize="17dp" />
 
     <ListView
         android:id="@+id/Main_ListView"
-        android:dividerHeight="0px"
-        android:divider="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/User_info"
+        android:layout_alignStart="@+id/User_info"
+        android:layout_alignEnd="@+id/User_info"
+        android:layout_marginStart="0dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:textColor = "#FF333333"
-        android:scrollbars="none"></ListView>
+        android:divider="#FFFFFF"
+        android:dividerHeight="0px"
+        android:scrollbars="none"
+        android:textColor="#FF333333"></ListView>
 
     <ImageButton
         android:id="@+id/Refresh"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="295dp"
+        android:layout_alignEnd="@+id/User_info"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
         android:background="#B4F0B4"
         android:src="@drawable/ic_baseline_refresh_24"
         tools:ignore="SpeakableTextPresentCheck" />
-</FrameLayout>
+</RelativeLayout>

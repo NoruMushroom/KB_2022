@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CommunityFragment">
+
         <ImageButton
-        android:id="@+id/Write"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginRight="10dp"
-        android:layout_gravity="right"
-        android:background="@color/white"
-        android:src="@drawable/ic_baseline_create_24" />
+            android:id="@+id/Write"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_baseline_create_24" />
+
         <ListView
-            android:dividerHeight="0px"
-            android:divider="#FFFFFF"
             android:id="@+id/Community_Comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginRight="10dp"
-            android:scrollbars="none">
-        </ListView>
+            android:layout_below="@+id/Write"
+            android:layout_alignLeft="@+id/Write"
+            android:layout_alignEnd="@+id/Write"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:divider="#FFFFFF"
+            android:dividerHeight="0px"
+            android:scrollbars="none"></ListView>
 
-</FrameLayout>
+</RelativeLayout>

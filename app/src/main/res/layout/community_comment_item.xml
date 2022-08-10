@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,18 +7,20 @@
     android:baselineAligned="false"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="65dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/round_item">
 
         <TextView
             android:id="@+id/comment_username"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
             android:gravity="left"
             android:textColor="#FF333333"
             android:textSize="15sp"
@@ -27,15 +29,16 @@
 
         <TextView
             android:id="@+id/comment_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/comment_username"
+            android:layout_alignStart="@+id/comment_username"
+            android:layout_alignEnd="@+id/comment_username"
             android:gravity="left"
             android:textColor="#FF333333"
-            android:textSize="10sp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comment_username" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

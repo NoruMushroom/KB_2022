@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,42 +7,47 @@
 
     <EditText
         android:id="@+id/W_title"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/round_wiget"
         android:hint="제목을 입력해주세요."
+        android:textColor="#FF333333"
         android:textSize="17sp"
-        android:textColor = "#FF333333"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/W_content"
-        android:layout_width="330dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="20dp"
-        android:hint="내용을 입력해주세요."
-        android:textColor = "#FF333333"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_below="@+id/W_pw"
+        android:layout_alignStart="@+id/W_title"
+        android:layout_alignEnd="@+id/W_title"
+        android:layout_marginTop="10dp"
         android:background="@drawable/round_wiget"
         android:gravity="top"
+        android:hint="내용을 입력해주세요."
+        android:textColor="#FF333333"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/W_pw" />
 
     <EditText
         android:id="@+id/W_pw"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/W_title"
+        android:layout_alignStart="@+id/W_title"
+        android:layout_alignEnd="@+id/W_title"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/round_wiget"
         android:hint="글에 대한 비밀번호를 입력해주세요."
-        android:textColor = "#FF333333"
+        android:textColor="#FF333333"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +55,15 @@
 
     <Button
         android:id="@+id/W_save"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/W_content"
+        android:layout_alignStart="@+id/W_title"
+        android:layout_alignEnd="@+id/W_title"
+        android:layout_marginTop="10dp"
         android:text="저장하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/W_content" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
