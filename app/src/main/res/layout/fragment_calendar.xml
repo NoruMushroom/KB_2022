@@ -17,6 +17,7 @@
         android:layout_marginTop="410dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/round_wiget"
+        android:textColor = "#FF333333"
         android:textSize="20sp" />
 
     <TextView
@@ -26,5 +27,6 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="455dp"
         android:layout_marginRight="10dp"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textColor = "#FF333333"/>
 </FrameLayout>

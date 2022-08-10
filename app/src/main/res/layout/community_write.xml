@@ -15,6 +15,7 @@
         android:background="@drawable/round_wiget"
         android:hint="제목을 입력해주세요."
         android:textSize="17sp"
+        android:textColor = "#FF333333"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +26,7 @@
         android:layout_height="350dp"
         android:layout_marginTop="20dp"
         android:hint="내용을 입력해주세요."
+        android:textColor = "#FF333333"
         android:background="@drawable/round_wiget"
         android:gravity="top"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +42,7 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/round_wiget"
         android:hint="글에 대한 비밀번호를 입력해주세요."
+        android:textColor = "#FF333333"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
