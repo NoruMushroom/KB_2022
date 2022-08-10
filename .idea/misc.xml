@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/activity_main.xml" value="0.24048913043478262" />
+        <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/community_read.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/fragment_calendar.xml" value="0.29936594202898553" />
         <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.297" />
@@ -15,9 +16,7 @@
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_restore_from_trash_24.xml" value="0.297" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1495" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_thumb_down_24.xml" value="0.224" />
-        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_thumb_up_24.xml" value="0.166" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_calendar.xml" value="0.1845" />
-        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_community.xml" value="0.367" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_home.xml" value="0.224" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_launcher_background.xml" value="0.297" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/round.xml" value="0.2295" />
@@ -45,7 +44,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

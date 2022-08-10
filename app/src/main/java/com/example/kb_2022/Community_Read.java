@@ -190,8 +190,11 @@ public class Community_Read extends AppCompatActivity {
                 else if(postValue == 2){
                     showLike();
                 }
-                else{
+                else if(postValue == 3){
                     showDelete();
+                }
+                else{
+                    showComment();
                 }
             }
         }
@@ -220,6 +223,10 @@ public class Community_Read extends AppCompatActivity {
                     postParameters = "bno=" + Bno + "&bpw=" + bpw;
                     postValue = 3;
                     break;
+                case "readcomment":
+                    Bno = params[1];
+                    postParameters = "bno=" + Bno;
+
                 default:
                     throw new IllegalStateException("Unexpected value: " + params[0]);
             }
@@ -308,6 +315,25 @@ public class Community_Read extends AppCompatActivity {
 
             }
         catch (JSONException e) {
+            Log.d(TAG, "showResult : ", e);
+        }
+    }
+    private void showComment(){
+        String TAG_JSON = "comment_list";
+        String TAG_CNO = "cno";
+        String TAG_NAME = "name";
+        String TAG_COM = "comment";
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            for (int i = 0; i < jsonArray.length(); i++){
+            JSONObject item = jsonArray.getJSONObject(i);
+            String title = item.getString(TAG_CNO);
+            String name = item.getString(TAG_NAME);
+            String content = item.getString(TAG_COM);
+            }
+        } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
         }
     }
