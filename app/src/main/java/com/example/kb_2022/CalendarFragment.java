@@ -121,13 +121,11 @@ public class CalendarFragment extends Fragment {
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 String Present = date.getDate().toString();//yyyy-mm-dd 형식
                 Day = Present.split("-");
-                String Data = null;
+                String Data;
                 try {
                     Data = item.getString("g"+Day[1]+Day[2]);
-                    if(Data == "null"){
-                        Data = "0";
-                    }
                 } catch (JSONException e) {
+                    Data = "0";
                     e.printStackTrace();
                 }
                 Select_Day.setText(Day[0] +"년 " + Day[1] + "월 " + Day[2] + "일");
