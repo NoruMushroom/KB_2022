@@ -53,7 +53,6 @@ public class HomeFragment extends Fragment {
     private TextView Change_Weight;
     private TextView Tree_Result;
     private TextView User_Info;
-    private TextView Trash_context;
     private ImageButton Refresh;
     private Context This_Activity;
     private String userID;

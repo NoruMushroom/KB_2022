@@ -49,7 +49,7 @@ public class CommunityList_Adapter extends BaseAdapter {
         TextView Writer = convertView.findViewById(R.id.Writer);
         Community_Type myItem = getItem(position);
         Title.setText(myItem.getTitle());
-        Like.setText("좋아요 : " + myItem.getLike());
+        Like.setText(" "+myItem.getLike());
         Number.setText("글번호 : " + myItem.getNumber());
         Writer.setText("작성자 : " + myItem.getWriter());
         return convertView;
