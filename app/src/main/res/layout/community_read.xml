@@ -14,58 +14,87 @@
         android:fillViewport="true"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="357dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageButton
+                android:id="@+id/R_delete"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="315dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ic_baseline_delete_24"
+                android:backgroundTint="#B4F0B4"
+                android:textColor="#FF333333"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/R_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/round_wiget"
-                android:textColor="#FF333333"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toTopOf="@+id/R_writer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/R_content"
-                android:layout_width="330dp"
-                android:layout_height="150dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/round_wiget"
                 android:textColor="#FF333333"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/R_writer" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/R_writer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_alignEnd="@+id/R_delete"
+                android:layout_marginTop="80dp"
                 android:background="@drawable/round_wiget"
                 android:textColor="#FF333333"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/R_delete" />
+
+            <TextView
+                android:id="@+id/R_content"
+                android:layout_width="335dp"
+                android:layout_height="150dp"
+                android:layout_alignEnd="@+id/R_writer"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="130dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/round_wiget"
+                android:textColor="#FF333333"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/R_writer" />
+            <ImageButton
+                android:id="@+id/image_unlike"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/R_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="230dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/R_like"
+                android:background="@color/white"
+                android:textColor="#FF333333"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/R_like"
+                app:layout_constraintTop_toBottomOf="@+id/R_content"
+                app:srcCompat="@drawable/ic_baseline_thumb_down_24" />
 
             <TextView
                 android:id="@+id/R_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_below="@+id/R_content"
+                android:layout_marginLeft="130dp"
+                android:layout_marginTop="20dp"
                 android:textColor="#FF333333"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,49 +102,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/R_content" />
 
             <ImageButton
-                android:id="@+id/image_unlike"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/white"
-                android:textColor="#FF333333"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.487"
-                app:layout_constraintStart_toEndOf="@+id/R_like"
-                app:layout_constraintTop_toBottomOf="@+id/R_content"
-                app:srcCompat="@drawable/ic_baseline_thumb_down_24" />
-
-            <ImageButton
                 android:id="@+id/image_like"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="20dp"
+                android:layout_below="@+id/R_content"
+                android:layout_alignStart="@+id/R_like"
+                android:layout_marginStart="-65dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:textColor="#FF333333"
-                app:layout_constraintEnd_toStartOf="@+id/R_like"
-                app:layout_constraintHorizontal_bias="0.552"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/R_content"
                 app:srcCompat="@drawable/ic_baseline_thumb_up_24" />
-
-            <ImageButton
-                android:id="@+id/R_delete"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/ic_baseline_delete_24"
-                android:backgroundTint="#B4F0B4"
-                android:textColor="#FF333333"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ListView
                 android:id="@+id/Community_Comment"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="385dp"
+                android:layout_alignTop="@+id/R_like"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="45dp"
                 android:layout_marginEnd="10dp"
                 android:divider="#FFFFFF"
                 android:dividerHeight="0px"
@@ -127,6 +132,6 @@
 
             </ListView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
