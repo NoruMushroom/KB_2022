@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="95dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/round_item">
 
@@ -20,52 +20,49 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:gravity="left"
-            android:textColor="#FF333333"
             android:textSize="20sp"
+            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/Like"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Title"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="40dp"
-            android:layout_toStartOf="@+id/Writer"
-            android:layout_toEndOf="@+id/Number"
+            android:layout_below="@+id/Writer"
+            android:layout_alignEnd="@+id/Title"
+            android:layout_marginEnd="20dp"
             android:drawableLeft="@drawable/ic_baseline_thumb_up_white"
-            android:gravity="left"
-            android:textColor="#FF333333"
-            android:textSize="16sp"
+            android:textSize="15sp"
+            android:textStyle="normal"
             app:layout_constraintEnd_toStartOf="@+id/Writer"
             app:layout_constraintStart_toEndOf="@+id/Number"
             app:layout_constraintTop_toBottomOf="@+id/Title" />
 
         <TextView
             android:id="@+id/Number"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Title"
             android:layout_alignStart="@+id/Title"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:textColor="#FF333333"
+            android:drawableLeft="@drawable/ic_baseline_format_list_numbered_24"
+            android:textSize="15sp"
+            android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Title" />
 
         <TextView
             android:id="@+id/Writer"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Title"
             android:layout_alignEnd="@+id/Title"
-            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:drawableLeft="@drawable/ic_baseline_create_24_white"
             android:gravity="center"
-            android:textColor="#FF333333"
+            android:textSize="15sp"
+            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Title" />
 

@@ -14,6 +14,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/round_item"
+        android:textStyle="normal"
         android:paddingLeft="165dp"
         android:paddingTop="50dp"
         android:textSize="17dp" />
@@ -29,6 +30,7 @@
         android:gravity="left"
         android:maxLines="1"
         android:textColor="#FF333333"
+        android:textStyle="normal"
         android:textSize="17dp" />
 
     <TextView
@@ -40,6 +42,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="60dp"
         android:gravity="left"
+        android:textStyle="normal"
         android:maxLines="1"
         android:textColor="#FF333333"
         android:textSize="17dp" />
@@ -53,12 +56,14 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="90dp"
         android:gravity="left"
+        android:textStyle="normal"
         android:maxLines="1"
         android:textColor="#FF333333"
         android:textSize="17dp" />
 
     <TextView
         android:id="@+id/TreeResult"
+        android:textStyle="normal"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_alignStart="@+id/User_info"
