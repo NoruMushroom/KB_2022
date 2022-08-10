@@ -190,11 +190,8 @@ public class Community_Read extends AppCompatActivity {
                 else if(postValue == 2){
                     showLike();
                 }
-                else if(postValue == 3){
+                else {
                     showDelete();
-                }
-                else{
-                    showComment();
                 }
             }
         }
@@ -223,10 +220,6 @@ public class Community_Read extends AppCompatActivity {
                     postParameters = "bno=" + Bno + "&bpw=" + bpw;
                     postValue = 3;
                     break;
-                case "readcomment":
-                    Bno = params[1];
-                    postParameters = "bno=" + Bno;
-
                 default:
                     throw new IllegalStateException("Unexpected value: " + params[0]);
             }
@@ -292,15 +285,19 @@ public class Community_Read extends AppCompatActivity {
         }
     }
     private void showContent(){
-        String TAG_JSON = "select_content";
+        String TAG_JCON = "select_content";
+        String TAG_JCOM = "comment_list";
         String TAG_TITLE = "title";
         String TAG_NAME = "name";
         String TAG_CONTENT = "content";
         String TAG_ISLIKE = "islike";
+        String TAG_CNO = "cno";
+        String TAG_COM = "comment";
+        List_item = new CommentList_Adapter();
 
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JCON);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject item = jsonArray.getJSONObject(i);
                 String title = item.getString(TAG_TITLE);
@@ -312,29 +309,17 @@ public class Community_Read extends AppCompatActivity {
                 Content.setText(content);
                 Like.setText("좋아요 : "+ like);
                 }
-
+            JSONArray jsonArray1 = jsonObject.getJSONArray(TAG_JCOM);
+            for(int i = 0; i < jsonArray1.length(); i++){
+                JSONObject item = jsonArray1.getJSONObject(i);
+                String cno = item.getString(TAG_CNO);
+                String name = item.getString(TAG_NAME);
+                String comment = item.getString(TAG_COM);
+                System.out.println("댓번호 : "+cno+" 작성자 : " + name+" 내용 : "+comment);
+                List_item.addItem(comment,name,cno);
+                }
             }
         catch (JSONException e) {
-            Log.d(TAG, "showResult : ", e);
-        }
-    }
-    private void showComment(){
-        String TAG_JSON = "comment_list";
-        String TAG_CNO = "cno";
-        String TAG_NAME = "name";
-        String TAG_COM = "comment";
-        List_item = new CommentList_Adapter();
-        try {
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-            for (int i = 0; i < jsonArray.length(); i++){
-            JSONObject item = jsonArray.getJSONObject(i);
-            String title = item.getString(TAG_CNO);
-            String name = item.getString(TAG_NAME);
-            String content = item.getString(TAG_COM);
-            List_item.addItem(content,name,title);
-            }
-        } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
         }
     }
