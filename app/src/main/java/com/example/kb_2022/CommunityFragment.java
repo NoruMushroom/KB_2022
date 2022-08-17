@@ -102,7 +102,6 @@ public class CommunityFragment extends Fragment {
         Write_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"이름 : " + userName + " 성별 : " + userGender, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), Community_Write.class);
                 intent.putExtra("이름", userName);
                 startActivity(intent);
@@ -134,7 +133,6 @@ public class CommunityFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
             progressDialog = ProgressDialog.show(This_Activity,
                     "잠시만 기다려주세요", null, true, true);
         }
@@ -207,7 +205,6 @@ public class CommunityFragment extends Fragment {
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject item = jsonArray.getJSONObject(i);
                 Integer bno = item.getInt(TAG_BNO);
@@ -219,6 +216,9 @@ public class CommunityFragment extends Fragment {
             Community_List.setAdapter(List_item);
         } catch (JSONException e) {
             Log.d(TAG, "showResult : ", e);
+        }
+        finally{
+            Community_List.setAdapter(List_item);
         }
     }
 }
