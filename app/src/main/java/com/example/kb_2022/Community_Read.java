@@ -75,6 +75,7 @@ public class Community_Read extends AppCompatActivity {
         Like = findViewById(R.id.R_like);
         Delete_Btn = findViewById(R.id.R_delete);
         String number = intent.getStringExtra("글 번호");//string형 글번호 변수
+        String userName = intent.getStringExtra("이름");//string형 글번호 변수
         //글 내용 가져오기
         GetData task = new GetData();
         task.execute("readtext", number);
@@ -121,7 +122,7 @@ public class Community_Read extends AppCompatActivity {
                 builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String PW_content = PW.getText().toString();
+                        String PW_content = Comment_Content.getText().toString();
                         GetData task = new GetData();
                         try {
                             String result = task.execute("deletetext", number, PW_content).get();

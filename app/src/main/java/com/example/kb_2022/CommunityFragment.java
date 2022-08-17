@@ -116,6 +116,7 @@ public class CommunityFragment extends Fragment {
                 String Number = item.getNumber();
                 Intent intent = new Intent(getActivity(), Community_Read.class);
                 intent.putExtra("글 번호",Number);//값 전달해주기
+                intent.putExtra("이름",userName);
                 startActivity(intent);
             }
         });
