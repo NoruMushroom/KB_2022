@@ -124,6 +124,9 @@ public class CalendarFragment extends Fragment {
                 String Data;
                 try {
                     Data = item.getString("g"+Day[1]+Day[2]);
+                    if (Data == "null"){
+                        Data = "0";
+                    }
                 } catch (JSONException e) {
                     Data = "0";
                     e.printStackTrace();
