@@ -193,6 +193,70 @@ public class Community_Read extends AppCompatActivity {
                 }
             }
         });
+        Comment_Send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Community_Read.this);
+                builder.setTitle("댓글 비밀번호");
+                builder.setMessage("\n비밀번호를 입력해주세요.\n");
+                final EditText PW = new EditText(Community_Read.this);
+                final ConstraintLayout container = new ConstraintLayout(Community_Read.this);
+                final ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.leftMargin = getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
+                params.rightMargin =getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
+                PW.setLayoutParams(params);
+                PW.setBackgroundResource(R.drawable.round_wiget);
+                container.addView(PW);
+                builder.setView(container);
+                builder.setPositiveButton("댓글 등록", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        PW_content = PW.getText().toString();
+                        D_task = new GetData();
+                        try {
+                            String result = D_task.execute("deletetext", number, PW_content).get();
+                            JSONObject j_result = new JSONObject(result);
+                            result = j_result.getString("success");//성공 여부
+                            System.out.println(result);
+                            AlertDialog.Builder del_bulider = new AlertDialog.Builder(Community_Read.this);
+                            if(result.equals("true")){
+                                del_bulider.setTitle("글 삭제 성공");
+                                del_bulider.setMessage("글 삭제를 성공하였습니다.");
+                                del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                        overridePendingTransition(0, 0);
+                                    }
+                                });
+                            }
+                            else{
+                                del_bulider.setTitle("글 삭제 실패");
+                                del_bulider.setMessage("\n비밀번호가 맞지 않습니다.\n");
+                                del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+                            }
+                            del_bulider.show();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.show();
+            }
+        });
     }
     public static boolean setListViewHeightBasedOnItems(ListView listView) {
 
