@@ -215,7 +215,7 @@ public class Community_Read extends AppCompatActivity {
                         String comment = Comment_Content.getText().toString();
                         GetData task = new GetData();
                         try {
-                            String result = task.execute("writecomment", number, cpw, comment).get();
+                            String result = task.execute("writecomment", number, userName ,cpw, comment).get();
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
                             System.out.println(result);
@@ -226,8 +226,6 @@ public class Community_Read extends AppCompatActivity {
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        finish();
-                                        overridePendingTransition(0, 0);
                                     }
                                 });
                             }
@@ -388,7 +386,9 @@ public class Community_Read extends AppCompatActivity {
                     Param2 = params[2];
                     Param3 = params[3];
                     Param4 = params[4];
-                    postParameters = "bno=" + Param1 + "&uname=" + Param2 + "&cpw=" + Param3 + "&comment" + Param4;
+
+                    postParameters = "bno=" + Param1 + "&uname=" + Param2 + "&cpw=" + Param3 + "&comment=" + Param4;
+                    System.out.println(postParameters);
                     postValue = 3;
                     break;
                 case "deletecomment":
