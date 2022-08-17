@@ -136,8 +136,11 @@ public class Community_Read extends AppCompatActivity {
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        finish();
-                                        overridePendingTransition(0, 0);
+                                        finish();//인텐트 종료
+                                        overridePendingTransition(0, 0);//인텐트 효과 없애기
+                                        Intent intent = getIntent(); //인텐트
+                                        startActivity(intent); //액티비티 열기
+                                        overridePendingTransition(0, 0);//인텐트 효과 없애기
                                     }
                                 });
                             }
@@ -226,6 +229,11 @@ public class Community_Read extends AppCompatActivity {
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();//인텐트 종료
+                                        overridePendingTransition(0, 0);//인텐트 효과 없애기
+                                        Intent intent = getIntent(); //인텐트
+                                        startActivity(intent); //액티비티 열기
+                                        overridePendingTransition(0, 0);//인텐트 효과 없애기
                                     }
                                 });
                             }
