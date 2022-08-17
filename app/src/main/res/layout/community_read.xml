@@ -68,8 +68,8 @@
 
             <TextView
                 android:id="@+id/R_content"
-                android:layout_width="335dp"
-                android:layout_height="150dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/Community_Comment"
                 android:layout_alignEnd="@+id/Community_Comment"
                 android:layout_marginTop="130dp"
