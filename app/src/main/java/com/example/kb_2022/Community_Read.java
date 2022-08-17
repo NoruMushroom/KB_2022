@@ -7,9 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class Community_Read extends AppCompatActivity {
     private TextView Writer;
     private TextView Content;
     private TextView Like;
+    private Button Comment_Send;
+    private EditText Comment_Content;
     private ImageButton Like_Btn;
     private ImageButton Bad_Btn;
     private ImageButton Delete_Btn;
@@ -55,7 +58,6 @@ public class Community_Read extends AppCompatActivity {
     private GetData D_task;
     private CommentList_Adapter List_item;
     private ListView Comment_List;
-    private TextView comment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,8 @@ public class Community_Read extends AppCompatActivity {
         actionBar.hide();
         setContentView(R.layout.community_read);
         Intent intent = getIntent();
+        Comment_Send = findViewById(R.id.Comment_complete);
+        Comment_Content = findViewById(R.id.Comment_content);
         Comment_List = findViewById(R.id.Community_Comment);
         Like_Btn = findViewById(R.id.image_like);
         Bad_Btn = findViewById(R.id.image_unlike);
@@ -75,6 +79,7 @@ public class Community_Read extends AppCompatActivity {
         //글 내용 가져오기
         GetData task = new GetData();
         task.execute("readtext", number);
+        Comment_Send.setEnabled(false);
         Like_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +104,6 @@ public class Community_Read extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
-
         Delete_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +161,36 @@ public class Community_Read extends AppCompatActivity {
                     }
                 });
                 builder.show();
+            }
+        });
+        Comment_Content.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if(Comment_Content.length() > 0){
+                    Comment_Send.setEnabled(true);
+                }
+                else{
+                    Comment_Send.setEnabled(false);
+                }
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(Comment_Content.length() > 0){
+                    Comment_Send.setEnabled(true);
+                }
+                else{
+                    Comment_Send.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(Comment_Content.length() > 0){
+                    Comment_Send.setEnabled(true);
+                }
+                else{
+                    Comment_Send.setEnabled(false);
+                }
             }
         });
     }
