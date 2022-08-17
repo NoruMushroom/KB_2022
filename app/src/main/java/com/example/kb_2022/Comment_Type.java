@@ -14,5 +14,5 @@ public class Comment_Type {
     public void setWriter(String writer) {
         this.Writer = writer;
     }
-    public void setCno(String Con) {this.Cno = Cno;}
+    public void setCno(String Cno) {this.Cno = Cno;}
 }

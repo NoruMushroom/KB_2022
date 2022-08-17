@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -52,10 +53,8 @@ public class Community_Read extends AppCompatActivity {
     private ImageButton Like_Btn;
     private ImageButton Bad_Btn;
     private ImageButton Delete_Btn;
-    private String PW_content;
     private String mJsonString;
     private Integer postValue;
-    private GetData D_task;
     private CommentList_Adapter List_item;
     private ListView Comment_List;
     @Override
@@ -122,10 +121,10 @@ public class Community_Read extends AppCompatActivity {
                 builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        PW_content = PW.getText().toString();
-                        D_task = new GetData();
+                        String PW_content = PW.getText().toString();
+                        GetData task = new GetData();
                         try {
-                            String result = D_task.execute("deletetext", number, PW_content).get();
+                            String result = task.execute("deletetext", number, PW_content).get();
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
                             System.out.println(result);
@@ -211,10 +210,10 @@ public class Community_Read extends AppCompatActivity {
                 builder.setPositiveButton("댓글 등록", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        PW_content = PW.getText().toString();
-                        D_task = new GetData();
+                        String PW_content = PW.getText().toString();
+                        GetData task = new GetData();
                         try {
-                            String result = D_task.execute("deletetext", number, PW_content).get();
+                            String result = task.execute("deletetext", number, PW_content).get();
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
                             System.out.println(result);
@@ -255,6 +254,33 @@ public class Community_Read extends AppCompatActivity {
                     }
                 });
                 builder.show();
+            }
+        });
+        Comment_List.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> a_parent, View a_view, int a_position, long a_id) {
+                final Comment_Type item = List_item.getItem(a_position);
+                String Cno = item.getCno();
+                AlertDialog.Builder builder = new AlertDialog.Builder(Community_Read.this);
+                builder.setTitle("댓글 삭제");
+                builder.setMessage("\n비밀번호를 입력해주세요.\n");
+                final EditText PW = new EditText(Community_Read.this);
+                final ConstraintLayout container = new ConstraintLayout(Community_Read.this);
+                final ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.leftMargin = getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
+                params.rightMargin =getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
+                PW.setLayoutParams(params);
+                PW.setBackgroundResource(R.drawable.round_wiget);
+                container.addView(PW);
+                builder.setView(container);
+                builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                return true;
             }
         });
     }
@@ -333,25 +359,40 @@ public class Community_Read extends AppCompatActivity {
         protected String doInBackground(String... params) {
             String serverURL = "http://123.215.162.92/KBServer/" + params[0] + ".php";
             String postParameters;
-            String Bno;
-            String isLike;
-            String bpw;
+            String Param1;
+            String Param2;
+            String Param3;
+            String Param4;
             switch (params[0]){
                 case "readtext":
-                    Bno = params[1];
-                    postParameters = "bno=" + Bno;
+                    Param1 = params[1];
+                    postParameters = "bno=" + Param1;
                     postValue = 1;
                     break;
                 case "likeupdown":
-                    Bno = params[1];
-                    isLike = params[2];
-                    postParameters = "bno=" + Bno + "&islike=" + isLike;
+                    Param1 = params[1];
+                    Param2 = params[2];
+                    postParameters = "bno=" + Param1 + "&islike=" + Param2;
                     postValue = 2;
                     break;
                 case "deletetext":
-                    Bno = params[1];
-                    bpw = params[2];
-                    postParameters = "bno=" + Bno + "&bpw=" + bpw;
+                    Param1 = params[1];
+                    Param2 = params[2];
+                    postParameters = "bno=" + Param1 + "&bpw=" + Param2;
+                    postValue = 3;
+                    break;
+                case "writecomment":
+                    Param1 = params[1];
+                    Param2 = params[2];
+                    Param3 = params[3];
+                    Param4 = params[4];
+                    postParameters = "bno=" + Param1 + "&uname=" + Param2 + "&cpw=" + Param3 + "&comment" + Param4;
+                    postValue = 3;
+                    break;
+                case "deletecomment":
+                    Param1 = params[1];
+                    Param2 = params[2];
+                    postParameters = "cno=" + Param1 + "&cpw=" + Param2;
                     postValue = 3;
                     break;
                 default:
