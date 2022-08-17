@@ -241,12 +241,12 @@ public class HomeFragment extends Fragment {
         BigDecimal bd = new BigDecimal(Math.abs(tree_change));
         DecimalFormat df = new DecimalFormat("#.######");
         if(change_result > 0){
-            int unicode = 0x1F5603;
+            int unicode = 0x1F603;
             Change_Weight.setText("어제보다 "+change_result + "g 덜 배출했습니다."+getEmojiByUnicode(unicode));
             Tree_Result.setText(df.format(bd).toString()+"그루를 심었습니다!");
         }
         else if(change_result == 0){
-            int unicode = 0x1F5603;
+            int unicode = 0x1F60A;
             Change_Weight.setText("어제와 동일하게 " +current_weight+"g 배출했습니다." + getEmojiByUnicode(unicode));
         }
         else{
