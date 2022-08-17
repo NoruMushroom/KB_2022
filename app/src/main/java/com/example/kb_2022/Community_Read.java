@@ -210,17 +210,18 @@ public class Community_Read extends AppCompatActivity {
                 builder.setPositiveButton("댓글 등록", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String PW_content = PW.getText().toString();
+                        String cpw = PW.getText().toString();
+                        String comment = Comment_Content.getText().toString();
                         GetData task = new GetData();
                         try {
-                            String result = task.execute("deletetext", number, PW_content).get();
+                            String result = task.execute("writecomment", number, cpw, comment).get();
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
                             System.out.println(result);
                             AlertDialog.Builder del_bulider = new AlertDialog.Builder(Community_Read.this);
                             if(result.equals("true")){
-                                del_bulider.setTitle("글 삭제 성공");
-                                del_bulider.setMessage("글 삭제를 성공하였습니다.");
+                                del_bulider.setTitle("댓글 등록 성공");
+                                del_bulider.setMessage("댓글 등록을 성공하였습니다.");
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -230,8 +231,8 @@ public class Community_Read extends AppCompatActivity {
                                 });
                             }
                             else{
-                                del_bulider.setTitle("글 삭제 실패");
-                                del_bulider.setMessage("\n비밀번호가 맞지 않습니다.\n");
+                                del_bulider.setTitle("댓글 등록 실패");
+                                del_bulider.setMessage("\n댓글 등록에 실패하였습니다.\n");
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
