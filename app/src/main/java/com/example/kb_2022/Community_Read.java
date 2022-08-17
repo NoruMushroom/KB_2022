@@ -128,7 +128,6 @@ public class Community_Read extends AppCompatActivity {
                             String result = task.execute("deletetext", number, PW_content).get();
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
-                            System.out.println(result);
                             AlertDialog.Builder del_bulider = new AlertDialog.Builder(Community_Read.this);
                             if(result.equals("true")){
                                 del_bulider.setTitle("글 삭제 성공");
@@ -276,10 +275,46 @@ public class Community_Read extends AppCompatActivity {
                 builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        String PW_content = Comment_Content.getText().toString();
+                        GetData task = new GetData();
+                        try {
+                            String result = task.execute("deletecomment", Cno, PW_content).get();
+                            System.out.println("비밀번호"+PW_content);
+                            JSONObject j_result = new JSONObject(result);
+                            result = j_result.getString("success");//성공 여부
+                            AlertDialog.Builder del_bulider = new AlertDialog.Builder(Community_Read.this);
+                            if(result.equals("true")){
+                                del_bulider.setTitle("댓글 삭제 성공");
+                                del_bulider.setMessage("댓글 삭제를 성공하였습니다.");
+                                del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                        overridePendingTransition(0, 0);
+                                    }
+                                });
+                            }
+                            else{
+                                del_bulider.setTitle("댓글 삭제 실패");
+                                del_bulider.setMessage("\n비밀번호가 맞지 않습니다.\n");
+                                del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+                            }
+                            del_bulider.show();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 });
-
+                builder.show();
                 return true;
             }
         });
@@ -386,9 +421,7 @@ public class Community_Read extends AppCompatActivity {
                     Param2 = params[2];
                     Param3 = params[3];
                     Param4 = params[4];
-
                     postParameters = "bno=" + Param1 + "&uname=" + Param2 + "&cpw=" + Param3 + "&comment=" + Param4;
-                    System.out.println(postParameters);
                     postValue = 3;
                     break;
                 case "deletecomment":
