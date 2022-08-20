@@ -5,65 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="70dp"
+        tools:srcCompat="@drawable/bin" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="70dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="70dp"
-            android:layout_marginBottom="70dp"
-            tools:srcCompat="@drawable/bin" />
+    <EditText
+        android:id="@+id/ID_EditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/PW_EditText"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/round_wiget"
+        android:hint="아이디를 입력해주세요." />
 
-        <EditText
-            android:id="@+id/ID_EditText"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/PW_EditText"
-            android:layout_centerInParent="true"
-            android:layout_margin="10dp"
-            android:background="@drawable/round_wiget"
-            android:hint="아이디를 입력해주세요." />
+    <EditText
+        android:id="@+id/PW_EditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/round_wiget"
+        android:hint="비밀번호를 입력해주세요."
+        android:inputType="textPassword" />
 
-        <EditText
-            android:id="@+id/PW_EditText"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/round_wiget"
-            android:hint="비밀번호를 입력해주세요."
-            android:inputType="textPassword" />
+    <Button
+        android:id="@+id/Login_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PW_EditText"
+        android:layout_alignStart="@+id/PW_EditText"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="로그인"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PW_EditText" />
 
-        <Button
-            android:id="@+id/Login_request"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/PW_EditText"
-            android:layout_alignStart="@+id/PW_EditText"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="로그인"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PW_EditText" />
+    <Button
+        android:id="@+id/Sign_Up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PW_EditText"
+        android:layout_alignEnd="@+id/PW_EditText"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="회원가입"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PW_EditText" />
 
-        <Button
-            android:id="@+id/Sign_Up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/PW_EditText"
-            android:layout_alignEnd="@+id/PW_EditText"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:text="회원가입"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PW_EditText" />
-    </RelativeLayout>
 </RelativeLayout>
