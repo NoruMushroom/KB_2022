@@ -85,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
                     AlertDialog.Builder bulider = new AlertDialog.Builder(SignUpActivity.this);
                     if(result.equals("true")){
                         bulider.setTitle("회원가입 성공");
-                        bulider.setMessage("회원가입을 완료하였습니다.");
+                        bulider.setMessage("\n회원가입을 완료하였습니다.\n");
                         bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
