@@ -14,12 +14,11 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
-            android:layout_margin="70dp"
             android:layout_marginStart="70dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="70dp"
             android:layout_marginBottom="70dp"
-            tools:srcCompat="@drawable/bin" />
+            app:srcCompat="@drawable/bin" />
 
         <EditText
             android:id="@+id/ID_EditText"
