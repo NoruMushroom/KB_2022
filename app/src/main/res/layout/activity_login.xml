@@ -23,7 +23,10 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/PW_EditText"
             android:layout_centerInParent="true"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/round_wiget"
             android:hint="아이디를 입력해주세요." />
 
