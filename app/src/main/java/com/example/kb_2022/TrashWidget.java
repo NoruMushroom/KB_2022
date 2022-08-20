@@ -3,6 +3,7 @@ package com.example.kb_2022;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 
@@ -33,7 +34,7 @@ public class TrashWidget extends AppWidgetProvider {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.trash_widget);
-        views.setTextViewText(R.id.appwidget_text, "JJJJJJJJJJJJJJJJJJ");
+        views.setTextViewText(R.id.appwidget_text, "Hello World2");
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
