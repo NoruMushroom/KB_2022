@@ -35,7 +35,6 @@ public class TrashWidget extends AppWidgetProvider {
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.trash_widget);
         views.setTextViewText(R.id.appwidget_text, "Hello World2");
-
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
