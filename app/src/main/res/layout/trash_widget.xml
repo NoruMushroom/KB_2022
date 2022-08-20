@@ -10,7 +10,19 @@
         android:id="@+id/appwidget_text"
         style="@style/Widget.KB_2022.AppWidget.InnerView"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:layout_alignTop="@+id/appwidget_text"
+        android:layout_alignEnd="@+id/appwidget_text"
+        android:layout_alignBottom="@+id/appwidget_text"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_refresh_24_green" />
+
 
 </RelativeLayout>
