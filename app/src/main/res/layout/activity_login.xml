@@ -11,44 +11,34 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="70dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginBottom="70dp"
+            tools:srcCompat="@drawable/bin" />
 
         <EditText
             android:id="@+id/ID_EditText"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_below="@+id/imageView"
-            android:layout_alignStart="@+id/imageView"
-            android:layout_marginStart="-55dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/PW_EditText"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
             android:background="@drawable/round_wiget"
-            android:hint="아이디를 입력해주세요."
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            android:hint="아이디를 입력해주세요." />
 
         <EditText
             android:id="@+id/PW_EditText"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_below="@+id/ID_EditText"
-            android:layout_alignStart="@+id/imageView"
-            android:layout_marginStart="-55dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:background="@drawable/round_wiget"
             android:hint="비밀번호를 입력해주세요."
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ID_EditText" />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/Login_request"
