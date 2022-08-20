@@ -4,12 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <EditText>
 
-    </EditText>>
+    <EditText
+        android:id="@+id/ID"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_above="@id/PW"
+        android:layout_margin="10dp"
+        android:background="@drawable/round_wiget"
+        android:hint="아이디를 입력해주세요." />
 
-
-
-
+    <EditText
+        android:id="@+id/PW"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/Name"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/round_wiget"
+        android:hint="비밀번호를 입력해주세요." />
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/round_wiget"
+        android:hint="이름을 입력해주세요." />
+    <Spinner
+        android:id="@+id/Gender"
+        android:entries="@array/성별"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/Name"
+        android:background="@drawable/round_wiget"
+        android:text="성별을 선택해주세요."
+        />
+    <Button
+        android:id="@+id/Signup_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Gender"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:text="회원가입"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Gender"
+        />
 
 </RelativeLayout>
