@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -17,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment Home;
     Fragment Calender;
     Fragment Community;
-    Fragment Option;//페이지 변수 선언
+    Fragment Option;
+    Fragment Photo;//페이지 변수 선언
     private String userName;
     private String userGender;
     private String userID;
@@ -34,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         Home = new HomeFragment();
         Calender = new CalendarFragment();
         Community = new CommunityFragment();
-        Option = new OptionFragment();//객체 생성
+        Option = new OptionFragment();
+        Photo = new PhotoFragment();//객체 생성
         Bundle home_bundle = new Bundle();
         home_bundle.putString("아이디",userID);
         home_bundle.putString("이름",userName);
@@ -57,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
                         Cal_bundle.putString("아이디",userID);
                         Calender.setArguments(Cal_bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Calender).commitAllowingStateLoss();
+                        return true;
+                    case R.id.photo:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Photo).commitAllowingStateLoss();
                         return true;
                     case R.id.community:
                         Bundle Com_bundle = new Bundle();

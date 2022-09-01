@@ -14,6 +14,12 @@
         android:enabled="true"
         />
     <item
+        android:id="@+id/photo"
+        android:icon="@drawable/ic_baseline_camera_alt_24"
+        android:title="사진분석"
+        android:enabled="true"
+        />
+    <item
         android:id="@+id/community"
         android:icon="@drawable/ic_community"
         android:title="커뮤니티"
