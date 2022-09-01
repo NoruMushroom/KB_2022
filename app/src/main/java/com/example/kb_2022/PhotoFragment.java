@@ -25,7 +25,8 @@ public class PhotoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button btn;
+    private Button Take_Photo;
+    private Button Analyze_Photo;
     private ImageView image;
     private TextView result;
 
@@ -73,19 +74,22 @@ public class PhotoFragment extends Fragment {
 
             // 이미지뷰에 Bitmap으로 이미지를 입력
             image.setImageBitmap(imageBitmap);
+            Analyze_Photo.setEnabled(true);
             result.setText("사진을 분석중입니다");
-            btn.setText("사진 재촬영");
+            Take_Photo.setText("사진 재촬영");
         }
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Photo_View = inflater.inflate(R.layout.fragment_photo, container, false);
-        btn = Photo_View.findViewById(R.id.Take);
+        Take_Photo = Photo_View.findViewById(R.id.Take);
+        Analyze_Photo = Photo_View.findViewById(R.id.Analyze);
         image = Photo_View.findViewById(R.id.Image);
         result = Photo_View.findViewById(R.id.Result);
         result.setText("쓰레기 사진을 찍어주세요");
-        btn.setOnClickListener(new View.OnClickListener() {
+        Analyze_Photo.setEnabled(false);
+        Take_Photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
