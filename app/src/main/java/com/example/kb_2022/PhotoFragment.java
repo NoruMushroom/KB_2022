@@ -82,9 +82,7 @@ public class PhotoFragment extends Fragment {
         btn = Photo_View.findViewById(R.id.Take);
         image = Photo_View.findViewById(R.id.Image);
         result = Photo_View.findViewById(R.id.Result);
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         result.setText("쓰레기 사진을 찍어주세요");
-        startActivityForResult(i, 0);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
