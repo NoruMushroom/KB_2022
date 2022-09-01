@@ -73,6 +73,8 @@ public class PhotoFragment extends Fragment {
 
             // 이미지뷰에 Bitmap으로 이미지를 입력
             image.setImageBitmap(imageBitmap);
+            result.setText("사진을 분석중입니다");
+            btn.setText("사진 재촬영");
         }
     }
     @Override
