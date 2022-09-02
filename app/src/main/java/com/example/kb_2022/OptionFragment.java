@@ -60,8 +60,6 @@ public class OptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Option_View = inflater.inflate(R.layout.fragment_option, container, false);
-        TextView text = Option_View.findViewById(R.id.Option_text);
-        text.setText("여기는 환경설정 화면 입니다.");
         return Option_View;
     }
 }
