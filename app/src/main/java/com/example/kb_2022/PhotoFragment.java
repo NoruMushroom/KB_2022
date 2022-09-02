@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class PhotoFragment extends Fragment {
 
@@ -36,11 +38,16 @@ public class PhotoFragment extends Fragment {
     private TextView result;
     private CameraSurfaceView surfaceView;
     private Bitmap Rotate_Bitmap;
+    private boolean Hide = false;
 
     public PhotoFragment() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onResume() {
+        Log.e("DEBUG", "onResume of HomeFragment");
+        super.onResume();
+    }
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -68,22 +75,6 @@ public class PhotoFragment extends Fragment {
         }
     }
     @Override
-    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // 카메라 촬영을 하면 이미지뷰에 사진 삽입
-        if (requestCode == 0 && resultCode == RESULT_OK) {
-            // Bundle로 데이터를 입력
-            Bundle extras = data.getExtras();
-
-            // Bitmap으로 컨버전
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            // 이미지뷰에 Bitmap으로 이미지를 입력
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 1;
-            image.setImageBitmap(imageBitmap);
-        }
-    }*/
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Photo_View = inflater.inflate(R.layout.fragment_photo, container, false);
@@ -94,10 +85,19 @@ public class PhotoFragment extends Fragment {
         result = Photo_View.findViewById(R.id.Result);
         result.setText("쓰레기 사진을 찍어주세요");
         Analyze_Photo.setEnabled(false);
+
         Take_Photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                capture();
+                if(Take_Photo.getText().equals("사진 재촬영")){
+                    capture_image.setImageResource(0);
+                    Take_Photo.setText("사진 촬영");
+                    result.setText("쓰레기 사진을 찍어주세요");
+                    Analyze_Photo.setEnabled(false);
+                }
+                else {
+                    capture();
+                }
             }
         });
         Analyze_Photo.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +107,10 @@ public class PhotoFragment extends Fragment {
             }
         });
         return Photo_View;
+    }
+    private void refresh(){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
     public void capture() {
         surfaceView.capture(new Camera.PictureCallback() {
@@ -118,12 +122,12 @@ public class PhotoFragment extends Fragment {
                 options.inSampleSize = 8; // 1/8사이즈로 보여주기
                 Matrix matrix = new Matrix();
                 matrix.postRotate(90);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length,options); //data 어레이 안에 있는 데이터 불러와서 비트맵에 저장
+                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options); //data 어레이 안에 있는 데이터 불러와서 비트맵에 저장
                 Rotate_Bitmap = bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);//전역변수해야됨
-                capture_image.setImageBitmap(Rotate_Bitmap);//이미지뷰에 사진 보여주기
                 Analyze_Photo.setEnabled(true);
                 result.setText("사진 분석 버튼을 눌러주세요");
                 Take_Photo.setText("사진 재촬영");
+                capture_image.setImageBitmap(Rotate_Bitmap);//이미지뷰 보이기
                 camera.startPreview();
             }
         });
