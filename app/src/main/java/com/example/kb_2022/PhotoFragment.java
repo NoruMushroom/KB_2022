@@ -43,11 +43,6 @@ public class PhotoFragment extends Fragment {
     public PhotoFragment() {
         // Required empty public constructor
     }
-    @Override
-    public void onResume() {
-        Log.e("DEBUG", "onResume of HomeFragment");
-        super.onResume();
-    }
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -107,10 +102,6 @@ public class PhotoFragment extends Fragment {
             }
         });
         return Photo_View;
-    }
-    private void refresh(){
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(this).attach(this).commit();
     }
     public void capture() {
         surfaceView.capture(new Camera.PictureCallback() {
