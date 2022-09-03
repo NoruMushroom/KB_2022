@@ -38,7 +38,6 @@ public class PhotoFragment extends Fragment {
     private TextView result;
     private CameraSurfaceView surfaceView;
     private Bitmap Rotate_Bitmap;
-    private boolean Hide = false;
 
     public PhotoFragment() {
         // Required empty public constructor

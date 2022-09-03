@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,8 +36,10 @@ public class OptionFragment extends Fragment {
     private Button Change_Name;
     private Button Sign_out;
     private LinearLayout PW_View;
+    private LinearLayout Photo_View;
     private LinearLayout Name_View;
     private LinearLayout Member_View;
+    private ArrayList<Photo_Type> mList;
     private EditText Before_PW;
     private EditText After_PW;
     private EditText Name_PW;
@@ -75,6 +81,12 @@ public class OptionFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    public void addItem(int img_path,String imgName){
+        Photo_Type item = new Photo_Type();
+        item.set_Photo_Path(img_path);
+        item.set_Photo_Name(imgName);
+        mList.add(item);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,10 +96,30 @@ public class OptionFragment extends Fragment {
         Change_PW = Option_View.findViewById(R.id.option_change_pw);
         Change_Name = Option_View.findViewById(R.id.option_change_name);
         Sign_out = Option_View.findViewById(R.id.option_sign_out);
+        mList = new ArrayList<>();
+        addItem(R.drawable.chu,"츄");
+        addItem(R.drawable.lee,"아이유");
+        addItem(R.drawable.han,"한효주");
+        addItem(R.drawable.suzi,"수지");
         Change_Photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Photo_View = (LinearLayout) View.inflate(getActivity(),R.layout.change_photo,null);
+                AlertDialog.Builder Dialog = new AlertDialog.Builder(getActivity());
+                Dialog.setTitle("프로필 사진 변경");
+                Dialog.setView(Photo_View);
+                RecyclerView recyclerView = Photo_View.findViewById(R.id.photo_view);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),recyclerView.HORIZONTAL,false));
+                Photo_Adapter adapter = new Photo_Adapter(mList);
+                recyclerView.setAdapter(adapter);
+                Dialog.setPositiveButton("변경", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                Dialog.setNegativeButton("취소", null);
+                Dialog.show();
             }
         });
         Change_PW.setOnClickListener(new View.OnClickListener() {
