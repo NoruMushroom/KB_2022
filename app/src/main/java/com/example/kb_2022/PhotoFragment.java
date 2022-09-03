@@ -168,9 +168,9 @@ public class PhotoFragment extends Fragment {
                 //bytearray 형식으로 전달
                 //이걸이용해서 이미지뷰로 보여주거나 파일로 저장
                 BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 3/2; // 1/8사이즈로 보여주기
+                options.inSampleSize = 4; // 1/8사이즈로 보여주기
                 Matrix matrix = new Matrix();
-                matrix.postRotate(0);
+                matrix.postRotate(90);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options); //data 어레이 안에 있는 데이터 불러와서 비트맵에 저장
                 Rotate_Bitmap = bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);//전역변수해야됨
                 Analyze_Photo.setEnabled(true);
@@ -212,7 +212,6 @@ public class PhotoFragment extends Fragment {
             return retrofit;
         }
     }
-
     private static class NullOnEmptyConverterFactory extends Converter.Factory {
         @Override
         public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit)
