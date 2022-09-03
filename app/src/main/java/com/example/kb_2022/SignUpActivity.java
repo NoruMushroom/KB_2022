@@ -30,9 +30,11 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -51,7 +53,10 @@ public class SignUpActivity extends AppCompatActivity {
         name_ed = findViewById(R.id.Name);
         Button signup_btn = (Button) findViewById(R.id.Signup_request);
         Spinner gender_sp = findViewById(R.id.Gender);
+        boolean[] bool_btn = new boolean[3];
+        Arrays.fill(bool_btn, false);
         signup_btn.setEnabled(false);
+
         //성별 스피너
         gender_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -114,28 +119,28 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(id_ed.length()>0){
-                    signup_btn.setEnabled(true);
+                    bool_btn[0] = true;
                 }
                 else{
-                    signup_btn.setEnabled(false);
+                    bool_btn[0] = false;
                 }
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(id_ed.length()>0){
-                    signup_btn.setEnabled(true);
+                    bool_btn[0] = true;
                 }
                 else{
-                    signup_btn.setEnabled(false);
+                    bool_btn[0] = false;
                 }
             }
             @Override
             public void afterTextChanged(Editable editable) {
                 if(id_ed.length()>0){
-                    signup_btn.setEnabled(true);
+                    bool_btn[0] = true;
                 }
                 else{
-                    signup_btn.setEnabled(false);
+                    bool_btn[0] = false;
                 }
             }
         });
@@ -143,28 +148,28 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(pw_ed.length() > 0){
-                    signup_btn.setEnabled(true);
+                    bool_btn[1] = true;
                 }
                 else {
-                    signup_btn.setEnabled(false);
+                    bool_btn[1] = false;
                 }
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(pw_ed.length() > 0){
-                    signup_btn.setEnabled(true);
+                    bool_btn[1] = true;
                 }
                 else {
-                    signup_btn.setEnabled(false);
+                    bool_btn[1] = false;
                 }
             }
             @Override
             public void afterTextChanged(Editable editable) {
                 if(pw_ed.length() > 0){
-                    signup_btn.setEnabled(true);
+                    bool_btn[1] = true;
                 }
                 else {
-                    signup_btn.setEnabled(false);
+                    bool_btn[1] = false;
                 }
             }
         });
@@ -172,31 +177,37 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(name_ed.length() > 0){
-                    signup_btn.setEnabled(true);
+                    bool_btn[2] = true;
                 }
                 else{
-                    signup_btn.setEnabled(false);
+                    bool_btn[2] = false;
                 }
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(name_ed.length() > 0){
-                    signup_btn.setEnabled(true);
+                    bool_btn[2] = true;
                 }
                 else{
-                    signup_btn.setEnabled(false);
+                    bool_btn[2] = false;
                 }
             }
             @Override
             public void afterTextChanged(Editable editable) {
                 if(name_ed.length() > 0){
-                    signup_btn.setEnabled(true);
+                    bool_btn[2] = true;
                 }
                 else{
-                    signup_btn.setEnabled(false);
+                    bool_btn[2] = false;
                 }
             }
         });
+        if(bool_btn[0] == true){
+            signup_btn.setEnabled(true);
+        }
+        else{
+            signup_btn.setEnabled(false);
+        }
 
     }
 
