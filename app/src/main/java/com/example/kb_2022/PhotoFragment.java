@@ -181,6 +181,7 @@ public class PhotoFragment extends Fragment {
             }
         });
     }
+    //asd
     private interface postInterface{
         @Multipart
         @POST("upload.php")
