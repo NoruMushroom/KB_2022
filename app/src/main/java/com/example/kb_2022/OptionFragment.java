@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class OptionFragment extends Fragment {
     private Button Change_PW;
     private Button Change_Name;
     private Button Sign_out;
+    private ImageView User_image;
     private LinearLayout PW_View;
     private LinearLayout Photo_View;
     private LinearLayout Name_View;
@@ -96,12 +98,16 @@ public class OptionFragment extends Fragment {
         Change_PW = Option_View.findViewById(R.id.option_change_pw);
         Change_Name = Option_View.findViewById(R.id.option_change_name);
         Sign_out = Option_View.findViewById(R.id.option_sign_out);
+        User_image = Option_View.findViewById(R.id.User_photo_option);
         mList = new ArrayList<>();
         addItem(R.drawable.chu,"츄");
         addItem(R.drawable.lee,"아이유");
         addItem(R.drawable.han,"한효주");
         addItem(R.drawable.suzi,"수지");
         Change_Photo.setOnClickListener(new View.OnClickListener() {
+            Photo_Type ex;
+            int Picture_id = -1;
+            String Photo_name;
             @Override
             public void onClick(View v) {
                 Photo_View = (LinearLayout) View.inflate(getActivity(),R.layout.change_photo,null);
@@ -111,12 +117,19 @@ public class OptionFragment extends Fragment {
                 RecyclerView recyclerView = Photo_View.findViewById(R.id.photo_view);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),recyclerView.HORIZONTAL,false));
                 Photo_Adapter adapter = new Photo_Adapter(mList);
+                adapter.setOnItemClickListener(new Photo_Adapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int pos) {
+                        Picture_id = mList.get(pos).get_Photo_Path();
+                    }//사진의 주소를 받아온다.
+                });
                 recyclerView.setAdapter(adapter);
                 Dialog.setPositiveButton("변경", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                    }
+                            Toast.makeText(getContext(),String.valueOf(Picture_id),Toast.LENGTH_SHORT).show();
+                            User_image.setImageResource(Picture_id);
+                    }//출력하기
                 });
                 Dialog.setNegativeButton("취소", null);
                 Dialog.show();
