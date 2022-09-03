@@ -128,7 +128,9 @@ public class OptionFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(getContext(),String.valueOf(Picture_id),Toast.LENGTH_SHORT).show();
-                            User_image.setImageResource(Picture_id);
+                            if(Picture_id >= 0) {
+                                User_image.setImageResource(Picture_id);
+                            }
                     }//출력하기
                 });
                 Dialog.setNegativeButton("취소", null);
