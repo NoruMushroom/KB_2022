@@ -94,7 +94,7 @@
                 android:gravity="center"
                 android:text="비밀번호 변경"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="24dp" />
 
             <Button
                 android:drawableTop="@drawable/change_logout"
@@ -108,7 +108,7 @@
                 android:layout_margin="10dp"
                 android:text="로그아웃"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="25dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="25dp" />
             <Button
                 android:id="@+id/option_sign_out"
                 android:drawableTop="@drawable/change_out"
@@ -139,7 +139,7 @@
                 android:layout_weight="1"
                 android:text="회원 탈퇴"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="25dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
