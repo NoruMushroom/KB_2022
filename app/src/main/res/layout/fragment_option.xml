@@ -5,80 +5,88 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".OptionFragment"
-    android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="5">
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/User_info_option"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/round_item" />
-        <TextView
-            android:id="@+id/User_name_option"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/User_info_option"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:text="이름 : "
-            android:textColor="@color/black"
-            android:textSize="17dp" />
-        <TextView
-            android:id="@+id/User_gender_option"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/User_name_option"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="20dp"
-            android:text="성별 : "
-            android:textColor="@color/black"
-            android:textSize="17dp" />
-        <TextView
-            android:id="@+id/User_id_option"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/User_gender_option"
-            android:layout_alignBottom="@+id/User_info_option"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="아이디 : "
-            android:textColor="@color/black"
-            android:textSize="17dp" />
-        <ImageView
-            android:id="@+id/User_photo_option"
-            android:layout_width="120dp"
-            android:layout_height="140dp"
-            android:layout_alignStart="@+id/User_info_option"
-            android:layout_alignTop="@+id/User_info_option"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/chu" />
-    </RelativeLayout>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/User_info_option"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_item" />
+            <TextView
+                android:id="@+id/User_name_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/User_info_option"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:text="이름 : "
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+            <TextView
+                android:id="@+id/User_gender_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/User_name_option"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="20dp"
+                android:text="성별 : "
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+            <TextView
+                android:id="@+id/User_id_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/User_gender_option"
+                android:layout_alignBottom="@+id/User_info_option"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="아이디 : "
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+            <ImageView
+                android:id="@+id/User_photo_option"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:layout_alignStart="@+id/User_info_option"
+                android:layout_alignTop="@+id/User_info_option"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/chu" />
+        </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_weight="3"
         android:weightSum="2">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:weightSum="2">
@@ -94,11 +102,11 @@
                 android:gravity="center"
                 android:text="비밀번호 변경"
                 android:textColor="@color/black"
-                android:textSize="24dp" />
+                android:textSize="15dp" />
 
             <Button
                 android:drawableTop="@drawable/change_logout"
-                android:id="@+id/option_change_name"
+                android:id="@+id/option_logout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/option_change_pw"
@@ -108,11 +116,11 @@
                 android:layout_margin="10dp"
                 android:text="로그아웃"
                 android:textColor="@color/black"
-                android:textSize="25dp" />
+                android:textSize="15dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:weightSum="2">
@@ -126,7 +134,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-                android:textSize="25dp" />
+                android:textSize="15dp" />
             <Button
                 android:id="@+id/option_sign_out"
                 android:drawableTop="@drawable/change_out"
@@ -139,7 +147,7 @@
                 android:layout_weight="1"
                 android:text="회원 탈퇴"
                 android:textColor="@color/black"
-                android:textSize="25dp" />
+                android:textSize="15dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

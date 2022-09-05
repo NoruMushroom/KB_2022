@@ -48,13 +48,13 @@ public class OptionFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private Button Change_Photo;
     private Button Change_PW;
-    private Button Change_Name;
+    private Button Logout;
     private Button Sign_out;
     private String userID;
     private ImageView User_image;
     private LinearLayout PW_View;
     private LinearLayout Photo_View;
-    private LinearLayout Name_View;
+    private LinearLayout Logout_View;
     private LinearLayout Member_View;
     private ArrayList<Photo_Type> mList;
     private EditText Before_PW;
@@ -116,7 +116,7 @@ public class OptionFragment extends Fragment {
         View Option_View = inflater.inflate(R.layout.fragment_option, container, false);
         Change_Photo = Option_View.findViewById(R.id.option_change_photo);
         Change_PW = Option_View.findViewById(R.id.option_change_pw);
-        Change_Name = Option_View.findViewById(R.id.option_change_name);
+        Logout = Option_View.findViewById(R.id.option_change_name);
         Sign_out = Option_View.findViewById(R.id.option_sign_out);
         User_image = Option_View.findViewById(R.id.User_photo_option);
         mList = new ArrayList<>();
@@ -125,9 +125,7 @@ public class OptionFragment extends Fragment {
         addItem(R.drawable.han,"한효주");
         addItem(R.drawable.suzi,"수지");
         Change_Photo.setOnClickListener(new View.OnClickListener() {
-            Photo_Type ex;
             int Picture_id = -1;
-            String Photo_name;
             @Override
             public void onClick(View v) {
                 Photo_View = (LinearLayout) View.inflate(getActivity(),R.layout.change_photo,null);
@@ -189,24 +187,22 @@ public class OptionFragment extends Fragment {
                 Dialog.show();
             }
         });
-        Change_Name.setOnClickListener(new View.OnClickListener() {
+        /*Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Name_View = (LinearLayout) View.inflate(getActivity(),R.layout.change_name,null);
+                Logout_View = (LinearLayout) View.inflate(getActivity(),R.layout.,null);
                 AlertDialog.Builder Dialog = new AlertDialog.Builder(getActivity());
-                Dialog.setTitle("이름 변경");
-                Dialog.setView(Name_View);
+                Dialog.setTitle("로그아웃");
+                Dialog.setView(Logout_View);
                 Dialog.setPositiveButton("변경", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Name_PW = Name_View.findViewById(R.id.Name_PW);
-                        After_Name = Name_View.findViewById(R.id.input_after_Name);
                     }
                 });
                 Dialog.setNegativeButton("취소", null);
                 Dialog.show();
             }
-        });
+        });*/
         Sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
