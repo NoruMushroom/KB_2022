@@ -1,12 +1,14 @@
 package com.example.kb_2022;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +47,10 @@ public class CommentList_Adapter extends BaseAdapter {
         }
         TextView comment_username = convertView.findViewById(R.id.comment_username);
         TextView comment_content = convertView.findViewById(R.id.comment_content);
+        ImageView comment_photo = convertView.findViewById(R.id.comment_photo);
+        GradientDrawable drawable = (GradientDrawable)context.getDrawable(R.drawable.round_image);
+        comment_photo.setBackground(drawable);
+        comment_photo.setClipToOutline(true);
         Comment_Type myItem = getItem(position);
         comment_content.setText(myItem.getContent());
         comment_username.setText("작성자 : " + myItem.getWriter());

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
@@ -9,22 +8,23 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="120dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/round_item">
 
+
         <TextView
             android:id="@+id/Title"
-            android:layout_width="380dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/Community_Photo"
             android:gravity="left"
             android:textSize="20sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginEnd="20dp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/Like"
@@ -32,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Writer"
             android:layout_alignEnd="@+id/Title"
-            android:layout_marginEnd="20dp"
             android:drawableLeft="@drawable/ic_baseline_thumb_up_white"
             android:textSize="15sp"
             android:textStyle="normal"
@@ -44,8 +43,9 @@
             android:id="@+id/Number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Title"
-            android:layout_alignStart="@+id/Title"
+            android:layout_below="@+id/Like"
+            android:layout_alignEnd="@+id/Title"
+
             android:drawableLeft="@drawable/ic_baseline_format_list_numbered_24"
             android:textSize="15sp"
             android:textStyle="normal"
@@ -58,13 +58,23 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Title"
             android:layout_alignEnd="@+id/Title"
-            android:layout_marginEnd="20dp"
             android:drawableLeft="@drawable/ic_baseline_create_24_white"
             android:gravity="center"
             android:textSize="15sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+        <ImageView
+            android:id="@+id/Community_Photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/han" />
 
     </RelativeLayout>
 

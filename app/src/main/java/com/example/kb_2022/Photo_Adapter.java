@@ -1,6 +1,7 @@
 package com.example.kb_2022;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,9 @@ public class Photo_Adapter extends RecyclerView.Adapter<Photo_Adapter.ViewHolder
             super(itemView);
             img_item = (ImageView) itemView.findViewById(R.id.show_photo);
             img_name = (TextView) itemView.findViewById(R.id.photo_name);
+            GradientDrawable drawable = (GradientDrawable)itemView.getContext().getDrawable(R.drawable.round_image);
+            img_item.setBackground(drawable);
+            img_item.setClipToOutline(true);
             img_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -63,7 +67,6 @@ public class Photo_Adapter extends RecyclerView.Adapter<Photo_Adapter.ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         View view = inflater.inflate(R.layout.change_photo_item, parent, false);
         Photo_Adapter.ViewHolder vh = new Photo_Adapter.ViewHolder(view);
         return vh;

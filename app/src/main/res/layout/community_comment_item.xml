@@ -9,22 +9,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/round_wiget">
 
         <TextView
             android:id="@+id/comment_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/comment_photo"
             android:gravity="left"
             android:textColor="#FF333333"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/comment_content"
@@ -36,8 +34,18 @@
             android:gravity="left"
             android:textColor="#FF333333"
             android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comment_username" />
+
+        <ImageView
+            android:id="@+id/comment_photo"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/han" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -1,12 +1,16 @@
 package com.example.kb_2022;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +51,10 @@ public class CommunityList_Adapter extends BaseAdapter {
         TextView Like = convertView.findViewById(R.id.Like);
         TextView Number = convertView.findViewById(R.id.Number);
         TextView Writer = convertView.findViewById(R.id.Writer);
+        ImageView Photo = convertView.findViewById(R.id.Community_Photo);
+        GradientDrawable drawable = (GradientDrawable) context.getDrawable(R.drawable.round_image);
+        Photo.setBackground(drawable);
+        Photo.setClipToOutline(true);
         Community_Type myItem = getItem(position);
         Title.setText(myItem.getTitle());
         Like.setText(" "+myItem.getLike());

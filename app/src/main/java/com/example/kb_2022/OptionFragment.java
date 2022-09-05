@@ -3,6 +3,7 @@ package com.example.kb_2022;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -47,10 +48,10 @@ public class OptionFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private Button Change_Photo;
-    private Button Change_PW;
-    private Button Logout;
-    private Button Sign_out;
+    private TextView Change_Photo;
+    private TextView Change_PW;
+    private TextView Logout;
+    private TextView Sign_out;
     private String userID;
     private ImageView User_image;
     private LinearLayout PW_View;
@@ -60,8 +61,6 @@ public class OptionFragment extends Fragment {
     private ArrayList<Photo_Type> mList;
     private EditText Before_PW;
     private EditText After_PW;
-    private EditText Name_PW;
-    private EditText After_Name;
     private EditText ID;
     private EditText PW;
 
@@ -120,6 +119,9 @@ public class OptionFragment extends Fragment {
         Logout = Option_View.findViewById(R.id.option_logout);
         Sign_out = Option_View.findViewById(R.id.option_sign_out);
         User_image = Option_View.findViewById(R.id.User_photo_option);
+        GradientDrawable drawable = (GradientDrawable)getContext().getDrawable(R.drawable.round_image);
+        User_image.setBackground(drawable);
+        User_image.setClipToOutline(true);
         mList = new ArrayList<>();
         addItem(R.drawable.chu,"츄");
         addItem(R.drawable.lee,"아이유");
@@ -139,7 +141,6 @@ public class OptionFragment extends Fragment {
                 adapter.setOnItemClickListener(new Photo_Adapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        Picture_id = mList.get(pos).get_Photo_Path();
                     }//사진의 주소를 받아온다.
                 });
                 recyclerView.setAdapter(adapter);
@@ -148,9 +149,9 @@ public class OptionFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(getContext(),String.valueOf(Picture_id),Toast.LENGTH_SHORT).show();
                             if(Picture_id >= 0) {
-                                User_image.setImageResource(Picture_id);
-                            }
-                    }//출력하기
+
+                                }
+                    } //출력하기
                 });
                 Dialog.setNegativeButton("취소", null);
                 Dialog.show();

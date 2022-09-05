@@ -18,6 +18,7 @@
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/change_password.xml" value="0.237" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/change_photo.xml" value="0.237" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/change_photo2.xml" value="0.237" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/change_photo_photo.xml" value="0.2295" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.1495" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.2385" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.2295" />
@@ -41,7 +42,9 @@
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/rectangle_imageview.xml" value="0.2375" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/round.xml" value="0.2295" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/round_day.xml" value="0.224" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/round_image.xml" value="0.237" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/round_item.xml" value="0.136" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/round_photo_text.xml" value="0.2295" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/round_wiget.xml" value="0.136" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/selector_bottom_navigation_menu_color.xml" value="0.24" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable/transparent_calender_element.xml" value="0.224" />
@@ -62,7 +65,7 @@
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_calendar.xml" value="0.5" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_community.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_home.xml" value="0.2626865671641791" />
-        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_option.xml" value="0.1875" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_option.xml" value="0.22" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_photo.xml" value="0.25815217391304346" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/home_item.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/home_listview_item.xml" value="0.36614583333333334" />

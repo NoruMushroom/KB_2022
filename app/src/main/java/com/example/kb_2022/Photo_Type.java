@@ -4,9 +4,7 @@ public class Photo_Type {
     private int Path;
     private String Name;
 
-    public int get_Photo_Path() {
-        return Path;
-    }
+    public int get_Photo_Path() {return Path;}
 
     public String get_Photo_Name() {
         return Name;
