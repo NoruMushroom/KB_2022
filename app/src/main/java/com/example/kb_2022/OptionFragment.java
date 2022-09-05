@@ -2,6 +2,7 @@ package com.example.kb_2022;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -116,7 +117,7 @@ public class OptionFragment extends Fragment {
         View Option_View = inflater.inflate(R.layout.fragment_option, container, false);
         Change_Photo = Option_View.findViewById(R.id.option_change_photo);
         Change_PW = Option_View.findViewById(R.id.option_change_pw);
-        Logout = Option_View.findViewById(R.id.option_change_name);
+        Logout = Option_View.findViewById(R.id.option_logout);
         Sign_out = Option_View.findViewById(R.id.option_sign_out);
         User_image = Option_View.findViewById(R.id.User_photo_option);
         mList = new ArrayList<>();
@@ -187,22 +188,25 @@ public class OptionFragment extends Fragment {
                 Dialog.show();
             }
         });
-        /*Logout.setOnClickListener(new View.OnClickListener() {
+        Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Logout_View = (LinearLayout) View.inflate(getActivity(),R.layout.,null);
+                Logout_View = (LinearLayout) View.inflate(getActivity(),R.layout.logout,null);
                 AlertDialog.Builder Dialog = new AlertDialog.Builder(getActivity());
                 Dialog.setTitle("로그아웃");
                 Dialog.setView(Logout_View);
-                Dialog.setPositiveButton("변경", new DialogInterface.OnClickListener() {
+                Dialog.setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getActivity(), LoginActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
                     }
                 });
                 Dialog.setNegativeButton("취소", null);
                 Dialog.show();
             }
-        });*/
+        });
         Sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
