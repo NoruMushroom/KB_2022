@@ -36,6 +36,7 @@ public class OptionFragment extends Fragment {
     private Button Change_PW;
     private Button Change_Name;
     private Button Sign_out;
+    private String userID;
     private ImageView User_image;
     private LinearLayout PW_View;
     private LinearLayout Photo_View;
@@ -93,6 +94,11 @@ public class OptionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            bundle = getArguments();
+            userID = bundle.getString("아이디");
+        }
         View Option_View = inflater.inflate(R.layout.fragment_option, container, false);
         Change_Photo = Option_View.findViewById(R.id.option_change_photo);
         Change_PW = Option_View.findViewById(R.id.option_change_pw);

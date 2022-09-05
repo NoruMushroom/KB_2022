@@ -61,6 +61,7 @@ public class PhotoFragment extends Fragment {
     private Bitmap Rotate_Bitmap;
     private boolean Hide = false;
     private Context thiscontext;
+    private String userID;
 
     public PhotoFragment() {
         // Required empty public constructor
@@ -95,6 +96,11 @@ public class PhotoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            bundle = getArguments();
+            userID = bundle.getString("아이디");
+        }
         View Photo_View = inflater.inflate(R.layout.fragment_photo, container, false);
         Take_Photo = Photo_View.findViewById(R.id.Take);
         Analyze_Photo = Photo_View.findViewById(R.id.Analyze);

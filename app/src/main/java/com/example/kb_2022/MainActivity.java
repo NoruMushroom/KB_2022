@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Calender).commitAllowingStateLoss();
                         return true;
                     case R.id.photo:
+                        Bundle Photo_bundle = new Bundle();
+                        Photo_bundle.putString("아이디", userID);
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Photo).commitAllowingStateLoss();
                         return true;
                     case R.id.community:
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Community).commitAllowingStateLoss();
                         return true;
                     case R.id.option:
+                        Bundle Opt_bundle = new Bundle();
+                        Opt_bundle.putString("아이디", userID);
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Option).commitAllowingStateLoss();
                         return true;
                 }
