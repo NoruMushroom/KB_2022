@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.option:
                         Bundle Opt_bundle = new Bundle();
                         Opt_bundle.putString("아이디", userID);
+                        Option.setArguments(Opt_bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Option).commitAllowingStateLoss();
                         return true;
                 }

@@ -19,7 +19,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Converter;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -153,9 +167,22 @@ public class OptionFragment extends Fragment {
                 Dialog.setPositiveButton("변경", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //비밀번호 변경
                         Before_PW = PW_View.findViewById(R.id.input_before_PW);
                         After_PW = PW_View.findViewById(R.id.input_after_PW);
+                        AndClient.pwchangeInterface pwchangeInterface = AndClient.requestServer.getClient().create(AndClient.pwchangeInterface.class);
+                        Call<AndClient.pwchangeResponse> pwcall = pwchangeInterface.pwchangePost(userID, Before_PW.getText().toString(), After_PW.getText().toString());
+                        pwcall.enqueue(new Callback<AndClient.pwchangeResponse>() {
+                            @Override
+                            public void onResponse(Call<AndClient.pwchangeResponse> call, Response<AndClient.pwchangeResponse> response) {
+                                System.out.println(response.body().pwRespoense());
+                            }
 
+                            @Override
+                            public void onFailure(Call<AndClient.pwchangeResponse> call, Throwable t) {
+
+                            }
+                        });
                     }
                 });
                 Dialog.setNegativeButton("취소", null);
@@ -192,6 +219,19 @@ public class OptionFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         ID = Member_View.findViewById(R.id.input_Out_ID);
                         PW = Member_View.findViewById(R.id.input_Out_PW);
+                        AndClient.signoutInterface signoutInterface = AndClient.requestServer.getClient().create(AndClient.signoutInterface.class);
+                        Call<AndClient.signoutResponse> signoutcall = signoutInterface.singoutPost(ID.getText().toString(), PW.getText().toString());
+                        signoutcall.enqueue(new Callback<AndClient.signoutResponse>() {
+                            @Override
+                            public void onResponse(Call<AndClient.signoutResponse> call, Response<AndClient.signoutResponse> response) {
+                                System.out.println(response.body().signoutResponse());
+                            }
+
+                            @Override
+                            public void onFailure(Call<AndClient.signoutResponse> call, Throwable t) {
+
+                            }
+                        });
                     }
                 });
                 Dialog.setNegativeButton("취소", null);

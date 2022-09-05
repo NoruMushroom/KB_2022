@@ -187,7 +187,6 @@ public class PhotoFragment extends Fragment {
             }
         });
     }
-    //asd
     private interface postInterface{
         @Multipart
         @POST("upload.php")
@@ -213,7 +212,6 @@ public class PhotoFragment extends Fragment {
                         .addConverterFactory(new NullOnEmptyConverterFactory())
                         .addConverterFactory(GsonConverterFactory.create(gson))
                         .build();
-
             }
             return retrofit;
         }
