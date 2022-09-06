@@ -9,7 +9,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class HomeList_Type {
 
