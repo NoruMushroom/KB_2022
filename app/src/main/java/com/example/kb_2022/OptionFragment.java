@@ -30,11 +30,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -118,6 +124,29 @@ public class OptionFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            File f = BitToFile(Rotate_bitmap, userID);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), f);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("myfile", f.getName(), requestBody);
+            AndClient.sguploadInterface sguploadInterface = AndClient.requestServer.getClient().create(AndClient.sguploadInterface.class);
+            Call<AndClient.sguploadResponse> call = sguploadInterface.sgUpload(body);
+            call.enqueue(new Callback<AndClient.sguploadResponse>() {
+                @Override
+                public void onResponse(Call<AndClient.sguploadResponse> call, Response<AndClient.sguploadResponse> response) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("이미지 변경 성공");
+                    builder.setMessage("\n이미지 변경을 완료하였습니다.");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(Call<AndClient.sguploadResponse> call, Throwable t) {
+
+                }
+            });
         }
     }
 
@@ -229,5 +258,16 @@ public class OptionFragment extends Fragment {
             }
         });
         return Option_View;
+    }
+    private File BitToFile(Bitmap bitmap, String user){
+        File file = new File(getActivity().getCacheDir(), user+".jpeg");
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 }
