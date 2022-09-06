@@ -108,16 +108,9 @@ public class OptionFragment extends Fragment {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
             Bitmap bitmap = null;
-            Bitmap Rotate_Bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImageUri);
-                Matrix matrix = new Matrix();
-                matrix.postRotate(90);
-                Rotate_Bitmap = bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-            } catch (IOException e) {
+            Matrix matrix =
                 e.printStackTrace();
             }
-            User_image.setImageBitmap(Rotate_Bitmap);
         }
     }
 
