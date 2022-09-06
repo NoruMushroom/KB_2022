@@ -1,9 +1,12 @@
 package com.example.kb_2022;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -63,6 +66,7 @@ public class OptionFragment extends Fragment {
     private EditText After_PW;
     private EditText ID;
     private EditText PW;
+    public static final int REQUEST_CODE = 100;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -104,6 +108,13 @@ public class OptionFragment extends Fragment {
         item.set_Photo_Name(imgName);
         mList.add(item);
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri selectedImageUri = data.getData();
+            User_image.setImageURI(selectedImageUri);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,33 +139,11 @@ public class OptionFragment extends Fragment {
         addItem(R.drawable.han,"한효주");
         addItem(R.drawable.suzi,"수지");
         Change_Photo.setOnClickListener(new View.OnClickListener() {
-            int Picture_id = -1;
             @Override
             public void onClick(View v) {
-                Photo_View = (LinearLayout) View.inflate(getActivity(),R.layout.change_photo,null);
-                AlertDialog.Builder Dialog = new AlertDialog.Builder(getActivity());
-                Dialog.setTitle("프로필 사진 변경");
-                Dialog.setView(Photo_View);
-                RecyclerView recyclerView = Photo_View.findViewById(R.id.photo_view);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),recyclerView.HORIZONTAL,false));
-                Photo_Adapter adapter = new Photo_Adapter(mList);
-                adapter.setOnItemClickListener(new Photo_Adapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int pos) {
-                    }//사진의 주소를 받아온다.
-                });
-                recyclerView.setAdapter(adapter);
-                Dialog.setPositiveButton("변경", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getContext(),String.valueOf(Picture_id),Toast.LENGTH_SHORT).show();
-                            if(Picture_id >= 0) {
-
-                                }
-                    } //출력하기
-                });
-                Dialog.setNegativeButton("취소", null);
-                Dialog.show();
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
         Change_PW.setOnClickListener(new View.OnClickListener() {
