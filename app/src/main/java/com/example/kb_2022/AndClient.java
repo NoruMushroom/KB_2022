@@ -79,7 +79,7 @@ public class AndClient {
     }
     interface sguploadInterface{
         @Multipart
-        @POST("upload.php")
+        @POST("signupload.php")
         Call<sguploadResponse> sgUpload(@Part MultipartBody.Part image);
     }
     
