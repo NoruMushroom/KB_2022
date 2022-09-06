@@ -5,6 +5,8 @@ import static android.app.Activity.RESULT_OK;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +61,6 @@ public class OptionFragment extends Fragment {
     private String userID;
     private ImageView User_image;
     private LinearLayout PW_View;
-    private LinearLayout Photo_View;
     private LinearLayout Logout_View;
     private LinearLayout Member_View;
     private EditText Before_PW;
@@ -105,7 +107,17 @@ public class OptionFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
-            User_image.setImageURI(selectedImageUri);
+            Bitmap bitmap = null;
+            Bitmap Rotate_Bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImageUri);
+                Matrix matrix = new Matrix();
+                matrix.postRotate(90);
+                Rotate_Bitmap = bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            User_image.setImageBitmap(Rotate_Bitmap);
         }
     }
 
