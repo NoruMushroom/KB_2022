@@ -4,9 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -16,10 +14,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -37,11 +33,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import okhttp3.MediaType;
@@ -56,7 +49,9 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText pw_ed;
     private EditText name_ed;
     private String gender;
-    private static String imgresult;
+    private Button signup_btn;
+    private Spinner gender_sp;
+    private String imgresult;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +61,8 @@ public class SignUpActivity extends AppCompatActivity {
         id_ed = findViewById(R.id.ID);
         pw_ed = findViewById(R.id.PW);
         name_ed = findViewById(R.id.Name);
-        Button signup_btn = (Button) findViewById(R.id.Signup_request);
-        Spinner gender_sp = findViewById(R.id.Gender);
-
+        signup_btn = (Button) findViewById(R.id.Signup_request);
+        gender_sp = findViewById(R.id.Gender);
         //성별 스피너
         gender_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -80,7 +74,6 @@ public class SignUpActivity extends AppCompatActivity {
                     gender = "여성";
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -94,8 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String userPW = pw_ed.getText().toString();
                 String userName = name_ed.getText().toString();
                 File sgupfile = BitToUri(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.default_profile), userID);
-
-                if(userID == "" || userPW == "" || userName == ""){
+                if(userID.equals("") || userPW.equals("") || userName.equals("")){
                     Toast.makeText(getApplicationContext(),"회원가입 정보를 모두 입력해주세요.",Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -118,7 +110,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<AndClient.sguploadResponse> call, Throwable t) {
-
                             }
                         });
                         if(result.equals("true") && imgresult.equals("true")){
@@ -146,14 +137,10 @@ public class SignUpActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-
-
                 }
             }
         });
-
     }
-
     //Task 클래스
     private class GetData extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog;
