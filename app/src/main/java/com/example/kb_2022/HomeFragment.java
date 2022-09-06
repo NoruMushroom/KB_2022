@@ -257,7 +257,6 @@ public class HomeFragment extends Fragment {
 
         for(int i = 0; i < 28; i++){
             if(i > 20){
-                System.out.println("Daily 값: " + chart_Data.get(i + Start_point));
                 if(chart_Data.get(i + Start_point) == "x"){
                     Daily_chart.add(new BarEntry(Daily_chart.size() + 1, 0));
                 }
@@ -267,15 +266,12 @@ public class HomeFragment extends Fragment {
             }//일간데이터 삽입
             Week_Data.add(chart_Data.get(i + Start_point));
             if(Week_Data.size() % 7 == 0){
-                System.out.println("값: " +Week_Data);
                 for(int j = 0; j < 7; j++){
                     if(Week_Data.get(j) != "x") {
-                        System.out.println("값: " +Week_Data.get(j));
                         value += Integer.parseInt(Week_Data.get(j));
                         count++;
                     }
                 }
-                System.out.println("평균: "+ (value / count) + "갯수: " + count);
                 Weekly_chart.add(new BarEntry(Weekly_chart.size()+1,value / count));
                 Week_Data.clear();
                 count = 0;

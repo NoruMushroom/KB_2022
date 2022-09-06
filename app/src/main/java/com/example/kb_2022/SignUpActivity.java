@@ -4,8 +4,11 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -27,6 +31,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -37,11 +44,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class SignUpActivity extends AppCompatActivity {
     private EditText id_ed;
     private EditText pw_ed;
     private EditText name_ed;
     private String gender;
+    private static String imgresult;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +68,6 @@ public class SignUpActivity extends AppCompatActivity {
         name_ed = findViewById(R.id.Name);
         Button signup_btn = (Button) findViewById(R.id.Signup_request);
         Spinner gender_sp = findViewById(R.id.Gender);
-        boolean[] bool_btn = new boolean[3];
-        Arrays.fill(bool_btn, false);
-        signup_btn.setEnabled(false);
 
         //성별 스피너
         gender_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -81,133 +93,64 @@ public class SignUpActivity extends AppCompatActivity {
                 String userID = id_ed.getText().toString();
                 String userPW = pw_ed.getText().toString();
                 String userName = name_ed.getText().toString();
+                File sgupfile = BitToUri(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.default_profile), userID);
 
-                GetData task = new GetData();
-                try {
-                    String result = task.execute("signup", userID, userPW, userName, gender).get();
-                    JSONObject j_result = new JSONObject(result);
-                    result = j_result.getString("success");//성공 여부
-                    AlertDialog.Builder bulider = new AlertDialog.Builder(SignUpActivity.this);
-                    if(result.equals("true")){
-                        bulider.setTitle("회원가입 성공");
-                        bulider.setMessage("\n회원가입을 완료하였습니다.\n");
-                        bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                if(userID == "" || userPW == "" || userName == ""){
+                    Toast.makeText(getApplicationContext(),"회원가입 정보를 모두 입력해주세요.",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    GetData task = new GetData();
+                    try {
+                        String result = task.execute("signup", userID, userPW, userName, gender).get();
+
+                        final JSONObject[] j_result = {new JSONObject(result)};
+                        result = j_result[0].getString("success");//성공 여부
+                        AlertDialog.Builder bulider = new AlertDialog.Builder(SignUpActivity.this);
+                        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), sgupfile);
+                        MultipartBody.Part body = MultipartBody.Part.createFormData("myfile", sgupfile.getName(), requestBody);
+                        AndClient.sguploadInterface sguploadInterface = AndClient.requestServer.getClient().create(AndClient.sguploadInterface.class);
+                        Call<AndClient.sguploadResponse> call = sguploadInterface.sgUpload(body);
+                        call.enqueue(new Callback<AndClient.sguploadResponse>() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();//인텐트 종료
-                                overridePendingTransition(0, 0);//인텐트 효과 없애기
+                            public void onResponse(Call<AndClient.sguploadResponse> call, Response<AndClient.sguploadResponse> response) {
+                                imgresult = response.body().sguploadResponse();
+                            }
+
+                            @Override
+                            public void onFailure(Call<AndClient.sguploadResponse> call, Throwable t) {
+
                             }
                         });
+                        if(result.equals("true") && imgresult.equals("true")){
+                            bulider.setTitle("회원가입 성공");
+                            bulider.setMessage("\n회원가입을 완료하였습니다.\n");
+                            bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    finish();//인텐트 종료
+                                    overridePendingTransition(0, 0);//인텐트 효과 없애기
+                                }
+                            });
+                        }
+                        else{
+                            bulider.setTitle("회원가입 실패");
+                            bulider.setMessage("\n중복된 사용자가 있습니다.\n");
+                            bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                }
+                            });
+                        }
+                        bulider.show();
+                    } catch (ExecutionException | JSONException | InterruptedException e) {
+                        e.printStackTrace();
                     }
-                    else{
-                        bulider.setTitle("회원가입 실패");
-                        bulider.setMessage("\n중복된 사용자가 있습니다.\n");
-                        bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                            }
-                        });
-                    }
-                    bulider.show();
-                } catch (ExecutionException | JSONException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
-        id_ed.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(id_ed.length()>0){
-                    bool_btn[0] = true;
-                }
-                else{
-                    bool_btn[0] = false;
-                }
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(id_ed.length()>0){
-                    bool_btn[0] = true;
-                }
-                else{
-                    bool_btn[0] = false;
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(id_ed.length()>0){
-                    bool_btn[0] = true;
-                }
-                else{
-                    bool_btn[0] = false;
+
+
                 }
             }
         });
-        pw_ed.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(pw_ed.length() > 0){
-                    bool_btn[1] = true;
-                }
-                else {
-                    bool_btn[1] = false;
-                }
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(pw_ed.length() > 0){
-                    bool_btn[1] = true;
-                }
-                else {
-                    bool_btn[1] = false;
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(pw_ed.length() > 0){
-                    bool_btn[1] = true;
-                }
-                else {
-                    bool_btn[1] = false;
-                }
-            }
-        });
-        name_ed.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(name_ed.length() > 0){
-                    bool_btn[2] = true;
-                }
-                else{
-                    bool_btn[2] = false;
-                }
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(name_ed.length() > 0){
-                    bool_btn[2] = true;
-                }
-                else{
-                    bool_btn[2] = false;
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(name_ed.length() > 0){
-                    bool_btn[2] = true;
-                }
-                else{
-                    bool_btn[2] = false;
-                }
-            }
-        });
-        if(bool_btn[0] == true){
-            signup_btn.setEnabled(true);
-        }
-        else{
-            signup_btn.setEnabled(false);
-        }
 
     }
 
@@ -275,5 +218,16 @@ public class SignUpActivity extends AppCompatActivity {
                 return null;
             }
         }
+    }
+    private File BitToUri(Bitmap bitmap, String user){
+        File file = new File(getApplicationContext().getCacheDir(), user + ".jpeg");
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 }

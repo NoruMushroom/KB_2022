@@ -66,7 +66,6 @@ public class HomeList_Adapter extends BaseAdapter {
                 //Date date = calendar.getTime();
                 days[6 - i] = format.format(calendar.getTime());
             }
-            System.out.println(days);
             configureChartAppearance(Trash_Bar,days);
         }
         if(myItem.getName().equals("주간")){

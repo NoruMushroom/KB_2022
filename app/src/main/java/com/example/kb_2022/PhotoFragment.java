@@ -129,7 +129,7 @@ public class PhotoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 result.setText("사진을 분석중입니다");
-                File upfile = BitToUri(Rotate_Bitmap);
+                File upfile = BitToUri(Rotate_Bitmap, userID);
                 System.out.println("파일 : "+upfile);
                 RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), upfile);
                 MultipartBody.Part body = MultipartBody.Part.createFormData("myfile", upfile.getName(), requestBody);
@@ -138,17 +138,16 @@ public class PhotoFragment extends Fragment {
                 call.enqueue(new Callback<ServerResponse>() {
                     @Override
                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                        System.out.println("응답코드 : "+response.code()+"\n 데이터 : " + response.body());
+                        result.setText("사진 업로드에 성공했습니다.");
                     }
 
                     @Override
                     public void onFailure(Call<ServerResponse> call, Throwable t) {
-                        System.out.println("개같이 실패");
+                        result.setText("사진 업로드에 실패했습니다.");
                     }
                 });
                 analyze analyzeIF = andClient.getClient().create(PhotoFragment.analyze.class);
-                Call<AnalyzeResponse> call1 = analyzeIF.getResult("123");
-                System.out.println("실행");
+                Call<AnalyzeResponse> call1 = analyzeIF.getResult(userID);
                 call1.enqueue(new Callback<AnalyzeResponse>() {
                     @Override
                     public void onResponse(Call<AnalyzeResponse> call, Response<AnalyzeResponse> response) {
@@ -259,8 +258,8 @@ public class PhotoFragment extends Fragment {
             }
         }
     }
-    private File BitToUri(Bitmap bitmap){
-        File file = new File(thiscontext.getCacheDir(), "123.jpeg");
+    private File BitToUri(Bitmap bitmap, String user){
+        File file = new File(thiscontext.getCacheDir(), user+".jpeg");
         FileOutputStream out = null;
         try {
              out = new FileOutputStream(file);

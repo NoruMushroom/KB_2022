@@ -21,6 +21,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 public class AndClient {
+    //서버 연결 객체
     static class requestServer{
         private static final String Server_URL = "http://123.215.162.92/KBServer/";
         private static Retrofit retrofit;
@@ -39,6 +40,7 @@ public class AndClient {
             return retrofit;
         }
     }
+    //null 예외처리 객체
     static class NullOnEmptyConverterFactory extends Converter.Factory {
         @Override
         public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit)
@@ -56,6 +58,8 @@ public class AndClient {
             };
         }
     }
+    
+    //서버 연결 인터페이스
     interface pwchangeInterface{
         @FormUrlEncoded
         @POST("pwChange.php")
@@ -73,7 +77,14 @@ public class AndClient {
                 @Field("userPW") String userpw
         );
     }
-
+    interface sguploadInterface{
+        @Multipart
+        @POST("upload.php")
+        Call<sguploadResponse> sgUpload(@Part MultipartBody.Part image);
+    }
+    
+    
+    //response 받는 객체
     class pwchangeResponse{
         @SerializedName("success")
         boolean success;
@@ -87,6 +98,20 @@ public class AndClient {
         boolean success;
         public boolean signoutResponse(){
             return success;
+        }
+    }
+    class sguploadResponse{
+        @SerializedName("success")
+        boolean success;
+        @SerializedName("error")
+        String error;
+        public String sguploadResponse(){
+            if (success = false){
+                return error;
+            }
+            else{
+                return "true";
+            }
         }
     }
 
