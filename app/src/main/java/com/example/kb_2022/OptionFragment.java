@@ -132,6 +132,7 @@ public class OptionFragment extends Fragment {
             call.enqueue(new Callback<AndClient.sguploadResponse>() {
                 @Override
                 public void onResponse(Call<AndClient.sguploadResponse> call, Response<AndClient.sguploadResponse> response) {
+                    System.out.println("성공 여부 : " + response.body().sguploadResponse());
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("이미지 변경 성공");
                     builder.setMessage("\n이미지 변경을 완료하였습니다.");
