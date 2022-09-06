@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Hello World"
+        android:text="쓰레기의 종류가 궁금하시면 카메라 이미지를 눌러주세요!"
         android:textColor="@color/black" />
 
     <ImageButton
@@ -26,7 +26,7 @@
         android:layout_marginBottom="0dp"
         android:layout_marginEnd="10dp"
         android:background="@color/white"
-        android:src="@drawable/ic_baseline_refresh_24_green" />
+        android:src="@drawable/ic_baseline_camera_alt_24_green" />
 
 
 </RelativeLayout>

@@ -61,7 +61,6 @@ public class OptionFragment extends Fragment {
     private LinearLayout Photo_View;
     private LinearLayout Logout_View;
     private LinearLayout Member_View;
-    private ArrayList<Photo_Type> mList;
     private EditText Before_PW;
     private EditText After_PW;
     private EditText ID;
@@ -102,12 +101,6 @@ public class OptionFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    public void addItem(int img_path,String imgName){
-        Photo_Type item = new Photo_Type();
-        item.set_Photo_Path(img_path);
-        item.set_Photo_Name(imgName);
-        mList.add(item);
-    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
@@ -133,11 +126,6 @@ public class OptionFragment extends Fragment {
         GradientDrawable drawable = (GradientDrawable)getContext().getDrawable(R.drawable.round_image);
         User_image.setBackground(drawable);
         User_image.setClipToOutline(true);
-        mList = new ArrayList<>();
-        addItem(R.drawable.chu,"츄");
-        addItem(R.drawable.lee,"아이유");
-        addItem(R.drawable.han,"한효주");
-        addItem(R.drawable.suzi,"수지");
         Change_Photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

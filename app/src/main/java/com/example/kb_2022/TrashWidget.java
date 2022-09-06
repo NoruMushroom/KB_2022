@@ -1,11 +1,17 @@
 package com.example.kb_2022;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * Implementation of App Widget functionality.
@@ -34,8 +40,10 @@ public class TrashWidget extends AppWidgetProvider {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.trash_widget);
-        views.setTextViewText(R.id.appwidget_text, "Hello World2");
         // Instruct the widget manager to update the widget
+        Intent intent = new Intent(context, LoginActivity.class);
+        PendingIntent pe= PendingIntent.getActivity(context, 0, intent, 0);
+        views.setOnClickPendingIntent(R.id.appwidget_btn, pe);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 }

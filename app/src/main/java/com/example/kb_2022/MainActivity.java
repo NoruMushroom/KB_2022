@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -64,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.photo:
                         Bundle Photo_bundle = new Bundle();
                         Photo_bundle.putString("아이디", userID);
-
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,Photo).commitAllowingStateLoss();
                         return true;
                     case R.id.community:
