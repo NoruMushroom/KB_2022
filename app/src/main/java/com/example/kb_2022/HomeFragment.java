@@ -4,19 +4,16 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +21,6 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.data.BarEntry;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,14 +31,11 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Ref;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class HomeFragment extends Fragment {
