@@ -12,7 +12,8 @@
         android:layout_marginTop="25dp"
         android:layout_marginLeft="25dp"
         android:text = "아이디"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:fontFamily="@font/custom_font_family"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +22,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/custom_font_family"/>
     <TextView
         android:id="@+id/Sign_Out_PW"
         android:layout_width="wrap_content"
@@ -29,7 +31,8 @@
         android:layout_gravity="left"
         android:layout_marginLeft="25dp"
         android:text = "비밀번호"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:fontFamily="@font/custom_font_family"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,6 +41,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/custom_font_family"/>
 
 </LinearLayout>

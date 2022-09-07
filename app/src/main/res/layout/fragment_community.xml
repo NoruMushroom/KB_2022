@@ -26,6 +26,7 @@
             android:layout_marginEnd="0dp"
             android:divider="#FFFFFF"
             android:dividerHeight="0px"
-            android:scrollbars="none"></ListView>
+            android:scrollbars="none"
+            android:fontFamily="@font/custom_font_family"></ListView>
 
 </RelativeLayout>

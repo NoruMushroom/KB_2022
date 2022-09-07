@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="쓰레기의 종류가 궁금하시면 카메라 이미지를 눌러주세요!"
+        android:fontFamily="@font/custom_font_family"
         android:textColor="@color/black" />
 
     <ImageButton

@@ -19,7 +19,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:textColor="#FF333333" />
+            android:textColor="#FF333333"
+            android:fontFamily="@font/custom_font_family"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/chart"
@@ -30,7 +31,8 @@
             android:layout_alignEnd="@+id/Trash_option"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:textColor="#FF333333" />
+            android:textColor="#FF333333"
+            android:fontFamily="@font/custom_font_family"/>
 
     </RelativeLayout>
 

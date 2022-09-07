@@ -60,7 +60,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/round_wiget"
             android:gravity="center"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:fontFamily="@font/custom_font_family"/>
         <Button
             android:id="@+id/Take"
             android:layout_width="match_parent"
@@ -68,7 +69,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
-
+            android:fontFamily="@font/custom_font_family"
             android:text="사진 촬영" />
         <Button
             android:id="@+id/Analyze"
@@ -77,6 +78,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/custom_font_family"
             android:text="사진 분석" />
     </LinearLayout>
 </LinearLayout>

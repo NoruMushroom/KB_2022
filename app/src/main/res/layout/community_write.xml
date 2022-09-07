@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/custom_font_family"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/round_wiget"
@@ -38,6 +39,7 @@
             <EditText
                 android:id="@+id/W_content"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/custom_font_family"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/W_pw"
                 android:layout_alignStart="@+id/W_title"
@@ -64,6 +66,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/round_wiget"
                 android:hint="글에 대한 비밀번호를 입력해주세요."
+                android:fontFamily="@font/custom_font_family"
                 android:textColor="#FF333333"
                 android:textSize="17sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +81,7 @@
             android:id="@+id/W_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/custom_font_family"
             android:text="저장하기"
             android:layout_margin="10dp"
             android:layout_weight="1" />

@@ -27,6 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/custom_font_family"
                 android:layout_weight="1"
                 android:text="Button1" />
 
@@ -43,6 +44,7 @@
 
             <TextView
                 android:id="@+id/R_title"
+                android:fontFamily="@font/custom_font_family"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/Community_Comment"
@@ -58,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/Community_Comment"
                 android:layout_marginTop="80dp"
-
+                android:fontFamily="@font/custom_font_family"
                 android:background="@drawable/round_wiget"
                 android:textColor="#FF333333"
                 android:textSize="15sp"
@@ -73,6 +75,7 @@
                 android:layout_alignEnd="@+id/Community_Comment"
                 android:layout_marginTop="130dp"
                 android:background="@drawable/round_wiget"
+                android:fontFamily="@font/custom_font_family"
                 android:textColor="#FF333333"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +103,7 @@
                 android:layout_alignTop="@+id/image_like"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="130dp"
+                android:fontFamily="@font/custom_font_family"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
                 android:layout_toStartOf="@+id/image_unlike"
@@ -135,12 +139,11 @@
                 android:layout_marginEnd="10dp"
                 android:divider="#FFFFFF"
                 android:dividerHeight="0px"
+                android:fontFamily="@font/custom_font_family"
                 android:scrollbars="none"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-            </ListView>
+                app:layout_constraintStart_toStartOf="parent"></ListView>
         </RelativeLayout>
     </ScrollView>
     <LinearLayout
@@ -154,6 +157,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
+            android:fontFamily="@font/custom_font_family"
             android:backgroundTint = "#B4F0B4"
             android:hint = "댓글을 입력해주세요" />
 
@@ -162,6 +166,7 @@
             android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:fontFamily="@font/custom_font_family"
             android:layout_weight="1"
             android:text="완료" />
 

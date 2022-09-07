@@ -10,9 +10,18 @@
         android:layout_gravity="left"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="25dp"
-        android:text = "정말로 로그아웃 하시겠습니까?"
-        android:textColor="@color/black"
-        android:textSize="17sp"
+        android:text = "비밀번호를 입력해주세요."
+        android:textSize="20sp"
+        android:fontFamily="@font/custom_font_family"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PW_D"
+        android:background="@drawable/round_wiget"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/custom_font_family"/>
 
 </LinearLayout>

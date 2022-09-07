@@ -88,6 +88,8 @@ public class OptionFragment extends Fragment {
     private EditText After_PW;
     private EditText ID;
     private EditText PW;
+    private Bitmap bitmap;
+    private Bitmap Rotate_bitmap;
     public static final int REQUEST_CODE = 100;
 
     // TODO: Rename and change types of parameters
@@ -128,41 +130,40 @@ public class OptionFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
-            Bitmap bitmap = null;
-            Bitmap Rotate_bitmap = null;
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImageUri);
                 Rotate_bitmap = bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                User_image.setImageBitmap(Rotate_bitmap);
+                System.out.println("이름:" + userID);
+                File f = BitToFile(bitmap, userID);
+                RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), f);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("myfile", f.getName(), requestBody);
+                AndClient.sguploadInterface sguploadInterface = AndClient.requestServer.getClient().create(AndClient.sguploadInterface.class);
+                Call<AndClient.sguploadResponse> call = sguploadInterface.sgUpload(body);
+                call.enqueue(new Callback<AndClient.sguploadResponse>() {
+                    @Override
+                    public void onResponse(Call<AndClient.sguploadResponse> call, Response<AndClient.sguploadResponse> response) {
+                        System.out.println("성공 여부 : " + response.body());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle("이미지 변경 성공");
+                        builder.setMessage("\n이미지 변경을 완료하였습니다.");
+                        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Call<AndClient.sguploadResponse> call, Throwable t) {
+                        System.out.println("실패실패실패실패");
+                    }
+                });
+                User_image.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            File f = BitToFile(Rotate_bitmap, userID);
-            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), f);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("myfile", f.getName(), requestBody);
-            AndClient.sguploadInterface sguploadInterface = AndClient.requestServer.getClient().create(AndClient.sguploadInterface.class);
-            Call<AndClient.sguploadResponse> call = sguploadInterface.sgUpload(body);
-            call.enqueue(new Callback<AndClient.sguploadResponse>() {
-                @Override
-                public void onResponse(Call<AndClient.sguploadResponse> call, Response<AndClient.sguploadResponse> response) {
-                    System.out.println("성공 여부 : " + response.body().sguploadResponse());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("이미지 변경 성공");
-                    builder.setMessage("\n이미지 변경을 완료하였습니다.");
-                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
-                    });
-                }
-
-                @Override
-                public void onFailure(Call<AndClient.sguploadResponse> call, Throwable t) {
-
-                }
-            });
         }
     }
 
