@@ -50,6 +50,7 @@ public class Community_Read extends AppCompatActivity {
     private Integer postValue;
     private CommentList_Adapter List_item;
     private LinearLayout Comment_Delete_View;
+    private LinearLayout Comment_Send_View;
     private LinearLayout Comment_T;
     private LinearLayout Comment_F;
     private ListView Comment_List;
@@ -194,20 +195,14 @@ public class Community_Read extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Community_Read.this);
-                builder.setTitle("댓글 비밀번호");
-                builder.setMessage("\n비밀번호를 입력해주세요.\n");
-                final EditText PW = new EditText(Community_Read.this);
-                final ConstraintLayout container = new ConstraintLayout(Community_Read.this);
-                final ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.leftMargin = getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
-                params.rightMargin =getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
-                PW.setLayoutParams(params);
-                PW.setBackgroundResource(R.drawable.round_wiget);
-                container.addView(PW);
-                builder.setView(container);
+                Comment_Send_View= (LinearLayout) View.inflate(Community_Read.this,R.layout.delete_any,null);
+                builder.setView(Comment_Send_View);
+                TextView Title = Comment_Send_View.findViewById(R.id.Title_Dialog);
+                Title.setText("비밀번호");
                 builder.setPositiveButton("댓글 등록", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        EditText PW = Comment_Send_View.findViewById(R.id.PW_D);
                         String cpw = PW.getText().toString();
                         String comment = Comment_Content.getText().toString();
                         GetData task = new GetData();
@@ -216,10 +211,15 @@ public class Community_Read extends AppCompatActivity {
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
                             System.out.println(result);
+                            Comment_T = (LinearLayout) View.inflate(Community_Read.this,R.layout.success_any,null);
+                            Comment_F = (LinearLayout) View.inflate(Community_Read.this,R.layout.failed_any,null);
                             AlertDialog.Builder del_bulider = new AlertDialog.Builder(Community_Read.this);
                             if(result.equals("true")){
-                                del_bulider.setTitle("댓글 등록 성공");
-                                del_bulider.setMessage("댓글 등록을 성공하였습니다.");
+                                del_bulider.setView(Comment_T);
+                                TextView Text_T = Comment_T.findViewById(R.id.Title_Dialog_T);
+                                TextView Text_C = Comment_T.findViewById(R.id.Dialog_T);
+                                Text_T.setText("댓글 등록 성공");
+                                Text_C.setText("댓글 등록을 성공하였습니다.");
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -232,8 +232,11 @@ public class Community_Read extends AppCompatActivity {
                                 });
                             }
                             else{
-                                del_bulider.setTitle("댓글 등록 실패");
-                                del_bulider.setMessage("\n댓글 등록에 실패하였습니다.\n");
+                                del_bulider.setView(Comment_F);
+                                TextView Text_T = Comment_F.findViewById(R.id.Title_Dialog_F);
+                                TextView Text_C = Comment_F.findViewById(R.id.Dialog_F);
+                                Text_T.setText("댓글 등록 실패");
+                                Text_C.setText("댓글 등록에 실패하였습니다.");
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
