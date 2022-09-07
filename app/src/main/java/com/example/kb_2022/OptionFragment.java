@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -16,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,12 +33,18 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import okhttp3.MediaType;
@@ -48,6 +57,12 @@ import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Streaming;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -154,6 +169,8 @@ public class OptionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         Bundle bundle = this.getArguments();
         if(bundle != null){
             bundle = getArguments();
@@ -168,6 +185,23 @@ public class OptionFragment extends Fragment {
         GradientDrawable drawable = (GradientDrawable)getContext().getDrawable(R.drawable.round_image);
         User_image.setBackground(drawable);
         User_image.setClipToOutline(true);
+        new Thread(() -> {
+            userImgInterface userimgIF = requestServer.getClient().create(OptionFragment.userImgInterface.class);
+            Call<ResponseBody> call = userimgIF.userImgPost(userID);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    InputStream is = response.body().byteStream();
+                    Bitmap bitmap = BitmapFactory.decodeStream(is);
+                    User_image.setImageBitmap(bitmap);
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        }).start();
         Change_Photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -271,4 +305,29 @@ public class OptionFragment extends Fragment {
         }
         return file;
     }
+    private static class requestServer{
+        private static final String Server_URL = "http://123.215.162.92/";
+        private static Retrofit retrofit;
+
+        private static Retrofit getClient(){
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+            if(retrofit == null){
+                retrofit = new Retrofit.Builder()
+                        .baseUrl(Server_URL)
+                        .addConverterFactory(new AndClient.NullOnEmptyConverterFactory())
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+            }
+            return retrofit;
+        }
+    }
+    private interface userImgInterface{
+        @GET("android/user_img/{userid}/{userid}.jpeg")
+        @Streaming
+        Call<ResponseBody> userImgPost(
+                @Path("userid") String userid);
+    }
+
 }
