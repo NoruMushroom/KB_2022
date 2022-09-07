@@ -5,23 +5,25 @@
     android:orientation="vertical">
 
     <TextView
+        android:id ="@+id/Title_Dialog_T"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="25dp"
-        android:text = "비밀번호를 입력해주세요."
+        android:textColor="#FF333333"
         android:textSize="20sp"
         android:fontFamily="@font/custom_font_family"/>
-    <EditText
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id ="@+id/Dialog_T"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/PW_D"
-        android:background="@drawable/round_wiget"
+        android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="10dp"
+        android:text = "댓글 삭제를 성공했습니다."
+        android:textColor="#FF333333"
+        android:textSize="15sp"
         android:fontFamily="@font/custom_font_family"/>
-
 </LinearLayout>

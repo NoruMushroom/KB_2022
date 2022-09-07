@@ -3,12 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/drawable/round_image.xml" value="0.2505" />
         <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/activity_login.xml" value="0.18211752786220872" />
         <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/activity_main.xml" value="0.24048913043478262" />
         <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/fragment_calendar.xml" value="0.29936594202898553" />
         <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/fragment_home.xml" value="0.33" />
-        <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/fragment_option.xml" value="0.20606884057971014" />
         <entry key="..\:/Users/Lee/Desktop/KB_2022/app/src/main/res/layout/fragment_photo.xml" value="0.37447916666666664" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable-v21/app_widget_background.xml" value="0.367" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/drawable-v21/app_widget_inner_view_background.xml" value="0.367" />
@@ -66,6 +64,8 @@
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/community_read.xml" value="0.22" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/community_write.xml" value="0.25" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/delete_comment.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/delete_community.xml" value="0.23125" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/failed_any.xml" value="0.2265625" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_calendar.xml" value="0.5" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_community.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/fragment_home.xml" value="0.2626865671641791" />
@@ -77,6 +77,7 @@
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/listview_ltem.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/logout.xml" value="0.1" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/sign_out.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/success_any.xml" value="0.1" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/trash_widget.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/layout/write_page.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/kimminku98/AndroidStudioProjects/KB_2022/app/src/main/res/menu/bottom_menu.xml" value="0.2921875" />

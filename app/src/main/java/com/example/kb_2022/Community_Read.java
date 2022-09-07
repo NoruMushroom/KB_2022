@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -48,6 +49,9 @@ public class Community_Read extends AppCompatActivity {
     private String mJsonString;
     private Integer postValue;
     private CommentList_Adapter List_item;
+    private LinearLayout Comment_Delete_View;
+    private LinearLayout Comment_T;
+    private LinearLayout Comment_F;
     private ListView Comment_List;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,31 +103,30 @@ public class Community_Read extends AppCompatActivity {
         Delete_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Community_Read.this);
-                builder.setTitle("글 삭제");
-                builder.setMessage("\n비밀번호를 입력해주세요.\n");
-                final EditText PW = new EditText(Community_Read.this);
-                final ConstraintLayout container = new ConstraintLayout(Community_Read.this);
-                final ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.leftMargin = getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
-                params.rightMargin =getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
-                PW.setLayoutParams(params);
-                PW.setBackgroundResource(R.drawable.round_wiget);
-                container.addView(PW);
-                builder.setView(container);
-                builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                Comment_Delete_View = (LinearLayout) View.inflate(Community_Read.this,R.layout.delete_any,null);
+                AlertDialog.Builder Dialog = new AlertDialog.Builder(Community_Read.this);
+                TextView Text = Comment_Delete_View.findViewById(R.id.Title_Dialog);
+                Text.setText("글 삭제");
+                Dialog.setView(Comment_Delete_View);
+                Dialog.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        EditText PW = Comment_Delete_View.findViewById(R.id.PW_D);
                         String PW_content = PW.getText().toString();
                         GetData task = new GetData();
                         try {
                             String result = task.execute("deletetext", number, PW_content).get();
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
+                            Comment_T = (LinearLayout) View.inflate(Community_Read.this,R.layout.success_any,null);
+                            Comment_F = (LinearLayout) View.inflate(Community_Read.this,R.layout.failed_any,null);
                             AlertDialog.Builder del_bulider = new AlertDialog.Builder(Community_Read.this);
                             if(result.equals("true")){
-                                del_bulider.setTitle("글 삭제 성공");
-                                del_bulider.setMessage("글 삭제를 성공하였습니다.");
+                                del_bulider.setView(Comment_T);
+                                TextView Text_T = Comment_T.findViewById(R.id.Title_Dialog_T);
+                                TextView Text_C = Comment_T.findViewById(R.id.Dialog_T);
+                                Text_T.setText("글 삭제 성공");
+                                Text_C.setText("글 삭제를 성공하였습니다.");
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -133,8 +136,11 @@ public class Community_Read extends AppCompatActivity {
                                 });
                             }
                             else{
-                                del_bulider.setTitle("글 삭제 실패");
-                                del_bulider.setMessage("\n비밀번호가 맞지 않습니다.\n");
+                                del_bulider.setView(Comment_F);
+                                TextView Text_T = Comment_F.findViewById(R.id.Title_Dialog_F);
+                                TextView Text_C = Comment_F.findViewById(R.id.Dialog_F);
+                                Text_T.setText("글 삭제 실패");
+                                Text_C.setText("비밀번호가 맞지 않습니다.");
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -151,7 +157,7 @@ public class Community_Read extends AppCompatActivity {
                         }
                     }
                 });
-                builder.show();
+                Dialog.show();
             }
         });
         Comment_Content.addTextChangedListener(new TextWatcher() {
@@ -257,21 +263,15 @@ public class Community_Read extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> a_parent, View a_view, int a_position, long a_id) {
                 final Comment_Type item = List_item.getItem(a_position);
                 String Cno = item.getCno();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Community_Read.this);
-                builder.setTitle("댓글 삭제");
-                builder.setMessage("\n비밀번호를 입력해주세요.\n");
-                final EditText PW = new EditText(Community_Read.this);
-                final ConstraintLayout container = new ConstraintLayout(Community_Read.this);
-                final ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.leftMargin = getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
-                params.rightMargin =getResources().getDimensionPixelSize(R.dimen.alert_dialog_internal_margin);
-                PW.setLayoutParams(params);
-                PW.setBackgroundResource(R.drawable.round_wiget);
-                container.addView(PW);
-                builder.setView(container);
-                builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                Comment_Delete_View = (LinearLayout) View.inflate(Community_Read.this,R.layout.delete_any,null);
+                AlertDialog.Builder Dialog = new AlertDialog.Builder(Community_Read.this);
+                TextView text = Comment_Delete_View.findViewById(R.id.Title_Dialog);
+                text.setText("댓글 삭제");
+                Dialog.setView(Comment_Delete_View);
+                Dialog.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        EditText PW = Comment_Delete_View.findViewById(R.id.PW_D);
                         String PW_content = PW.getText().toString();
                         GetData task = new GetData();
                         try {
@@ -279,10 +279,13 @@ public class Community_Read extends AppCompatActivity {
                             System.out.println("비밀번호"+PW_content);
                             JSONObject j_result = new JSONObject(result);
                             result = j_result.getString("success");//성공 여부
+                            Comment_T = (LinearLayout) View.inflate(Community_Read.this,R.layout.success_any,null);
+                            Comment_F = (LinearLayout) View.inflate(Community_Read.this,R.layout.failed_any,null);
                             AlertDialog.Builder del_bulider = new AlertDialog.Builder(Community_Read.this);
                             if(result.equals("true")){
-                                del_bulider.setTitle("댓글 삭제 성공");
-                                del_bulider.setMessage("댓글 삭제를 성공하였습니다.");
+                                del_bulider.setView(Comment_T);
+                                TextView Text = Comment_T.findViewById(R.id.Title_Dialog_T);
+                                Text.setText("댓글 삭제 성공");
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -295,8 +298,9 @@ public class Community_Read extends AppCompatActivity {
                                 });
                             }
                             else{
-                                del_bulider.setTitle("댓글 삭제 실패");
-                                del_bulider.setMessage("\n비밀번호가 맞지 않습니다.\n");
+                                del_bulider.setView(Comment_F);
+                                TextView Text = Comment_F.findViewById(R.id.Title_Dialog_F);
+                                Text.setText("댓글 삭제 실패");
                                 del_bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -311,10 +315,9 @@ public class Community_Read extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 });
-                builder.show();
+                Dialog.show();
                 return true;
             }
         });

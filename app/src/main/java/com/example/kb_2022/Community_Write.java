@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 import androidx.appcompat.app.ActionBar;
@@ -20,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -34,9 +37,10 @@ public class Community_Write extends AppCompatActivity {
     private EditText PW;
     private Button Save;
     private String userName;
-    private Context This_Activity;
     private String mJsonString;
     private String success;
+    private LinearLayout Write_T;
+    private LinearLayout Write_F;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,8 +158,12 @@ public class Community_Write extends AppCompatActivity {
     private void writeAlertDialog(String string){
         AlertDialog.Builder bulider = new AlertDialog.Builder(this);
         if(string == "true") {
-            bulider.setTitle("글 작성 성공");
-            bulider.setMessage("글을 작성하였습니다.");
+            Write_T = (LinearLayout) View.inflate(Community_Write.this,R.layout.success_any,null);
+            TextView Text_T = Write_T.findViewById(R.id.Title_Dialog_T);
+            TextView Text_C = Write_T.findViewById(R.id.Dialog_T);
+            Text_T.setText("글 작성 성공");
+            Text_C.setText("글을 작성하였습니다.");
+            bulider.setView(Write_T);
             bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -165,8 +173,12 @@ public class Community_Write extends AppCompatActivity {
             });
         }
         else{
-            bulider.setTitle("글 작성 실패");
-            bulider.setMessage("글 작성에 실패하였습니다.");
+            Write_F = (LinearLayout) View.inflate(Community_Write.this,R.layout.failed_any,null);
+            TextView Text_T = Write_F.findViewById(R.id.Title_Dialog_F);
+            TextView Text_C = Write_F.findViewById(R.id.Dialog_F);
+            Text_T.setText("글 작성 실패");
+            Text_C.setText("글을 작성에 실패했습니다.");
+            bulider.setView(Write_F);
             bulider.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
