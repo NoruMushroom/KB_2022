@@ -34,7 +34,7 @@
         </receiver>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".SplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,6 +46,7 @@
         <activity android:name=".Community_Read" />
         <activity android:name=".Community_Write" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".LoginActivity"/>
     </application>
 
 </manifest>
