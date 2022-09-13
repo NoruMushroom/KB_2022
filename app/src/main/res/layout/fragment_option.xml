@@ -32,10 +32,10 @@
             android:layout_marginStart="160dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
+            android:fontFamily="@font/custom_font_family"
             android:text="이름 : "
             android:textColor="@color/black"
-            android:textSize="17dp"
-            android:fontFamily="@font/custom_font_family"/>
+            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/User_gender_option"

@@ -80,6 +80,11 @@ public class OptionFragment extends Fragment {
     private TextView Logout;
     private TextView Sign_out;
     private String userID;
+    private String userName;
+    private String userGender;
+    private TextView User_Name;
+    private TextView User_Gender;
+    private TextView User_ID;
     private ImageView User_image;
     private LinearLayout PW_View;
     private LinearLayout Logout_View;
@@ -176,8 +181,16 @@ public class OptionFragment extends Fragment {
         if(bundle != null){
             bundle = getArguments();
             userID = bundle.getString("아이디");
+            userName = bundle.getString("이름");
+            userGender = bundle.getString("성별");
         }
         View Option_View = inflater.inflate(R.layout.fragment_option, container, false);
+        User_Name= Option_View.findViewById(R.id.User_name_option);
+        User_Gender = Option_View.findViewById(R.id.User_gender_option);
+        User_ID = Option_View.findViewById(R.id.User_id_option);
+        User_Name.append(userName);
+        User_Gender.append(userGender);
+        User_ID.append(userID);
         Change_Photo = Option_View.findViewById(R.id.option_change_photo);
         Change_PW = Option_View.findViewById(R.id.option_change_pw);
         Logout = Option_View.findViewById(R.id.option_logout);
