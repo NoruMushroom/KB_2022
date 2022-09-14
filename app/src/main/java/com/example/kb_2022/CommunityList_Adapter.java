@@ -55,6 +55,21 @@ public class CommunityList_Adapter extends BaseAdapter {
         Photo.setBackground(drawable);
         Photo.setClipToOutline(true);
         Community_Type myItem = getItem(position);
+        if(myItem.getWriter().equals("키키")){
+            Photo.setImageResource(R.drawable.kiki);
+        }
+        else if(myItem.getWriter().equals("아거")){
+            Photo.setImageResource(R.drawable.force);
+        }
+        else if(myItem.getWriter().equals("비비")){
+            Photo.setImageResource(R.drawable.bibi);
+        }
+        else if(myItem.getWriter().equals("라무")){
+            Photo.setImageResource(R.drawable.ramu);
+        }
+        else if(myItem.getWriter().equals("콜리")){
+            Photo.setImageResource(R.drawable.cole);
+        }
         Title.setText(myItem.getTitle());
         Like.setText(" "+myItem.getLike());
         Number.setText(" "+myItem.getNumber());
