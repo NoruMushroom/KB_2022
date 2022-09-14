@@ -31,7 +31,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/round_wiget"
-            android:hint="아이디를 입력해주세요."
+            android:hint=" 아이디를 입력해주세요."
             android:fontFamily="@font/custom_font_family"/>
 
         <EditText
@@ -40,10 +40,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="@drawable/round_wiget"
-            android:hint="비밀번호를 입력해주세요."
+            android:fontFamily="@font/custom_font_family"
+            android:hint=" 비밀번호를 입력해주세요."
             android:inputType="textPassword"
-            android:textStyle="normal"
-            android:fontFamily="@font/custom_font_family"/>
+            android:textStyle="normal" />
 
         <Button
             android:id="@+id/Login_request"

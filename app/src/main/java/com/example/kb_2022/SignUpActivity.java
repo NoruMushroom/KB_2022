@@ -100,13 +100,16 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<AndClient.sguploadResponse> call, Response<AndClient.sguploadResponse> response) {
                                 imgresult = response.body().sguploadResponse();
+                                System.out.println("회원가입 결과 : "+ response.body().sguploadResponse());
                             }
 
                             @Override
                             public void onFailure(Call<AndClient.sguploadResponse> call, Throwable t) {
+                                System.out.println("사진 업로드 실패");
                             }
                         });
-                        if(result.equals("true") && imgresult.equals("true")){
+
+                        if(result.equals("true")){
                             bulider.setTitle("회원가입 성공");
                             bulider.setMessage("\n회원가입을 완료하였습니다.\n");
                             bulider.setPositiveButton("확인", new DialogInterface.OnClickListener() {

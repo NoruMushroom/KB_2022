@@ -17,6 +17,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +30,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Streaming;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -221,4 +232,29 @@ public class CommunityFragment extends Fragment {
             Community_List.setAdapter(List_item);
         }
     }
+    private static class requestServer{
+        private static final String Server_URL = "http://123.215.162.92/";
+        private static Retrofit retrofit;
+
+        private static Retrofit getClient(){
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+            if(retrofit == null){
+                retrofit = new Retrofit.Builder()
+                        .baseUrl(Server_URL)
+                        .addConverterFactory(new AndClient.NullOnEmptyConverterFactory())
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+            }
+            return retrofit;
+        }
+    }
+    private interface userImgInterface{
+        @GET("android/user_img/{userid}/{userid}.jpeg")
+        @Streaming
+        Call<ResponseBody> userImgPost(
+                @Path("userid") String userid);
+    }
+
 }
