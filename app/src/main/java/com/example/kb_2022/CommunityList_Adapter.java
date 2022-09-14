@@ -70,6 +70,9 @@ public class CommunityList_Adapter extends BaseAdapter {
         else if(myItem.getWriter().equals("콜리")){
             Photo.setImageResource(R.drawable.cole);
         }
+        else if(myItem.getWriter().equals("깔끔한형제들")){
+            Photo.setImageResource(R.drawable.kbsc);
+        }
         Title.setText(myItem.getTitle());
         Like.setText(" "+myItem.getLike());
         Number.setText(" "+myItem.getNumber());
