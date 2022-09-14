@@ -47,6 +47,25 @@ public class CommentList_Adapter extends BaseAdapter {
         comment_photo.setBackground(drawable);
         comment_photo.setClipToOutline(true);
         Comment_Type myItem = getItem(position);
+
+        if(myItem.getWriter().equals("키키")){
+            comment_photo.setImageResource(R.drawable.kiki);
+        }
+        else if(myItem.getWriter().equals("아거")){
+            comment_photo.setImageResource(R.drawable.force);
+        }
+        else if(myItem.getWriter().equals("비비")){
+            comment_photo.setImageResource(R.drawable.bibi);
+        }
+        else if(myItem.getWriter().equals("라무")){
+            comment_photo.setImageResource(R.drawable.ramu);
+        }
+        else if(myItem.getWriter().equals("콜리")){
+            comment_photo.setImageResource(R.drawable.cole);
+        }
+        else if(myItem.getWriter().equals("깔끔한형제들")){
+            comment_photo.setImageResource(R.drawable.kbsc);
+        }
         comment_content.setText(myItem.getContent());
         comment_username.setText("작성자 : " + myItem.getWriter());
         return convertView;
