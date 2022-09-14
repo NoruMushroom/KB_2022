@@ -96,8 +96,6 @@ public class HomeList_Adapter extends BaseAdapter {
         Trash_Bar.setDrawGridBackground(false);//격자 출력 유무
         Trash_Bar.setDrawBarShadow(false);//그림자 효과
         Trash_Bar.getDescription().setEnabled(false);
-
-
         // XAxis (수평 막대 기준 왼쪽) - 선 유무, 사이즈, 색상, 축 위치 설정
         XAxis xAxis = Trash_Bar.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // X 축 데이터 표시 위치
@@ -116,7 +114,7 @@ public class HomeList_Adapter extends BaseAdapter {
         yAxis.setDrawAxisLine(true);
         yAxis.setDrawGridLines(true);//선출력
         yAxis.setAxisMinimum(0f);
-        yAxis.setAxisMaximum(50f);
+        yAxis.setAxisMaximum(5000f);
     }
     public void addItem(String name, ArrayList<BarEntry> Chart_List) {//Bar = 차트 위젯, chart = 차트 데이터
         //Drawable img, String name, String contents

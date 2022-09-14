@@ -282,7 +282,7 @@ public class OptionFragment extends Fragment {
                 AlertDialog.Builder Dialog = new AlertDialog.Builder(getActivity());
                 Dialog.setTitle("회원 탈퇴");
                 Dialog.setView(Member_View);
-                Dialog.setPositiveButton("변경", new DialogInterface.OnClickListener() {
+                Dialog.setPositiveButton("탈퇴", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ID = Member_View.findViewById(R.id.input_Out_ID);
@@ -293,6 +293,9 @@ public class OptionFragment extends Fragment {
                             @Override
                             public void onResponse(Call<AndClient.signoutResponse> call, Response<AndClient.signoutResponse> response) {
                                 System.out.println(response.body().signoutResponse());
+                                Intent i = new Intent(getActivity(), LoginActivity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(i);
                             }
 
                             @Override
