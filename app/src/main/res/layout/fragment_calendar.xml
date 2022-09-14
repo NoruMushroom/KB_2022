@@ -22,12 +22,19 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/round_wiget"
-        android:paddingLeft="10dp"
+        android:fontFamily="@font/custom_font_family"
+        android:paddingLeft="95dp"
         android:paddingTop="10dp"
         android:textColor="#FF333333"
-        android:textSize="15sp"
-        android:fontFamily="@font/custom_font_family"/>
+        android:textSize="15sp" />
 
+    <ImageView
+        android:id="@+id/Cal_Photo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignBottom="@+id/Day"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp" />
     <TextView
         android:id="@+id/Gram"
         android:layout_width="wrap_content"
@@ -35,10 +42,11 @@
         android:layout_alignStart="@+id/Day"
         android:layout_alignTop="@+id/Day"
         android:layout_alignBottom="@+id/Day"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="95dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="100dp"
+        android:layout_marginRight="140dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:textColor="#FF333333"
         android:textSize="18sp"

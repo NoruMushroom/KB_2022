@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -37,6 +38,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,7 +54,7 @@ public class CalendarFragment extends Fragment {
     private String[] Day;
     private String Month;
     private String userID;
-    private String mJsonString;
+    private ImageView Cal_Photo;
     private Context This_Activity;
     private JSONObject item;
     private MaterialCalendarView calendarView;
@@ -105,8 +107,26 @@ public class CalendarFragment extends Fragment {
         }
         This_Activity = container.getContext();
         calendarView = Calender_View.findViewById(R.id.Calendar);
+        Cal_Photo = Calender_View.findViewById(R.id.Cal_Photo);
         Select_Day = Calender_View.findViewById(R.id.Day);
         Show_Gram = Calender_View.findViewById(R.id.Gram);
+        Random random = new Random();
+        int choice = random.nextInt(5);
+        if(choice == 0){
+            Cal_Photo.setImageResource(R.drawable.kiki);
+        }
+        else if(choice == 1){
+            Cal_Photo.setImageResource(R.drawable.ramu);
+        }
+        else if(choice == 2){
+            Cal_Photo.setImageResource(R.drawable.bibi);
+        }
+        else if(choice == 3){
+            Cal_Photo.setImageResource(R.drawable.force);
+        }
+        else if(choice == 4){
+            Cal_Photo.setImageResource(R.drawable.cole);
+        }
         calendarView.setTitleFormatter(new MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)));
         calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)));
         calendarView.setHeaderTextAppearance(R.style.CalendarWidgetHeader);
