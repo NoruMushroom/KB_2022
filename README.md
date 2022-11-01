@@ -14,3 +14,4 @@
 <img src = https://user-images.githubusercontent.com/57284689/199165802-c1d0ef44-cd36-488e-96ea-2edd779350ce.jpg>
 <h2> 5.기대효과</h2>
 <img src = https://user-images.githubusercontent.com/57284689/199166034-67ec46fb-f511-408f-9907-174315bd2867.jpg>
+<h2> 6.시연 영상</h2>
